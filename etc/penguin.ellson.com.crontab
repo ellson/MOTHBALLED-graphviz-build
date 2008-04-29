@@ -6,5 +6,5 @@ SOURCE_DIR=CURRENT
 # Directory containing build scripts from graphviz-build CVS repository
 BIN=graphviz-build/redhat
 
- 0 2 * * * $BIN/graphviz-build.tcl $SOURCE_DIR
- 0 3 * * * $BIN/graphviz-att-build.tcl $SOURCE_DIR
+ 0 2 * * * $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+ 0 3 * * * $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
