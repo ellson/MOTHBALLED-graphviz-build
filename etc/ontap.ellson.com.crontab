@@ -1,0 +1,10 @@
+# SOURCE_DIR=CURRENT for daily snapshot builds
+# or SOURCE_DIR=ARCHIVE for release builds
+SOURCE_DIR=CURRENT
+#SOURCE_DIR=ARCHIVE
+
+# Directory containing build scripts from graphviz-build CVS repository
+BIN=graphviz-build/redhat
+
+ 0 2 * * * $BIN/graphviz-build.tcl $SOURCE_DIR
+ 0 3 * * * $BIN/graphviz-att-build.tcl $SOURCE_DIR
