@@ -18,7 +18,7 @@ cd $HOME/tmp/gviz
 rm -rf webdot
 
 # obtain latest from cvs
-$HOME/graphviz-build/bin/anoncvs.tcl -Qz3 co webdot
+$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co webdot
 
 cd webdot
 
