@@ -22,15 +22,16 @@ $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
 
 cd graphviz2
 
+VERSION_MAJOR=`grep 'm4_define(graphviz_version_major, \([0-9]*\))/\1/'`
+VERSION_MINOR=`grep 'm4_define(graphviz_version_minor, \([0-9]*\))/\1/'`
+VERSION_MICRO=`grep 'm4_define(graphviz_version_micro, \([0-9.]*\))/\1/'`
 if test $SRCDIR = CURRENT; then
-    BASEVERSION=`grep 'AC_INIT(graphviz' configure.ac | sed 's/AC_INIT(graphviz, \([0-9.]*\))/\1/'`
-    VERSION=$BASEVERSION.$DATE
+    VERSION_MICRO=$DATE
 
-    sed "s/\(AC_INIT(graphviz, [0-9.]*\))/\1.$DATE)/" <configure.ac >t$$
+    sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$DATE)/" <configure.ac >t$$
     mv t$$ configure.ac
-else
-    VERSION=`grep 'AC_INIT(graphviz' configure.ac | sed 's/AC_INIT(graphviz, \([0-9.]*\))/\1/'`
 fi
+VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
 ./autogen.sh >/dev/null
 make dist >/dev/null
