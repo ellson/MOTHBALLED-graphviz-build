@@ -16,6 +16,7 @@ q'`
 if test -n $source
 then
 	# clean up previous builds
+	mkdir -p $work
 	rm -rf $work/*
 	cd $work
 
