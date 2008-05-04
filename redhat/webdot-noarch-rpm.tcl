@@ -1,5 +1,7 @@
 #!/usr/bin/tclsh
 
+# $Id$ $Revision$
+
 #################################################
 
 set graphviz_host www.graphviz.org

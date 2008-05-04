@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# $Id$ $Revision$
+
 WWW=www.graphviz.org
 DATE=`date -u +%Y%m%d.%H%M`
 HOST=`uname -n`

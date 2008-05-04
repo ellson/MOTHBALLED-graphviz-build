@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# $Id$ $Revision$
+
 # where everything is
 graphviz_host=www.graphviz.org
 graphviz_path=/pub/graphviz

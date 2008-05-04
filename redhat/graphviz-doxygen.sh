@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# $Id$ $Revision$
+
 WWW=www.graphviz.org
 HOST=`uname -n`
 

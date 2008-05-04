@@ -1,5 +1,7 @@
 #!/bin/ksh
 
+# $Id$ $Revision$
+
 if test "x$CC" = "x"; then
 	CC=cc
 fi

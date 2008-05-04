@@ -1,3 +1,5 @@
+# $Id$ $Revision$
+
 # SOURCE_DIR=CURRENT for daily snapshot builds
 # or SOURCE_DIR=ARCHIVE for release builds
 SOURCE_DIR=CURRENT

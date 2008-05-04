@@ -1,4 +1,6 @@
 #!/usr/bin/expect --
+
+# $Id$ $Revision$
  
 if {$argc == 0} {
         send_user "Usage: $argv0 checkout <module>\n"

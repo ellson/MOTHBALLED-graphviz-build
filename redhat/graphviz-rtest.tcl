@@ -1,5 +1,8 @@
 #!/usr/bin/env tclsh
 
+# $Id$ $Revision$
+
+
 #################################################
 
 #set host www.graphviz.org
