@@ -5,65 +5,62 @@
 SOURCE_DIR=CURRENT
 #SOURCE_DIR=ARCHIVE
 
-# Directory containing build scripts from graphviz-build CVS repository
-BIN=graphviz-build/redhat
-
-35 0 * * * $BIN/webdot-src.sh $SOURCE_DIR
-30 2 * * * $BIN/webdot-noarch-rpm.tcl $SOURCE_DIR
+35 0 * * * graphviz-build/redhat/webdot-src.sh $SOURCE_DIR
+30 2 * * * graphviz-build/redhat/webdot-noarch-rpm.tcl $SOURCE_DIR
 
 # the source distribution is built on a machine with doxygen, graphviz,
 #    and a recent swig installed
-45 0 * * * ssh fc7-64      $BIN/graphviz-src.sh $SOURCE_DIR
+45 0 * * * ssh fc7-64      graphviz-build/redhat/graphviz-src.sh $SOURCE_DIR
 # graphviz-doxygen.sh does support a $SOURCE_DIR arg,
 #    but we don't bother generating a separate version of the doxygen documents
-15 14 * * * ssh fc7        $BIN/graphviz-doxygen.sh
+15 14 * * * ssh fc7        graphviz-build/redhat/graphviz-doxygen.sh
 
 # Just too old and broken!!   graphviz.spec no longer works with
 #    the old rpmbuild on these systems.    
-#30 2 * * * ssh redhat7     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-#45 2 * * * ssh redhat8     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-# 0 3 * * * ssh redhat9     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+#30 2 * * * ssh redhat7     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+#45 2 * * * ssh redhat8     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+# 0 3 * * * ssh redhat9     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 
-# Macos build
-15 1 * * * ssh stayman      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+# MacOS-X build
+15 1 * * * ssh stayman     graphviz-build/macosx/graphviz-bin-pkg.sh $SOURCE_DIR
 
 # AT&T fc* custom distro for internal use
-15 1 * * * ssh fc6-64      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-45 1 * * * ssh fc6         $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-15 2 * * * ssh fc7-64      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-45 2 * * * ssh fc7         $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-15 3 * * * ssh fc8-64      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-45 3 * * * ssh fc8         $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+15 1 * * * ssh fc6-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+45 1 * * * ssh fc6         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+15 2 * * * ssh fc7-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+45 2 * * * ssh fc7         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+15 3 * * * ssh fc8-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+45 3 * * * ssh fc8         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 # awaiting fc9 vms
-#15 4 * * * ssh fc9-64      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-#45 4 * * * ssh fc9         $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+#15 4 * * * ssh fc9-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+#45 4 * * * ssh fc9         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 
 # shadowfax is not a vm, so schedule in parallel
-15 1 * * * ssh shadowfax   $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 1 * * * ssh shadowfax   graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 
-15 5 * * * ssh centos3     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 5 * * * ssh centos3     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 # Use penguin's PATH because the path under ssh on centos[34]-64 is missing /usr/X11R6/bin
-45 5 * * * ssh centos3-64  PATH=$PATH $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 6 * * * ssh centos4     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 6 * * * ssh centos4-64  PATH=$PATH $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 7 * * * ssh centos5     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 7 * * * ssh centos5-64  $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 8 * * * ssh fc4         $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 8 * * * ssh fc4-64      $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 9 * * * ssh fc5         $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 9 * * * ssh fc5-64      $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 10 * * * ssh fc6        $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 10 * * * ssh fc6-64     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-30 11 * * * ssh fc7        $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 11 * * * ssh fc7-64     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 12 * * * ssh fc8        $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 12 * * * ssh fc8-64     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 5 * * * ssh centos3-64  PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 6 * * * ssh centos4     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 6 * * * ssh centos4-64  PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 7 * * * ssh centos5     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 7 * * * ssh centos5-64  graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 8 * * * ssh fc4         graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 8 * * * ssh fc4-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 9 * * * ssh fc5         graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 9 * * * ssh fc5-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 10 * * * ssh fc6        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 10 * * * ssh fc6-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+30 11 * * * ssh fc7        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 11 * * * ssh fc7-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 12 * * * ssh fc8        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 12 * * * ssh fc8-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 # awaiting fc9 vms
-#15 13 * * * ssh fc9        $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-#45 13 * * * ssh fc9-64     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+#15 13 * * * ssh fc9        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+#45 13 * * * ssh fc9-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 
 #fc10 builds are done on John Ellson's home machines.  Can't ssh from here.
-#0 8 * * * ssh fc10         $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
-#15 8 * * * ssh fc10-64     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
+#0 8 * * * ssh fc10         graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+#15 8 * * * ssh fc10-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 
-#30 2 * * * ssh bilbo       $BIN/graphviz-rtest.tcl
+#30 2 * * * ssh bilbo       graphviz-build/redhat/graphviz-rtest.tcl
