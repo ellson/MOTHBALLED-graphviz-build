@@ -5,7 +5,13 @@
 # where everything is
 graphviz_host=www.graphviz.org
 graphviz_path=/pub/graphviz
-path=$graphviz_path/$1
+
+if test -z $1; then
+    path=$graphviz_path/CURRENT
+else
+    path=$graphviz_path/$1
+fi
+
 work=$HOME/tmp/gviz
 
 # search for last graphviz tarball in the public sources
