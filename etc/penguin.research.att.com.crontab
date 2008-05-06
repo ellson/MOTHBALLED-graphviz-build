@@ -24,6 +24,9 @@ BIN=graphviz-build/redhat
 #45 2 * * * ssh redhat8     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
 # 0 3 * * * ssh redhat9     $BIN/graphviz-bin-rpm.tcl $SOURCE_DIR
 
+# Macos build
+15 1 * * * ssh stayman      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+
 # AT&T fc* custom distro for internal use
 15 1 * * * ssh fc6-64      $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 45 1 * * * ssh fc6         $BIN/graphviz-bin-att-rpm.tcl $SOURCE_DIR
