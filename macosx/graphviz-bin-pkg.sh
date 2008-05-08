@@ -24,18 +24,20 @@ q'`
 
 if test -n $source
 then
+	LOG=$source-log.txt
+
 	# clean up previous builds
 	mkdir -p $work
 	rm -rf $work/*
 	cd $work
 
 	# get the sources
-	scp gviz@$graphviz_host:$path/$source.tar.gz .
+	scp gviz@$graphviz_host:$path/$source.tar.gz . 2>$LOG
 	
 	# build the package
 	tar xzf $source.tar.gz
-	make -C $source/macosx/build PREBUILD=$fix
+	make -C $source/macosx/build PREBUILD=$fix >>$LOG 2>&1
 
 	# put the package
-	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$path/$source.pkg
+	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$path/$source.pkg 2>>$LOG
 fi
