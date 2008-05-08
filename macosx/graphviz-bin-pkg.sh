@@ -13,6 +13,7 @@ else
 fi
 
 work=$HOME/tmp/gviz
+fix=$HOME/fix
 
 # search for last graphviz tarball in the public sources
 source=`ssh gviz@www.graphviz.org ls -r $path | sed -n 's/^\(graphviz-[0-9.]*\).tar.gz$/\1/p
@@ -33,8 +34,8 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	make -C $source/macosx/build
+	make -C $source/macosx/build PREBUILD=$fix
 
 	# put the package
-	scp $source/macosx/build/graphviz-*.pkg gviz@$graphviz_host:$path/
+	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$path/$source.pkg
 fi
