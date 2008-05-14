@@ -22,21 +22,21 @@ set source_dir CURRENT
 if {$argc} {
    set source_dir [lindex $argv 0]
 }
-set path $graphviz_path/$source_dir
+set path $graphviz_path/ATT_$source_dir
 
 proc getfile {host path sourcefile} { exec scp $host:/$path/$sourcefile . }
 proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
 set patterns {
-	"Fedora Core release (\[0-9\]+)" ".att_fc" 0 att_fedora
-	"Fedora release (\[0-9\]+).*(Rawhide)" ".att_fc" 1 att_fedora
-	"Fedora release (\[0-9\]+)" ".att_fc"  0 att_fedora
-	"CentOS release (\[0-9\]+)" ".att_el" 0 att_rhel
-	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".att_el" 0 att_rhel
-	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".att_el" 0 att_rhel
-	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".att_el" 0 att_rhel
-	"Red Hat Linux release (\[0-9\]+)" ".att_rhl" 0 att_rhl
+	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
+	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 1 fedora
+	"Fedora release (\[0-9\]+)" ".fc"  0 fedora
+	"CentOS release (\[0-9\]+)" ".el" 0 rhel
+	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 rhel
+	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
+	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel
+	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
 }
 
 # as far as I can tell, rpmbuild --macros doesn't work,
@@ -83,7 +83,7 @@ foreach f [glob -nocomplain $work/graphviz*] {file delete -force $f}
 cd $work
 
 set index [getindex $graphviz_host $path]
-foreach {. v} [regexp -all -inline -- {graphviz-([0-9.]*?).tar.gz} $index] {
+foreach {. v} [regexp -all -inline -- {graphviz-([0-9.]*?att).tar.gz} $index] {
   lappend versions $v
 }
 if {! [info exists versions]} {
