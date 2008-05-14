@@ -29,14 +29,14 @@ proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
 set patterns {
-	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
-	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 1 fedora
-	"Fedora release (\[0-9\]+)" ".fc"  0 fedora
-	"CentOS release (\[0-9\]+)" ".el" 0 rhel
-	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 rhel
-	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
-	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel
-	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
+	"Fedora Core release (\[0-9\]+)" ".fc" 0 att_fedora
+	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 1 att_fedora
+	"Fedora release (\[0-9\]+)" ".fc"  0 att_fedora
+	"CentOS release (\[0-9\]+)" ".el" 0 att_rhel
+	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 att_rhel
+	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 att_rhel
+	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 att_rhel
+	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 att_rhl
 }
 
 # as far as I can tell, rpmbuild --macros doesn't work,
