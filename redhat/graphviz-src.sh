@@ -12,6 +12,7 @@ if test .$1 != . ;then
     SRCDIR=$1
 fi
 GRAPHVIZ_PATH=$GRAPHVIZ_ROOT/$SRCDIR
+GRAPHVIZ_ATT_PATH=$GRAPHVIZ_ROOT/ATT_$SRCDIR
 
 RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
@@ -52,6 +53,31 @@ scp -p $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$GRAPHVIZ_PATH
 
 tar cf - rtest | gzip >rtest.tgz
 scp -p rtest.tgz $WWW:$GRAPHVIZ_PATH
+
+#----------------------------------------------------
+# obtain latest att branch from cvs
+
+cd ..
+rm -rf graphviz2/lib/sfdpgen
+$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
+cd graphviz2
+
+./autogen.sh >/dev/null
+make dist >/dev/null
+
+if ! test -f graphviz-$VERSION.tar.gz; then
+    exit -1
+fi
+
+md5sum graphviz-$VERSION.tar.gz >graphviz-$VERSION.tar.gz.md5
+scp -p graphviz-$VERSION.tar.gz graphviz-$VERSION.tar.gz.md5 $WWW:$GRAPHVIZ_ATT_PATH
+ssh $WWW "cd $GRAPHVIZ_ATT_PATH; ln -sf graphviz-$VERSION.tar.gz graphviz-working.tar.gz"
+
+# build a "distroagnostic" src.rpm.
+rpmbuild -ts -D "distroagnostic 1" graphviz-$VERSION.tar.gz >/dev/null
+scp -p $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$GRAPHVIZ_ATT_PATH
+
+#----------------------------------------------------
 
 #./graphviz-win.sh
 #scp -p graphviz-win.tgz $WWW:$GRAPHVIZ_PATH/graphviz-win-$VERSION.tar.gz
