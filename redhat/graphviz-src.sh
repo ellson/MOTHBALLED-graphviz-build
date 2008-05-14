@@ -31,7 +31,7 @@ VERSION_MICRO=`grep 'm4_define(graphviz_version_micro' configure.ac | sed 's/.*,
 if test $SRCDIR = CURRENT; then
     VERSION_MICRO=$DATE
 
-    sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$DATE)/" <configure.ac >t$$
+    sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
     mv t$$ configure.ac
 fi
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
@@ -61,6 +61,15 @@ cd ..
 rm -rf graphviz2/lib/sfdpgen
 $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
 cd graphviz2
+
+if test $SRCDIR = CURRENT; then
+    VERSION_MICRO=$DATE.att
+else
+    VERSION_MICRO=att
+
+sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
+mv t$$ configure.ac
+VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
 ./autogen.sh >/dev/null
 make dist >/dev/null
