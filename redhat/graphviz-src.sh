@@ -66,6 +66,7 @@ if test $SRCDIR = CURRENT; then
     VERSION_MICRO=$DATE.att
 else
     VERSION_MICRO=att
+fi
 
 sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
 mv t$$ configure.ac
