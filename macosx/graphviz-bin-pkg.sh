@@ -18,7 +18,7 @@ fix=$HOME/fix
 # search for last graphviz tarball in the public sources
 source=
 for file in `ssh gviz@www.graphviz.org ls -r $path`; do
-        source=`expr $file : '\(graphviz-[0-9.]*\).tar.gz'`
+        source=`expr $file : '\(graphviz-[0-9.]*\).tar.gz$'`
         if test -n "$source"; then
                 break
         fi
