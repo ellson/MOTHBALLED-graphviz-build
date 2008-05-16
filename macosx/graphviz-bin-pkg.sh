@@ -16,13 +16,15 @@ work=$HOME/tmp/gviz
 fix=$HOME/fix
 
 # search for last graphviz tarball in the public sources
-source=`ssh gviz@www.graphviz.org ls -r $path | sed -n 's/^\(graphviz-[0-9.]*\).tar.gz$/\1/p
-t found
-b
-:found
-q'`
+source=
+for file in `ssh gviz@www.graphviz.org ls -r $path`; do
+        source=`expr $file : '\(graphviz-[0-9.]*\).tar.gz'`
+        if test -n "$source"; then
+                break
+        fi
+done
 
-if test -n $source
+if test -n "$source"
 then
 	LOG=$source-log.txt
 
