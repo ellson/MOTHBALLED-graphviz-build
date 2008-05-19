@@ -21,7 +21,7 @@ while {1} {
                 break
         }
 }
-set timeout 300 
+set timeout 600 
 switch $argc {
 	1 { spawn cvs -d :pserver:anoncvs@cvs-graphviz.research.att.com:/home/cvsroot $a1 }
 	2 { spawn cvs -d :pserver:anoncvs@cvs-graphviz.research.att.com:/home/cvsroot $a1 $a2 }
