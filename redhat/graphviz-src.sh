@@ -21,7 +21,8 @@ cd $HOME/tmp/gviz
 rm -rf graphviz2
 
 # obtain latest from cvs
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
+#$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
+cvs -Qz3 co graphviz2
 
 cd graphviz2
 
