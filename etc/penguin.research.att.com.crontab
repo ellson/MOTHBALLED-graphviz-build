@@ -25,8 +25,8 @@ SOURCE_DIR=CURRENT
 15 1 * * * ssh stayman     graphviz-build/macosx/graphviz-bin-pkg.sh $SOURCE_DIR
 
 # AT&T fc* custom distro for internal use
-15 1 * * * ssh fc6-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
-45 1 * * * ssh fc6         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+#15 1 * * * ssh fc6-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+#45 1 * * * ssh fc6         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 15 2 * * * ssh fc7-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 45 2 * * * ssh fc7         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
 15 3 * * * ssh fc8-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
@@ -54,8 +54,8 @@ SOURCE_DIR=CURRENT
 45 11 * * * ssh fc7-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 15 12 * * * ssh fc8        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 45 12 * * * ssh fc8-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
-15 13 * * * ssh fc9        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
-45 13 * * * ssh fc9-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+15 1 * * * ssh fc9        graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+45 1 * * * ssh fc9-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
 
 #fc10 builds are done on John Ellson's home machines.  Can't ssh from here.
 #0 8 * * * ssh fc10         graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
