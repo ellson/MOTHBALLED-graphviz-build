@@ -6,6 +6,9 @@ WWW=www.graphviz.org
 DATE=`date -u +%Y%m%d.%H%M`
 HOST=`uname -n`
 
+export CVSROOT=:ext:ellson@cvs-graphviz.research.att.com:/home/cvsroot
+export CVS_RSH=ssh
+
 GRAPHVIZ_ROOT=/pub/graphviz
 SRCDIR=CURRENT
 if test .$1 != . ;then
@@ -20,7 +23,8 @@ cd $HOME/tmp/gviz
 rm -rf webdot
 
 # obtain latest from cvs
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co webdot
+#$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co webdot
+cvs -Qz3 co webdot
 
 cd webdot
 

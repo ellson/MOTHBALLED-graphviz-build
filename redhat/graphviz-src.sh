@@ -6,6 +6,9 @@ WWW=www.graphviz.org
 DATE=`date -u +%Y%m%d.%H%M`
 HOST=`uname -n`
 
+export CVSROOT=:ext:ellson@cvs-graphviz.research.att.com:/home/cvsroot
+export CVS_RSH=ssh
+
 GRAPHVIZ_ROOT=/pub/graphviz
 SRCDIR=CURRENT
 if test .$1 != . ;then 
@@ -21,8 +24,8 @@ cd $HOME/tmp/gviz
 rm -rf graphviz2
 
 # obtain latest from cvs
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
-#cvs -Qz3 co graphviz2
+#$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
+cvs -Qz3 co graphviz2
 
 cd graphviz2
 
@@ -60,8 +63,8 @@ scp -p rtest.tgz $WWW:$GRAPHVIZ_PATH
 
 cd ..
 rm -rf graphviz2/lib/sfdpgen
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
-#cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
+#$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
+cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
 cd graphviz2
 
 if test $SRCDIR = CURRENT; then
