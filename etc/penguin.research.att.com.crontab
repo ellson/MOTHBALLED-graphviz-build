@@ -13,7 +13,7 @@ SOURCE_DIR=CURRENT
 45 0 * * * ssh fc7-64      graphviz-build/redhat/graphviz-src.sh $SOURCE_DIR
 # graphviz-doxygen.sh does support a $SOURCE_DIR arg,
 #    but we don't bother generating a separate version of the doxygen documents
-15 14 * * * ssh fc7        graphviz-build/redhat/graphviz-doxygen.sh
+15 14 * * * ssh fc9-64     graphviz-build/redhat/graphviz-doxygen.sh
 
 # Just too old and broken!!   graphviz.spec no longer works with
 #    the old rpmbuild on these systems.    
