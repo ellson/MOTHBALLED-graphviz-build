@@ -64,10 +64,11 @@ scp -p rtest.tgz $WWW:$GRAPHVIZ_PATH
 cd ..
 rm -rf graphviz2/lib/sfdpgen
 $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/cmd/tools
 #cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
-#cvs -Qz3 update -d -r att_07932 graphviz2/cmd/tools
-cd graphviz2
+cd graphviz2/cmd/tools
+$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 mmio.h mmio.c mm2dot.c matrix_market.h matrix_market.c Makefile.old Makefile.am
+#cvs -Qz3 update -d -r att_07932 mmio.h mmio.c mm2dot.c matrix_market.h matrix_market.c Makefile.old Makefile.am
+cd ../../
 
 if test $SRCDIR = CURRENT; then
     VERSION_MICRO=$DATE.att
