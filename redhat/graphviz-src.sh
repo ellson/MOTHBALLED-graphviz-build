@@ -64,7 +64,9 @@ scp -p rtest.tgz $WWW:$GRAPHVIZ_PATH
 cd ..
 rm -rf graphviz2/lib/sfdpgen
 $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
+$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/cmd/tools
 #cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
+#cvs -Qz3 update -d -r att_07932 graphviz2/cmd/tools
 cd graphviz2
 
 if test $SRCDIR = CURRENT; then
