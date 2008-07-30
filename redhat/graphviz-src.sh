@@ -65,10 +65,7 @@ cd ..
 rm -rf graphviz2/lib/sfdpgen
 $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
 #cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
-cd graphviz2/cmd/tools
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 mmio.h mmio.c mm2dot.c matrix_market.h matrix_market.c Makefile.old Makefile.am
-#cvs -Qz3 update -d -r att_07932 mmio.h mmio.c mm2dot.c matrix_market.h matrix_market.c Makefile.old Makefile.am
-cd ../../
+cd graphviz2
 
 if test $SRCDIR = CURRENT; then
     VERSION_MICRO=$DATE.att
