@@ -5,5 +5,5 @@
 SOURCE_DIR=CURRENT
 #SOURCE_DIR=ARCHIVE
 
- 0 2 * * * graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
- 0 3 * * * graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
+ 0 3 * * * graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
+ 0 5 * * * graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
