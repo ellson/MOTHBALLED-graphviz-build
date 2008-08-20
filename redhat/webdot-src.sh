@@ -61,6 +61,7 @@ scp -p webdot-$VERSION.tar.gz webdot-$VERSION.tar.gz.md5 $WWW:$SOURCES/
 
 rpmbuild -ts -D "distroagnostic 1" webdot-$VERSION.tar.gz
 scp -p $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
+ssh $WWW "cd $SRPMS; createrepo ."
 
 # copy for internal use
 
@@ -70,4 +71,5 @@ SRPMS=$GRAPHVIZ_ATT_PATH/SRPMS
 ssh $WWW "mkdir -p $SOURCES $SRPMS"
 scp -p webdot-$VERSION.tar.gz webdot-$VERSION.tar.gz.md5 $WWW:$SOURCES/
 scp -p $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
+ssh $WWW "cd $SRPMS; createrepo ."
 
