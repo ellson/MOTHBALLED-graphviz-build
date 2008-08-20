@@ -5,7 +5,7 @@
 #################################################
 
 set graphviz_host www.graphviz.org
-set graphviz_path /pub/graphviz
+set graphviz_path /pub/ext_repos
 set redhat_release /etc/redhat-release
 
 ################################################
@@ -22,9 +22,15 @@ set source_dir CURRENT
 if {$argc} {
    set source_dir [lindex $argv 0]
 }
-set path $graphviz_path/$source_dir
+if {[string equal $source_dir CURRENT]} {
+    set path $graphviz_path/development
+} {
+    set path $graphviz_path/stable
+}
 
-proc getfile {host path sourcefile} { exec scp $host:/$path/$sourcefile . }
+proc getfile {host path fn} { exec scp $host:/$path/$fn . }
+proc makedir {host path} { exec ssh $host "mkdir -p $path" }
+proc createrepo {host path} { exec ssh $host "cd $path; createrepo ." }
 proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
@@ -82,7 +88,9 @@ foreach f [glob -nocomplain $work/graphviz*] {file delete -force $f}
 
 cd $work
 
-set index [getindex $graphviz_host $path]
+set SOURCES $path/SOURCES
+
+set index [getindex $graphviz_host $SOURCES]
 foreach {. v} [regexp -all -inline -- {graphviz-([0-9.]*?).tar.gz} $index] {
   lappend versions $v
 }
@@ -93,10 +101,10 @@ set version [lindex [lsort -decreasing -dictionary $versions] 0]
 
 set sourcefile graphviz-$version.tar.gz
 
-puts "getting http://$graphviz_host/$path/$sourcefile"
+puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
 
 # get sourcefile into local temporary directory
-getfile $graphviz_host $path $sourcefile
+getfile $graphviz_host $SOURCES $sourcefile
 
 puts "making..."
 # make products
@@ -127,11 +135,15 @@ puts $f $end_time
 close $f
 
 set productfiles [concat \
-  [glob -nocomplain $rpmbuild/RPMS/*/graphviz*$version*.rpm] \
+  [glob -nocomplain $rpmbuild/RPMS/$arch/graphviz*$version*.rpm] \
   $BUILDLOG]
 
+set RPMS $path/RPMS/$dist/$arch
+makedir $graphviz_host $RPMS
+
 foreach fn $productfiles {
-  putfile $graphviz_host $path $fn
+  putfile $graphviz_host $RPMS $fn
 }
+createrepo $graphviz_host $RPMS
 
 puts "done"

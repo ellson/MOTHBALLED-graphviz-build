@@ -104,7 +104,7 @@ ssh $WWW "cd $SOURCES; ln -sf graphviz-$VERSION.tar.gz graphviz-working.tar.gz"
 # build a "distroagnostic" src.rpm.
 rpmbuild -ts -D "distroagnostic 1" graphviz-$VERSION.tar.gz >/dev/null
 scp -p $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
-ssh $WWW "cd $SRPMS; creatrepo ."
+ssh $WWW "cd $SRPMS; createrepo ."
 
 #----------------------------------------------------
 
