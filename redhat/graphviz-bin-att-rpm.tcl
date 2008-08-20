@@ -139,7 +139,7 @@ set productfiles [concat \
   [glob -nocomplain $rpmbuild/RPMS/$arch/graphviz*$version*.rpm] \
   $BUILDLOG]
 
-set RPMS $path/RPMS/$dist/$arch
+set RPMS $path/RPMS/[string trim $dist .]/$arch
 makedir $graphviz_host $RPMS
 
 foreach fn $productfiles {

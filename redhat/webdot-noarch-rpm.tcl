@@ -64,7 +64,6 @@ puts "... done making."
 
 set productfiles [concat \
   [glob -nocomplain $rpmbuild/RPMS/noarch/webdot*$version*.noarch.rpm] \
-  [glob -nocomplain $rpmbuild/SRPMS/webdot*$version*.src.rpm] \
   webdot-linux-buildlog-$version.txt]
 
 set RPMS $path/RPMS/noarch
