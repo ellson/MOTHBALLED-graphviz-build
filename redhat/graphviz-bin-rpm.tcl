@@ -77,6 +77,8 @@ proc rpmbuildargs {release} {
 
 # automatically determine arch and dist
 set arch $tcl_platform(machine)
+#for i686 use canonical i386
+if {[string equal $arch i686]} {set arch i386}
 
 # set rpm options from database
 set rpmopt [rpmbuildargs $redhat_release]
