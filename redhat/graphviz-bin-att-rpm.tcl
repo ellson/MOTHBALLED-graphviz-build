@@ -95,7 +95,8 @@ foreach {. v} [regexp -all -inline -- {graphviz-([0-9.]*?att).tar.gz} $index] {
   lappend versions $v
 }
 if {! [info exists versions]} {
-    error "no graphviz snapshots found"
+    puts stderr "no graphviz snapshots found"
+    exit
 }
 set version [lindex [lsort -decreasing -dictionary $versions] 0]
 
