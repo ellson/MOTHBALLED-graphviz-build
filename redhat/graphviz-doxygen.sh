@@ -5,12 +5,15 @@
 WWW=www.graphviz.org
 HOST=`uname -n`
 
-GRAPHVIZ_ROOT=/pub/graphviz
 SRCDIR=CURRENT
 if test .$1 != . ;then
     SRCDIR=$1
 fi
-GRAPHVIZ_PATH=$GRAPHVIZ_ROOT/$SRCDIR
+if test .$SRCDIR = .CURRENT ; then
+   GRAPHVIZ_PATH=/pub/graphviz/development/
+else
+   GRAPHVIZ_PATH=/pub/graphviz/stable/
+fi
 
 cd $HOME/tmp/gviz/graphviz2
 
