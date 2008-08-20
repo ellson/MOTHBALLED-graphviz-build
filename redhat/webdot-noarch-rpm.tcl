@@ -5,7 +5,7 @@
 #################################################
 
 set graphviz_host www.graphviz.org
-set graphviz_path /pub/graphviz
+set graphviz_path /pub/ext_repos
 
 ################################################
 set build_host [exec uname -n]
@@ -17,9 +17,15 @@ set source_dir CURRENT
 if {$argc} {
    set source_dir [lindex $argv 0]
 }
-set path $graphviz_path/$source_dir
+if {[string equal $source_dir CURRENT]} {
+    set path $graphviz_path/development
+} {
+    set path $graphviz_path/stable
+}
 
 proc getfile {host path sourcefile} { exec scp $host:/$path/$sourcefile . }
+proc makedir {host path} { exec ssh $host "mkdir -p $path" }
+proc createrepo {host path} { exec ssh $host "cd $path; createrepo ." }
 proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
@@ -58,8 +64,12 @@ set productfiles [concat \
   [glob -nocomplain $rpmbuild/SRPMS/webdot*$version*.src.rpm] \
   webdot-linux-buildlog-$version.txt]
 
+set RPMS $path/RPMS/noarch
+makedir $graphviz_host $RPMS
+
 foreach fn $productfiles {
-  putfile $graphviz_host $path $fn
+  putfile $graphviz_host $RPMS $fn
 }
+createrepo $graphviz_host $RPMS
 
 puts "done"
