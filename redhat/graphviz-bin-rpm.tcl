@@ -5,7 +5,7 @@
 #################################################
 
 set graphviz_host www.graphviz.org
-set graphviz_path /pub/ext_repos
+set graphviz_path /pub/graphviz
 set redhat_release /etc/redhat-release
 
 ################################################
