@@ -4,19 +4,22 @@
 
 # where everything is
 graphviz_host=www.graphviz.org
-graphviz_path=/pub/graphviz/
 
-if test -z $1; then
-    path=$graphviz_path/development
+SRCDIR=CURRENT
+if test .$1 != . ;then
+    SRCDIR=$1
+fi
+if test .$SRCDIR = .CURRENT ; then
+   GRAPHVIZ_PUB_PATH=/pub/graphviz/development/
 else
-    path=$graphviz_path/stable
+   GRAPHVIZ_PUB_PATH=/pub/graphviz/stable/
 fi
 
 work=$HOME/tmp/gviz
 fix=$HOME/fix
 
-SOURCES=$path/SOURCES
-PKGS=$path/macos
+SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
+PKGS=$GRAPHVIZ_PUB_PATH/macos
 
 # search for last graphviz tarball in the public sources
 source=
