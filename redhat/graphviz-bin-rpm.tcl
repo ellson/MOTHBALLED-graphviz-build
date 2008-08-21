@@ -4,7 +4,8 @@
 
 #################################################
 
-set graphviz_host www.graphviz.org
+#set graphviz_host www.graphviz.org
+set graphviz_host 192.20.225.20
 set graphviz_path /pub/graphviz
 set redhat_release /etc/redhat-release
 
@@ -139,7 +140,7 @@ set productfiles [concat \
   [glob -nocomplain $rpmbuild/RPMS/$arch/graphviz*$version*.rpm] \
   $BUILDLOG]
 
-set RPMS $graphviz_path/redhat/[string trim $dist .]/$arch
+set RPMS $path/redhat/[string trim $dist .]/$arch
 exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug"
 
 foreach fn $productfiles {
