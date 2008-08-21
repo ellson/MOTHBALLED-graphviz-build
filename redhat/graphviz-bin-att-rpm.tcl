@@ -146,6 +146,6 @@ foreach fn $productfiles {
   putfile $graphviz_host $RPMS $fn
 }
 
-exec ssh $graphviz_host "cd $RPMS; mv os/*debuginfo*rpm debug/; (cd os; createrepo .); (cd debug; createrepo .)" }
+exec ssh $graphviz_host "cd $RPMS; mv os/*debuginfo*rpm debug/; (cd os; createrepo .); (cd debug; createrepo .)"
 
 puts "done"
