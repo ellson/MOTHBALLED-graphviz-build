@@ -29,8 +29,6 @@ if {[string equal $source_dir CURRENT]} {
 }
 
 proc getfile {host path fn} { exec scp $host:/$path/$fn . }
-proc makedir {host path} { exec ssh $host "mkdir -p $path" }
-proc createrepo {host path} { exec ssh $host "cd $path; createrepo ." }
 proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
@@ -141,12 +139,13 @@ set productfiles [concat \
   [glob -nocomplain $rpmbuild/RPMS/$arch/graphviz*$version*.rpm] \
   $BUILDLOG]
 
-set RPMS $path/RPMS/[string trim $dist .]/$arch
-makedir $graphviz_host $RPMS
+set RPMS $graphviz_path/redhat/[string trim $dist .]/$arch
+exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug" }
 
 foreach fn $productfiles {
   putfile $graphviz_host $RPMS $fn
 }
-createrepo $graphviz_host $RPMS
+
+exec ssh $graphviz_host "cd $RPMS; mv os/*debuginfo*rpm debug/; (cd os; createrepo .); (cd debug; createrepo .)" }
 
 puts "done"
