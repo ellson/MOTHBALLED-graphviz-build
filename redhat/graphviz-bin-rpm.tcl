@@ -4,8 +4,8 @@
 
 #################################################
 
-#set graphviz_host www.graphviz.org
-set graphviz_host 192.20.225.20
+set graphviz_host www.graphviz.org
+#set graphviz_host 192.20.225.20
 set graphviz_path /pub/graphviz
 set redhat_release /etc/redhat-release
 
