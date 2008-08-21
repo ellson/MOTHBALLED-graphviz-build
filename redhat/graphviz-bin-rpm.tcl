@@ -140,7 +140,7 @@ set productfiles [concat \
   $BUILDLOG]
 
 set RPMS $graphviz_path/redhat/[string trim $dist .]/$arch
-exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug" }
+exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug"
 
 foreach fn $productfiles {
   putfile $graphviz_host $RPMS/os $fn
