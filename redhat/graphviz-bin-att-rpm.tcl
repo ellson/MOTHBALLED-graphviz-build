@@ -143,7 +143,7 @@ set RPMS $graphviz_path/redhat/[string trim $dist .]/$arch
 exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug" }
 
 foreach fn $productfiles {
-  putfile $graphviz_host $RPMS $fn
+  putfile $graphviz_host $RPMS/os $fn
 }
 
 exec ssh $graphviz_host "cd $RPMS; mv os/*debuginfo*rpm debug/; (cd os; createrepo .); (cd debug; createrepo .)"
