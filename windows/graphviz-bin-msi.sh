@@ -4,7 +4,7 @@
 
 # where everything is
 graphviz_host=www.graphviz.org
-graphviz_path=/pub/graphviz
+graphviz_path=/data/pub/graphviz
 
 if test -z $1; then
     path=$graphviz_path/development
