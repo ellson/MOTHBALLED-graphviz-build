@@ -5,6 +5,6 @@
 SOURCE_DIR=CURRENT
 #SOURCE_DIR=ARCHIVE
 
-15 0 * * * (cd graphviz-build; bin/anoncvs.tcl -qz3 update -d; crontab graphviz-build/etc/ontap.ellson.com.crontab)
+15 0 * * * (cd graphviz-build; /home/gviz/bin/anoncvs.tcl -qz3 update -d; crontab graphviz-build/etc/ontap.ellson.com.crontab)
  0 2 * * * graphviz-build/redhat/graphviz-bin-rpm.tcl $SOURCE_DIR
  0 3 * * * graphviz-build/redhat/graphviz-bin-att-rpm.tcl $SOURCE_DIR
