@@ -5,6 +5,8 @@
 DIR=CURRENT
 #DIR=ARCHIVE
 
+25 0 * * * (cd graphviz-build; bin/anoncvs.tcl -qz3 update -d; crontab graphviz-build/etc/penguin.research.att.com.crontab)
+
 35 0 * * * graphviz-build/redhat/webdot-src.sh $DIR
 30 2 * * * graphviz-build/redhat/webdot-noarch-rpm.tcl $DIR
 
