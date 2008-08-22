@@ -7,7 +7,7 @@
 
 #set host www.graphviz.org
 set host 192.20.225.20
-set path /pub/graphviz/CURRENT
+set path /data/pub/graphviz/CURRENT
 
 set WWWHOST www.research.att.com
 set WWWDIR wwwfiles/graphviz_log

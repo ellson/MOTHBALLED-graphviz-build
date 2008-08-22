@@ -10,9 +10,9 @@ if test .$1 != . ;then
     SRCDIR=$1
 fi
 if test .$SRCDIR = .CURRENT ; then
-   GRAPHVIZ_PATH=/pub/graphviz/development/
+   GRAPHVIZ_PATH=/data/pub/graphviz/development/
 else
-   GRAPHVIZ_PATH=/pub/graphviz/stable/
+   GRAPHVIZ_PATH=/data/pub/graphviz/stable/
 fi
 
 cd $HOME/tmp/gviz/graphviz2

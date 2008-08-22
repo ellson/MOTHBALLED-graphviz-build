@@ -15,11 +15,11 @@ if test .$1 != . ;then
 fi
 
 if test .$SRCDIR = .CURRENT ; then
-   GRAPHVIZ_PUB_PATH=/pub/graphviz/development/
-   GRAPHVIZ_ATT_PATH=/att/graphviz/development/
+   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/development/
+   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/development/
 else
-   GRAPHVIZ_PUB_PATH=/pub/graphviz/stable/
-   GRAPHVIZ_ATT_PATH=/att/graphviz/stable/
+   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/stable/
+   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/stable/
 fi
 
 RPMBUILD=$HOME/rpmbuild/$HOST

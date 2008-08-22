@@ -5,7 +5,7 @@
 #################################################
 
 set graphviz_host www.graphviz.org
-set graphviz_path /pub/graphviz
+set graphviz_path /data/pub/graphviz
 
 ################################################
 set build_host [exec uname -n]
