@@ -66,7 +66,7 @@ set productfiles [concat \
   [glob -nocomplain $rpmbuild/RPMS/noarch/webdot*$version*.noarch.rpm] \
   webdot-linux-buildlog-$version.txt]
 
-set RPMS $path/RPMS/noarch
+set RPMS $path/redhat/noarch
 makedir $graphviz_host $RPMS
 
 foreach fn $productfiles {
