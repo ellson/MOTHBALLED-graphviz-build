@@ -15,12 +15,12 @@ if test .$1 != . ;then
 fi
 
 if test .$SRCDIR = .CURRENT ; then
-   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/development/
-   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/development/
+    COLLECTION=development
 else
-   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/stable/
-   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/stable/
+    COLLECTION=stable
 fi
+GRAPHVIZ_PUB_PATH=/pub/graphviz/$COLLECTION/
+GRAPHVIZ_ATT_PATH=/att/graphviz/$COLLECTION/
 
 RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
@@ -39,6 +39,8 @@ if test $SRCDIR = CURRENT; then
     VERSION=$BASEVERSION.$DATE
 
     sed "s/\(AC_INIT(webdot, [0-9.]*\))/\1.$DATE)/" <configure.ac >t$$
+    mv t$$ configure.ac
+    sed "s/\(GRAPHVIZ_COLLECTION\)=.*/\1=$COLLECTION/" <configure.ac >t$$
     mv t$$ configure.ac
 else
     VERSION=`grep 'AC_INIT(webdot' configure.ac | sed 's/AC_INIT(webdot, \([0-9.]*\))/\1/'`

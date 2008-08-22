@@ -14,12 +14,12 @@ if test .$1 != . ;then
     SRCDIR=$1
 fi
 if test .$SRCDIR = .CURRENT ; then
-   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/development/
-   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/development/
+   COLLECTION=development
 else
-   GRAPHVIZ_PUB_PATH=/data/pub/graphviz/stable/
-   GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/stable/
+   COLLECTION=stable
 fi
+GRAPHVIZ_PUB_PATH=/pub/graphviz/$COLLECTION
+GRAPHVIZ_ATT_PATH=/att_pub/graphviz/$COLLECTION
 
 RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
@@ -40,6 +40,8 @@ if test .$SRCDIR = .CURRENT; then
     VERSION_MICRO=$DATE
 
     sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
+    mv t$$ configure.ac
+    sed "s/\(GRAPHVIZ_COLLECTION\)=.*/\1=$COLLECTION/" <configure.ac >t$$
     mv t$$ configure.ac
 fi
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
@@ -76,13 +78,15 @@ $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 update -d -r att_07932 graphviz2/li
 #cvs -Qz3 update -d -r att_07932 graphviz2/lib/sfdpgen
 cd graphviz2
 
-if test $SRCDIR = CURRENT; then
+if test .$SRCDIR = .CURRENT; then
     VERSION_MICRO=$DATE.att
 else
     VERSION_MICRO=att
 fi
 
 sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
+mv t$$ configure.ac
+sed "s/COLLECTION=development/COLLECTION=$COLLECTION/" <configure.ac >t$$
 mv t$$ configure.ac
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
