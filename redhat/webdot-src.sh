@@ -19,8 +19,8 @@ if test .$SRCDIR = .CURRENT ; then
 else
     COLLECTION=stable
 fi
-GRAPHVIZ_PUB_PATH=/pub/graphviz/$COLLECTION/
-GRAPHVIZ_ATT_PATH=/att/graphviz/$COLLECTION/
+GRAPHVIZ_PUB_PATH=/data/pub/graphviz/$COLLECTION/
+GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/$COLLECTION/
 
 RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
