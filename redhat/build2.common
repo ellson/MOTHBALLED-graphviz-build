@@ -10,6 +10,7 @@ foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-*] {file delete -force $f}
 foreach f [glob -nocomplain $rpmbuild/*/$pkg*] {file delete -force $f}
 foreach f [glob -nocomplain $work/$pkg*] {file delete -force $f}
 
+set oldpwd [pwd]
 cd $work
 
 set SOURCES $path/SOURCES
@@ -71,3 +72,5 @@ exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug"
 foreach fn $productfiles {
   putfile $graphviz_host $RPMS/os $fn
 }
+
+cd $oldpwd
