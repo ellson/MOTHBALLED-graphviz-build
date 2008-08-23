@@ -78,8 +78,6 @@ proc rpmbuildargs {release own_} {
 	return $rv
 }
 
-# automatically determine arch and dist
-set arch $tcl_platform(machine)
 #for i686 use canonical i386
 if {[string equal $arch i686]} {set arch i386}
 
@@ -87,26 +85,26 @@ if {[string equal $arch i686]} {set arch i386}
 set rpmopt [rpmbuildargs $redhat_release $own_]
 
 #clean up any previous build
-foreach f [glob -nocomplain $rpmbuild/RPMS/*/graphviz-*] {file delete -force $f}
-foreach f [glob -nocomplain $rpmbuild/*/graphviz*] {file delete -force $f}
-foreach f [glob -nocomplain $work/graphviz*] {file delete -force $f}
+foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-*] {file delete -force $f}
+foreach f [glob -nocomplain $rpmbuild/*/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/$pkg*] {file delete -force $f}
 
 cd $work
 
 set SOURCES $path/SOURCES
 
 set index [getindex $graphviz_host $SOURCES]
-set pat "graphviz-(\[0-9.\]*?$own).tar.gz"
+set pat "$pkg-(\[0-9.\]*?$own).tar.gz"
 foreach {. v} [regexp -all -inline -- $pat $index] {
   lappend versions $v
 }
 if {! [info exists versions]} {
-    puts stderr "no graphviz snapshots found"
+    puts stderr "no $pkg snapshots found"
     exit
 }
 set version [lindex [lsort -decreasing -dictionary $versions] 0]
 
-set sourcefile graphviz-$version.tar.gz
+set sourcefile $pkg-$version.tar.gz
 
 puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
 
@@ -120,7 +118,7 @@ catch "exec rpmbuild $rpmopt -tb $sourcefile" buildlog
 
 #set end_build_time [clock format [clock seconds]]
 
-#cd $rpmbuild/BUILD/graphviz-$version/rtest
+#cd $rpmbuild/BUILD/$pkg-$version/rtest
 #catch "exec ./rtest.sh" rtestlog
 #cd $work
 
@@ -128,7 +126,7 @@ set end_time [clock format [clock seconds]]
 
 puts  "...done making."
 
-set BUILDLOG graphviz-linux-buildlog-$version$dist.$arch.txt
+set BUILDLOG $pkg-linux-buildlog-$version$dist.$arch.txt
 set f [open $BUILDLOG w]
 puts $f $start_time
 puts $f ""
@@ -142,7 +140,7 @@ puts $f $end_time
 close $f
 
 set productfiles [concat \
-  [glob -nocomplain $rpmbuild/RPMS/$arch/graphviz*$version*.rpm] \
+  [glob -nocomplain $rpmbuild/RPMS/$arch/$pkg*$version*.rpm] \
   $BUILDLOG]
 
 set RPMS $path/redhat/[string trim $dist .]/$arch
