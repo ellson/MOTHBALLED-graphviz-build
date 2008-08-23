@@ -2,8 +2,11 @@
 
 # $Id$ $Revision$
 
+source [file dirname $argv0]/build1.common
+
 set own att
 set pkg graphviz
-set arch $tcl_platform(machine)
+set isnoarch 0
 
-source [file dirname $argv0]/build-rpm.common
+source [file dirname $argv0]/build2.common
+source [file dirname $argv0]/build3.common
