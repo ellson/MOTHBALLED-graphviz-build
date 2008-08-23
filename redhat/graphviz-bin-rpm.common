@@ -97,7 +97,7 @@ set SOURCES $path/SOURCES
 
 set index [getindex $graphviz_host $SOURCES]
 set pat "graphviz-(\[0-9.\]*?$own).tar.gz"
-foreach {. v} [regexp -all -inline -- $pat tar.gz} $index] {
+foreach {. v} [regexp -all -inline -- $pat $index] {
   lappend versions $v
 }
 if {! [info exists versions]} {
