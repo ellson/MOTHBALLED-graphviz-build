@@ -10,7 +10,7 @@ if {[string length $own]} {
 
 set graphviz_host www.graphviz.org
 set graphviz_path /data/[set own_]pub/graphviz
-set distro_release {/etc/lsb-release /etc/redhat-release}
+set distro_release { /etc/lsb-release /etc/redhat-release }
 
 ################################################
 set start_time [clock format [clock seconds]]
@@ -88,7 +88,7 @@ set found 0
 foreach {release_fn} $distro_release {
 	if {[file exists $release_fn]} {
 		# set rpm options from database
-		set rpmopt [rpmbuildargs $distro_release $own_]
+		set rpmopt [rpmbuildargs $release_fn $own_]
 		set found 1
 		break
 	}
