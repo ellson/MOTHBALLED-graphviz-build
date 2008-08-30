@@ -50,6 +50,10 @@ DIR=CURRENT
 15 6 * * * ssh fc9        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 6 * * * ssh fc9-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
+# Ubuntu
+ 0 7 * * * ssh ubuntu8    graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
+ 0 9 * * * ssh ubuntu8    graphviz-build/ubuntu/graphviz-bin-att-deb.tcl $DIR
+
 #fc10 builds are done on John Ellson's home machines.  Can't ssh from here.
 #15 1 * * * ssh fc10       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #15 1 * * * ssh fc10-64    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
