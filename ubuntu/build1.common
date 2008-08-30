@@ -10,7 +10,7 @@ if {[string length $own]} {
 
 set graphviz_host www.graphviz.org
 set graphviz_path /data/[set own_]pub/graphviz
-set redhat_release /etc/redhat-release
+set distro_release {/etc/lsb-release /etc/redhat-release}
 
 ################################################
 set start_time [clock format [clock seconds]]
@@ -50,6 +50,7 @@ set patterns {
 	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
+	"DISTRIB_DESCRIPTION=\"Ubuntu (\[0-9\]+).*\"" ".ub" 0 ubuntu
 }
 
 # as far as I can tell, rpmbuild --macros doesn't work,
@@ -57,9 +58,9 @@ set patterns {
 # pass them on the rpmbuild command line, to run in an environment
 # where ~/.rpmmacros may be shared (e.g. virtual hosts).
 proc rpmbuildargs {release own_} {
-	global vers os dist patterns;
+	global vers os dist patterns
 	if {! [file readable $release]} {
-		puts stderr "cannot read $release, giving up.";
+		puts stderr "cannot read $release, giving up."
 		exit
 	}
 	set f [open $release r]
@@ -75,11 +76,27 @@ proc rpmbuildargs {release own_} {
 		}
 	}
 	if {! $rc} {
-		puts stderr "can't determine OS release from $release";
+		puts stderr "can't determine OS release from $release"
 		exit
 	}
 	close $f
 	set rv [concat --define \"dist $dist\" --define \"$os $vers\"]
 	return $rv
 }
+
+set found 0
+foreach {release_fn} $distro_release {
+	if {[file exists $release_fn]} {
+		# set rpm options from database
+		set rpmopt [rpmbuildargs $distro_release $own_]
+		set found 1
+		break
+	}
+}
+
+if {! $found} {
+	puts stderr "no release file found."
+	exit
+}
+
 
