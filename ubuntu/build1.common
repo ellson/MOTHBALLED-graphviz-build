@@ -98,5 +98,3 @@ if {! $found} {
 	puts stderr "no release file found."
 	exit
 }
-
-

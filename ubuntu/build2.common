@@ -33,14 +33,11 @@ getfile $graphviz_host $SOURCES $sourcefile
 
 puts "making..."
 # make products
-#puts "rpmbuild $rpmopt -tb $sourcefile"
-#catch "exec rpmbuild $rpmopt -tb $sourcefile" buildlog
 puts "zcat $sourcefile | tar xf -"
 catch "exec zcat $sourcefile | tar xf -" unpacklog
 cd $pkg-$version
 puts "fakeroot make -f debian/rules binary"
 catch "exec fakeroot make -f debian/rules binary" buildlog
-
 
 #set end_build_time [clock format [clock seconds]]
 
@@ -73,7 +70,7 @@ set productfiles [concat \
   $BUILDLOG]
 
 set DEBS $path/ubuntu/[string trim $dist .]/$arch
-exec ssh $graphviz_host "mkdir -p $DEBS
+exec ssh $graphviz_host "mkdir -p $DEBS"
 
 foreach fn $productfiles {
   putfile $graphviz_host $DEBS $fn
