@@ -3,6 +3,7 @@
 # $Id$ $Revision$
 
 set own att
+set rtest 0
 
 source [file dirname $argv0]/build1.common
 

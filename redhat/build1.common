@@ -42,9 +42,9 @@ proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
 set patterns {
-	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
 	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 1 fedora
 	"Fedora release (\[0-9\]+)" ".fc"  0 fedora
+	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
 	"CentOS release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
@@ -57,7 +57,7 @@ set patterns {
 # pass them on the rpmbuild command line, to run in an environment
 # where ~/.rpmmacros may be shared (e.g. virtual hosts).
 proc rpmbuildargs {release own_} {
-	global vers os dist patterns;
+	global rtest vers os dist patterns;
 	if {! [file readable $release]} {
 		puts stderr "cannot read $release, giving up.";
 		exit
@@ -79,7 +79,7 @@ proc rpmbuildargs {release own_} {
 		exit
 	}
 	close $f
-	set rv [concat --define \"dist $dist\" --define \"$os $vers\"]
+	set rv [concat --define \"dist $dist\" --define \"$os $vers\" --define \"rtest $rtest\"]
 	return $rv
 }
 
