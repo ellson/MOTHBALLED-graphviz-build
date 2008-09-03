@@ -6,6 +6,7 @@ if {$isnoarch} {set pkgarch noarch} {set pkgarch $arch}
 foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-*] {file delete -force $f}
 foreach f [glob -nocomplain $rpmbuild/*/$pkg*] {file delete -force $f}
 foreach f [glob -nocomplain $work/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/*deb] {file delete -force $f}
 
 set oldpwd [pwd]
 cd $work
