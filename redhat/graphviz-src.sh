@@ -91,8 +91,13 @@ mv t$$ configure.ac
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
 # modify debian rules
-sed "s/--without-sfdp/--with-sfdp/" <debian/rules >t$$
-sed "s/--without-smyrna/--with-smyrna/" <t$$ >debian/rules
+sed "s/--without-sfdp/--with-sfdp/" <debian/rules >t$$1
+sed "s/--without-smyrna/--with-smyrna/" <t$$1 >t$$2
+sed "s/--without-gtk/--with-gtk/" <t$$2 >t$$1
+sed "s/--without-gtkgl/--with-gtkgl/" <t$$1 >t$$2
+sed "s/--without-gtkglext/--with-gtkglext/" <t$$2 >t$$1
+sed "s/--without-glade/--with-glade/" <t$$1 >debian/rules
+rm -f t$$1 t$$2
 
 ./autogen.sh >/dev/null
 make dist >/dev/null
