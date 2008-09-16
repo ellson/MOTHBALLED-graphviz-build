@@ -90,6 +90,10 @@ sed "s/COLLECTION=development/COLLECTION=$COLLECTION/" <configure.ac >t$$
 mv t$$ configure.ac
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
+# modify debian rules
+sed "s/--without-sfdp/--with-sfdp/" <debian/rules >t$$
+sed "s/--without-smyrna/--with-smyrna/" <t$$ >debian/rules
+
 ./autogen.sh >/dev/null
 make dist >/dev/null
 
