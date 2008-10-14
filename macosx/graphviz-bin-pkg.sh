@@ -48,4 +48,5 @@ then
 
 	# put the package
 	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
+	scp $LOG gviz@$graphviz_host:$PKGS/$LOG
 fi
