@@ -2,11 +2,13 @@
 
      PREFIX = ${HOME}/PREFIX
 
-     GVDEPS = ${PREFIX}/lib/libpango-1.0.so ${PREFIX}/lib/libpango-1.0.so \
-	      ${PREFIX}/lib/libgts.so ${PREFIX}/lib/libgs.so \
-	      ${PREFIX}/lib/librsvg.so ${PREFIX}/lib/libgs.so \
+     GVDEPS = ${PREFIX}/lib/libpango-1.0.so ${PREFIX}/lib/libcairo.so \
+	      ${PREFIX}/lib/libgts.so ${PREFIX}/lib/librsvg-2.so \
 	      ${PREFIX}/lib/libtcl8.6.so ${PREFIX}/lib/libtk8.6.so \
-	      ${PREFIX}/lib/libxml2.so ${PREFIX}/lib/libxslt.so
+	      ${PREFIX}/lib/libxml2.so ${PREFIX}/lib/libxslt.so \
+	      ${PREFIX}/lib/libgd.so
+
+# ${PREFIX}/lib/libgs.so
 
 all: ${GVDEPS}
 
@@ -135,13 +137,17 @@ ${PREFIX}:
 	
 BASETOOLS = ${PREFIX} ${PREFIX}/bin/bison ${PREFIX}/bin/flex ${PREFIX}/bin/grep \
 	${PREFIX}/bin/make ${PREFIX}/bin/pkg-config ${PREFIX}/bin/sed \
-	${PREFIX}/bin/tar ${PREFIX}/bin/tclsh ${PREFIX}/bin/wget 
+	${PREFIX}/bin/tar ${PREFIX}/bin/tclsh8.6 ${PREFIX}/bin/wget 
 
 #${PREFIX}/bin/gawk
 #${PREFIX}/bin/gzip
 
+allbasetools: ${BASETOOLS}
+
 CVSTOOLS = ${BASETOOLS} ${PREFIX}/bin/cvs ${PREFIX}/bin/autoconf ${PREFIX}/bin/automake \
 	   ${PREFIX}/bin/libtoolize ${PREFIX}/bin/swig
+
+allcvstools: ${CVSTOOLS}
 
 ${PREFIX}/bin/autoconf: ${AUTOCONF} ${BASETOOLS}
 	zcat ${AUTOCONF} | tar xf -
@@ -184,7 +190,7 @@ ${PREFIX}/lib/libgettextlib.so: ${GETTEXT} ${BASETOOLS}
 	(cd `echo ${GETTEXT} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/lib/libgs.so: ${GHOSTSCRIPT} ${BASETOOLS} ${PREFIX}/lib/libfontconfig.so
 	zcat ${GHOSTSCRIPT} | tar xf -
-	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX} --disable-cups; make install)
+	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX} --disable-cups --enable-dynamic --with-drivers=CAIRO; make install soinstall)
 ${PREFIX}/lib/libglib-2.0.so: ${GLIB} ${BASETOOLS} ${PREFIX}/lib/libgettextlib.so
 	zcat ${GLIB} | tar xf -
 	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX} --disable-visibility; make install)
@@ -206,7 +212,7 @@ ${PREFIX}/lib/libiconv.so: ${LIBICONV} ${BASETOOLS}
 ${PREFIX}/lib/libpng.so: ${LIBPNG} ${BASETOOLS}
 	zcat ${LIBPNG} | tar xf -
 	(cd `echo ${LIBPNG} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
-${PREFIX}/lib/librsvg.so: ${LIBRSVG} ${BASETOOLS}
+${PREFIX}/lib/librsvg-2.so: ${LIBRSVG} ${BASETOOLS}
 	zcat ${LIBRSVG} | tar xf -
 	(cd `echo ${LIBRSVG} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/bin/libtoolize: ${LIBTOOL} ${BASETOOLS}
@@ -214,7 +220,7 @@ ${PREFIX}/bin/libtoolize: ${LIBTOOL} ${BASETOOLS}
 	(cd `echo ${LIBTOOL} | sed s/.tar.gz// | sed s/a$$//`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/lib/libxml2.so: ${LIBXML2} ${BASETOOLS}
 	zcat ${LIBXML2} | tar xf -
-	(cd `echo ${LIBXML2} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
+	(cd `echo ${LIBXML2} | sed s/.tar.gz// | sed s/-sources//`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/lib/libxslt.so: ${LIBXSLT} ${BASETOOLS}
 	zcat ${LIBXSLT} | tar xf -
 	(cd `echo ${LIBXSLT} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
@@ -242,11 +248,12 @@ ${PREFIX}/bin/swig: ${SWIG} ${BASETOOLS}
 ${PREFIX}/bin/tar: ${TAR} ${PREFIX}/bin/make
 	zcat ${TAR} | tar xf -
 	(cd `echo ${TAR} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
-${PREFIX}/lib/libtcl8.6.so ${PREFIX}/bin/tclsh: ${TCL} ${PREFIX}/bin/make
+${PREFIX}/lib/libtcl8.6.so ${PREFIX}/bin/tclsh8.6: ${TCL} ${PREFIX}/bin/make
 	zcat ${TCL} | tar xf -
 	(cd `echo ${TCL} | sed s/.tar.gz// | sed s/-src$$/\\\/unix/`; ./configure --prefix=${PREFIX}; make install)
-${PREFIX}/lib/libtk8.6.so ${PREFIX}/bin/wish: ${TK} ${PREFIX}/bin/tclsh
+${PREFIX}/lib/libtk8.6.so ${PREFIX}/bin/wish8.6: ${TK} ${PREFIX}/bin/tclsh8.6
 	zcat ${TK} | tar xf -
+	patch -p0 <tk8.6a3.patch
 	(cd `echo ${TK} | sed s/.tar.gz// | sed s/-src$$/\\\/unix/`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/bin/wget: ${WGET} ${PREFIX}/bin/make
 	zcat ${WGET} | tar xf -
