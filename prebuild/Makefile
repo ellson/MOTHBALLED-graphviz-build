@@ -169,7 +169,7 @@ ${PREFIX}/lib/libgettext.so: ${PREFIX} ${GETTEXT}
 ${PREFIX}/lib/libgs.so: ${PREFIX} ${GHOSTSCRIPT} 
 	zcat ${GHOSTSCRIPT} | tar xf -
 	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
-${PREFIX}/lib/libglib.so: ${PREFIX} ${GLIB} 
+${PREFIX}/lib/libglib-2.0.so: ${PREFIX} ${GLIB} 
 	zcat ${GLIB} | tar xf -
 	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
 ${PREFIX}/bin/grep: ${PREFIX} ${GREP} 
@@ -208,9 +208,9 @@ ${PREFIX}/bin/m4: ${PREFIX} ${M4}
 ${PREFIX}/bin/make: ${PREFIX} ${MAKE} 
 	zcat ${MAKE} | tar xf -
 	(cd `echo ${MAKE} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
-${PREFIX}/lib/libpango.so: ${PREFIX} ${PANGO} ${PREFIX}/lib/libglib.so ${PREFIX}/lib/libfontconfig.so ${PREFIX}/lib/libcairo.so
+${PREFIX}/lib/libpango.so: ${PREFIX} ${PANGO} ${PREFIX}/lib/libglib-2.0.so ${PREFIX}/lib/libfontconfig.so ${PREFIX}/lib/libcairo.so
 	zcat ${PANGO} | tar xf -
-	(cd `echo ${PANGO} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
+	(cd `echo ${PANGO} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX} --disable-visibility; make install)
 ${PREFIX}/lib/libpixman.so: ${PREFIX} ${PIXMAN} 
 	zcat ${PIXMAN} | tar xf -
 	(cd `echo ${PIXMAN} | sed s/.tar.gz//`; ./configure --prefix=${PREFIX}; make install)
