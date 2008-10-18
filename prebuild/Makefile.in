@@ -225,7 +225,7 @@ allcvstools: ${CVSTOOLS}
 	(cd `echo ${M4} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/bin/make: ${MAKE} @prefix@
 	zcat ${MAKE} | tar xf -
-	(cd `echo ${MAKE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
+	(cd `echo ${MAKE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 @prefix@/lib/libpango-1.0.so: ${PANGO} ${BASETOOLS} @prefix@/lib/libglib-2.0.so @prefix@/lib/libfontconfig.so @prefix@/lib/libcairo.so
 	zcat ${PANGO} | tar xf -
 	(cd `echo ${PANGO} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make install)
