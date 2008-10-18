@@ -38,6 +38,7 @@ VERSION_MINOR=`grep 'm4_define(graphviz_version_minor' configure.ac | sed 's/.*,
 VERSION_MICRO=`grep 'm4_define(graphviz_version_micro' configure.ac | sed 's/.*, \([0-9.]*\))/\1/'`
 if test .$SRCDIR = .CURRENT; then
     VERSION_MICRO=$DATE
+    VERSION_DATE=$DATE
 
     sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
     mv t$$ configure.ac
@@ -87,6 +88,8 @@ fi
 sed "s/\(m4_define(graphviz_version_micro, \)[0-9.]*)/\1$VERSION_MICRO)/" <configure.ac >t$$
 mv t$$ configure.ac
 sed "s/COLLECTION=development/COLLECTION=$COLLECTION/" <configure.ac >t$$
+mv t$$ configure.ac
+sed "s/VERSION_DATE=.*/VERSION_DATE=$VERSION_DATE/" <configure.ac >t$$
 mv t$$ configure.ac
 VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
