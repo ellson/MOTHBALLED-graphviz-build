@@ -168,7 +168,7 @@ allcvstools: ${CVSTOOLS}
 	(cd `echo ${FINDUTILS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/bin/flex: ${FLEX} @prefix@/bin/make
 	zcat ${FLEX} | tar xf -
-	(cd `echo ${FLEX} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
+	(cd `echo ${FLEX} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 @prefix@/lib/libfontconfig.so: ${FONTCONFIG} ${BASETOOLS} @prefix@/lib/libfreetype.so @prefix@/lib/libexpat.so
 	zcat ${FONTCONFIG} | tar xf -
 	(cd `echo ${FONTCONFIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-docs; make install)
@@ -181,7 +181,7 @@ allcvstools: ${CVSTOOLS}
 @prefix@/lib/libgd.so: ${GD} ${BASETOOLS}
 	zcat ${GD} | tar xf -
 	(cd `echo ${GD} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
-@prefix@/lib/libgettextlib.so: ${GETTEXT} ${BASETOOLS}
+@prefix@/lib/libgettextlib.so: ${GETTEXT} @prefix@/bin/make
 	zcat ${GETTEXT} | tar xf -
 	(cd `echo ${GETTEXT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/lib/libgs.so: ${GHOSTSCRIPT} ${BASETOOLS} @prefix@/lib/libfontconfig.so
@@ -190,7 +190,7 @@ allcvstools: ${CVSTOOLS}
 @prefix@/lib/libglib-2.0.so: ${GLIB} ${BASETOOLS} @prefix@/lib/libgettextlib.so
 	zcat ${GLIB} | tar xf -
 	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make install)
-@prefix@/bin/grep: ${GREP} @prefix@/bin/make 
+@prefix@/bin/grep: ${GREP} @prefix@/bin/make @prefix@/lib/libgettextlib.so 
 	zcat ${GREP} | tar xf -
 	(cd `echo ${GREP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/lib/libgtk+.so: ${GTK} ${BASETOOLS}
@@ -202,7 +202,7 @@ allcvstools: ${CVSTOOLS}
 @prefix@/bin/gzip: ${GZIP} @prefix@/bin/make
 	zcat ${GZIP} | tar xf -
 	(cd `echo ${GZIP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
-@prefix@/lib/libiconv.so: ${LIBICONV} ${BASETOOLS}
+@prefix@/lib/libiconv.so: ${LIBICONV} @prefix@/bin/make
 	zcat ${LIBICONV} | tar xf -
 	(cd `echo ${LIBICONV} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/lib/libpng.so: ${LIBPNG} ${BASETOOLS}
@@ -237,6 +237,7 @@ allcvstools: ${CVSTOOLS}
 	(cd `echo ${PKGCONFIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/bin/sed: ${SED} @prefix@/bin/make
 	zcat ${SED} | tar xf -
+	patch -p0 <sed-4.1.5.patch
 	(cd `echo ${SED} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 @prefix@/bin/swig: ${SWIG} ${BASETOOLS}
 	zcat ${SWIG} | tar xf -
