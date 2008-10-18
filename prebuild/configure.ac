@@ -73,6 +73,7 @@ dnl checks for various programs
 
 AC_ISC_POSIX
 AC_PROG_AWK
+AC_CHECK_PROG(WGET,wget,wget,false)
 AC_CHECK_PROG(BISON,bison,bison,false)
 AC_CHECK_PROG(FLEX,flex,flex,false)
 AC_CHECK_PROG(SED,sed,sed,false)
@@ -81,7 +82,6 @@ AC_CHECK_PROG(SORT,sort,sort,false)
 AC_CHECK_PROG(GROFF,groff,groff,false)
 AC_CHECK_PROG(PS2PDF,ps2pdf,ps2pdf,false)
 AC_CHECK_PROG(PS2PDF,pstopdf,pstopdf,false)
-PKG_PROG_PKG_CONFIG
 
 # Generate Makefiles
 AC_CONFIG_FILES(Makefile)
