@@ -1,32 +1,15 @@
---- sed-4.1.5/lib/regcomp.c.orig	Sat Oct 18 12:53:23 2008
-+++ sed-4.1.5/lib/regcomp.c	Sat Oct 18 12:56:09 2008
-@@ -558,7 +558,11 @@
- static const bitset_t utf8_sb_map =
- {
-   /* Set the first 128 bits.  */
--  [0 ... 0x80 / BITSET_WORD_BITS - 1] = BITSET_WORD_MAX
-+//  [0 ... 0x80 / BITSET_WORD_BITS - 1] = BITSET_WORD_MAX
-+//
-+// Sun's cc can't handle this syntax.
-+// assume 32 bit words
-+  0xffff, 0xffff, 0xffff, 0xffff,
- };
- #endif
- 
---- sed-4.1.5/lib/regexec.c.orig	Sat Oct 18 13:02:59 2008
-+++ sed-4.1.5/lib/regexec.c	Sat Oct 18 13:00:00 2008
-@@ -2894,7 +2894,9 @@
+--- sed-4.1.5/lib/regexec.c.orig	Sun Oct 19 01:00:29 2008
++++ sed-4.1.5/lib/regexec.c	Sun Oct 19 01:01:30 2008
+@@ -2894,7 +2894,7 @@
  	      sizeof (re_dfastate_t *) * (path->alloc - old_alloc));
      }
  
 -  str_idx = path->next_idx ?: top_str;
-+//  str_idx = path->next_idx ?: top_str;
-+// Sun's cc can't handle this syntax
-+  str_idx = path->next_idx ? 0 : top_str;
- 
++  str_idx = path->next_idx ? path->next_idx : top_str;
  
    /* Temporary modify MCTX.  */
-@@ -3297,8 +3299,10 @@
+   backup_state_log = mctx->state_log;
+@@ -3296,8 +3296,10 @@
    reg_errcode_t err;
    int i, j, ch, need_word_trtable = 0;
    bitset_word_t elem, mask;
@@ -39,7 +22,7 @@
    int ndests; /* Number of the destination states from `state'.  */
    re_dfastate_t **trtable;
    re_dfastate_t **dest_states = NULL, **dest_states_word, **dest_states_nl;
-@@ -3323,7 +3327,8 @@
+@@ -3322,7 +3324,8 @@
        dests_alloc = re_malloc (struct dests_alloc, 1);
        if (BE (dests_alloc == NULL, 0))
  	return 0;
@@ -49,7 +32,7 @@
      }
    dests_node = dests_alloc->dests_node;
    dests_ch = dests_alloc->dests_ch;
-@@ -3372,7 +3377,8 @@
+@@ -3371,7 +3374,8 @@
  	    free (dests_alloc);
  	  return 0;
  	}
@@ -59,7 +42,7 @@
      }
    dest_states_word = dest_states + ndests;
    dest_states_nl = dest_states_word + ndests;
-@@ -3577,7 +3583,8 @@
+@@ -3576,7 +3580,8 @@
  	{
  	  if (constraint & NEXT_NEWLINE_CONSTRAINT)
  	    {
