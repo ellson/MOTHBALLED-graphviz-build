@@ -131,7 +131,7 @@ ${ZLIB}:
 @prefix@:
 	mkdir -p @prefix@
 	
-BASETOOLS = @prefix@ make bison flex pkg-config sed tar tclsh8.6 wget 
+BASETOOLS = @prefix@ make bison flex pkg-config sed tar tcl wget 
 
 #gawk gzip grep coreutils findutils
 
