@@ -73,7 +73,7 @@ dnl checks for various programs
 
 AC_ISC_POSIX
 AC_PROG_AWK
-AC_CHECK_PROG(WGET,wget,wget,false)
+AC_CHECK_PROG(wget,wget,wget,false)
 AC_CHECK_PROG(BISON,bison,bison,false)
 AC_CHECK_PROG(FLEX,flex,flex,false)
 AC_CHECK_PROG(SED,sed,sed,false)
