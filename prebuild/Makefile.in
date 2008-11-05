@@ -202,7 +202,7 @@ ghostscript: ${GHOSTSCRIPT} ${BASETOOLS} fontconfig
 	touch ghostscript
 glib: ${GLIB} ${BASETOOLS} gettext
 	@gzcat@ ${GLIB} | tar xf -
-	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make install)
+	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make; make install)
 	touch glib
 grep: ${GREP} make gettext
 	@gzcat@ ${GREP} | tar xf -
