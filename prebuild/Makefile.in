@@ -267,6 +267,7 @@ sed: ${SED} make
 	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
 	patch -p0 <sed-4.1.5_lib_regexec.c.patch
 	(cd `echo ${SED} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
+	touch sed
 swig: ${SWIG} ${BASETOOLS}
 	@gzcat@ ${SWIG} | tar xf -
 	(cd `echo ${SWIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
