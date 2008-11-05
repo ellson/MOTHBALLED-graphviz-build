@@ -142,153 +142,153 @@ CVSTOOLS = ${BASETOOLS} cvs autoconf automake libtoolize swig
 allcvstools: ${CVSTOOLS}
 
 autoconf: ${AUTOCONF} ${BASETOOLS}
-	zcat ${AUTOCONF} | tar xf -
+	@gzcat@ ${AUTOCONF} | tar xf -
 	(cd `echo ${AUTOCONF} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch autoconf;
 automake: ${AUTOMAKE} ${BASETOOLS}
-	zcat ${AUTOMAKE} | tar xf -
+	@gzcat@ ${AUTOMAKE} | tar xf -
 	(cd `echo ${AUTOMAKE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 bison: ${BISON} make
-	zcat ${BISON} | tar xf -
+	@gzcat@ ${BISON} | tar xf -
 	(cd `echo ${BISON} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch bison
 cairo: ${CAIRO} ${BASETOOLS} pixman freetype libpng
-	zcat ${CAIRO} | tar xf -
+	@gzcat@ ${CAIRO} | tar xf -
 	(cd `echo ${CAIRO} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility --disable-xlib-xrender; make install)
 	touch cairo
 coreutils: ${COREUTILS}
-	zcat ${COREUTILS} | tar xf -
+	@gzcat@ ${COREUTILS} | tar xf -
 	(cd `echo ${COREUTILS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch coreutils
 cvs: ${CVS} ${BASETOOLS}
-	zcat ${CVS} | tar xf -
+	@gzcat@ ${CVS} | tar xf -
 	(cd `echo ${CVS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch cvs
 expat: ${EXPAT} ${BASETOOLS}
-	zcat ${EXPAT} | tar xf -
+	@gzcat@ ${EXPAT} | tar xf -
 	(cd `echo ${EXPAT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch expat
 findutils: ${FINDUTILS} ${BASETOOLS}
-	zcat ${FINDUTILS} | tar xf -
+	@gzcat@ ${FINDUTILS} | tar xf -
 	(cd `echo ${FINDUTILS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch findutils
 flex: ${FLEX} make
-	zcat ${FLEX} | tar xf -
+	@gzcat@ ${FLEX} | tar xf -
 	(cd `echo ${FLEX} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 	touch flex
 fontconfig: ${FONTCONFIG} ${BASETOOLS} freetype expat
-	zcat ${FONTCONFIG} | tar xf -
+	@gzcat@ ${FONTCONFIG} | tar xf -
 	(cd `echo ${FONTCONFIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-docs; make install)
 	touch fontconfig
 freetype: ${FREETYPE} ${BASETOOLS}
-	zcat ${FREETYPE} | tar xf -
+	@gzcat@ ${FREETYPE} | tar xf -
 	(cd `echo ${FREETYPE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch freetype
 gawk: ${GAWK} make 
-	zcat ${GAWK} | tar xf -
+	@gzcat@ ${GAWK} | tar xf -
 	(cd `echo ${GAWK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch gawk
 gd: ${GD} ${BASETOOLS}
-	zcat ${GD} | tar xf -
+	@gzcat@ ${GD} | tar xf -
 	(cd `echo ${GD} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch gd
 gettext: ${GETTEXT} make
-	zcat ${GETTEXT} | tar xf -
+	@gzcat@ ${GETTEXT} | tar xf -
 	(cd `echo ${GETTEXT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-java; make LIBS="-lsec"; make install)
 	touch gettext
 ghostscript: ${GHOSTSCRIPT} ${BASETOOLS} fontconfig
-	zcat ${GHOSTSCRIPT} | tar xf -
+	@gzcat@ ${GHOSTSCRIPT} | tar xf -
 	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-cups --enable-dynamic --with-drivers=CAIRO; make install soinstall)
 	touch ghostscript
 glib: ${GLIB} ${BASETOOLS} gettext
-	zcat ${GLIB} | tar xf -
+	@gzcat@ ${GLIB} | tar xf -
 	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make install)
 	touch glib
 grep: ${GREP} make gettext
-	zcat ${GREP} | tar xf -
+	@gzcat@ ${GREP} | tar xf -
 	(cd `echo ${GREP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch grep
 gtk: ${GTK} ${BASETOOLS}
-	zcat ${GTK} | tar xf -
+	@gzcat@ ${GTK} | tar xf -
 	(cd `echo ${GTK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 gts: ${GTS} ${BASETOOLS}
-	zcat ${GTS} | tar xf -
+	@gzcat@ ${GTS} | tar xf -
 	(cd `echo ${GTS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch gts
 gzip: ${GZIP} make
-	zcat ${GZIP} | tar xf -
+	@gzcat@ ${GZIP} | tar xf -
 	(cd `echo ${GZIP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 iconv: ${LIBICONV} make
-	zcat ${LIBICONV} | tar xf -
+	@gzcat@ ${LIBICONV} | tar xf -
 	(cd `echo ${LIBICONV} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch iconv
 libpng: ${LIBPNG} ${BASETOOLS}
-	zcat ${LIBPNG} | tar xf -
+	@gzcat@ ${LIBPNG} | tar xf -
 	(cd `echo ${LIBPNG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch libpng
 rsvg: ${LIBRSVG} ${BASETOOLS}
-	zcat ${LIBRSVG} | tar xf -
+	@gzcat@ ${LIBRSVG} | tar xf -
 	(cd `echo ${LIBRSVG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch rsvg
 libtool: ${LIBTOOL} ${BASETOOLS}
-	zcat ${LIBTOOL} | tar xf -
+	@gzcat@ ${LIBTOOL} | tar xf -
 	(cd `echo ${LIBTOOL} | sed s/.tar.gz// | sed s/a$$//`; ./configure --prefix=@prefix@; make install)
 	touch libtool
 libxml2: ${LIBXML2} ${BASETOOLS}
-	zcat ${LIBXML2} | tar xf -
+	@gzcat@ ${LIBXML2} | tar xf -
 	(cd `echo ${LIBXML2} | sed s/.tar.gz// | sed s/-sources//`; ./configure --prefix=@prefix@; make install)
 	touch libxml2
 libxslt: ${LIBXSLT} ${BASETOOLS}
-	zcat ${LIBXSLT} | tar xf -
+	@gzcat@ ${LIBXSLT} | tar xf -
 	(cd `echo ${LIBXSLT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch libxslt
 m4: ${M4} ${BASETOOLS}
-	zcat ${M4} | tar xf -
+	@gzcat@ ${M4} | tar xf -
 	(cd `echo ${M4} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch m4
 make: ${MAKE}
-	zcat ${MAKE} | tar xf -
+	@gzcat@ ${MAKE} | tar xf -
 	(cd `echo ${MAKE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 	touch make
 pango: ${PANGO} ${BASETOOLS} glib fontconfig cairo
-	zcat ${PANGO} | tar xf -
+	@gzcat@ ${PANGO} | tar xf -
 	(cd `echo ${PANGO} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility; make install)
 	touch pango
 pixman: ${PIXMAN} ${BASETOOLS}
-	zcat ${PIXMAN} | tar xf -
+	@gzcat@ ${PIXMAN} | tar xf -
 	(cd `echo ${PIXMAN} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch pixman
 pkg-config: ${PKGCONFIG} make
-	zcat ${PKGCONFIG} | tar xf -
+	@gzcat@ ${PKGCONFIG} | tar xf -
 	(cd `echo ${PKGCONFIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch pkg-config
 sed: ${SED} make
-	zcat ${SED} | tar xf -
+	@gzcat@ ${SED} | tar xf -
 	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
 	patch -p0 <sed-4.1.5_lib_regexec.c.patch
 	(cd `echo ${SED} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 swig: ${SWIG} ${BASETOOLS}
-	zcat ${SWIG} | tar xf -
+	@gzcat@ ${SWIG} | tar xf -
 	(cd `echo ${SWIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch swig
 tar: ${TAR} make
-	zcat ${TAR} | tar xf -
+	@gzcat@ ${TAR} | tar xf -
 	(cd `echo ${TAR} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch tar
 tcl: ${TCL} make
-	zcat ${TCL} | tar xf -
+	@gzcat@ ${TCL} | tar xf -
 	(cd `echo ${TCL} | sed s/.tar.gz// | sed s/-src$$/\\\/unix/`; ./configure --prefix=@prefix@; make install)
 	touch tcl
 tk: ${TK} tcl
-	zcat ${TK} | tar xf -
+	@gzcat@ ${TK} | tar xf -
 	patch -p0 <tk8.6a3.patch
 	(cd `echo ${TK} | sed s/.tar.gz// | sed s/-src$$/\\\/unix/`; ./configure --prefix=@prefix@; make install)
 	touch tk
 wget: ${WGET} make
-	zcat ${WGET} | tar xf -
+	@gzcat@ ${WGET} | tar xf -
 	(cd `echo ${WGET} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch wget
 zlib: ${ZLIB} make
-	zcat ${ZLIB} | tar xf -
+	@gzcat@ ${ZLIB} | tar xf -
 	(cd `echo ${ZLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --shared; make install)
 	touch zlib
