@@ -176,7 +176,7 @@ flex: ${FLEX} make
 	@gzcat@ ${FLEX} | tar xf -
 	(cd `echo ${FLEX} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 	touch flex
-fontconfig: ${FONTCONFIG} ${BASETOOLS} freetype expat
+fontconfig: ${FONTCONFIG} ${BASETOOLS} freetype expat libxml2
 	@gzcat@ ${FONTCONFIG} | tar xf -
 	(cd `echo ${FONTCONFIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-docs; make install)
 	touch fontconfig
