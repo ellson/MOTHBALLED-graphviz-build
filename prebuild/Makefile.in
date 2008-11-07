@@ -4,6 +4,7 @@
 
 all: ${GVDEPS}
 
+        ATK = atk-1.24.0.tar.gz
    AUTOCONF = autoconf-2.63.tar.gz
    AUTOMAKE = automake-1.10.1.tar.gz
       BISON = bison-2.3.tar.gz
@@ -17,6 +18,7 @@ all: ${GVDEPS}
    FREETYPE = freetype-2.3.7.tar.gz
        GAWK = gawk-3.1.5.tar.gz
          GD = gd-2.0.36RC1.tar.gz
+  GDKPIXBUF = gdk-pixbuf-0.22.0.tar.gz
     GETTEXT = gettext-0.17.tar.gz
 GHOSTSCRIPT = ghostscript-8.63.tar.gz
        GLIB = glib-2.18.2.tar.gz
@@ -43,13 +45,15 @@ GHOSTSCRIPT = ghostscript-8.63.tar.gz
        WGET = wget-1.11.4.tar.gz
        ZLIB = zlib-1.2.3.tar.gz
 
-allsrc:	${AUTOCONF} ${AUTOMAKE} ${BISON} ${CAIRO} ${COREUTILS} ${CVS} \
+allsrc:	${ATK} ${AUTOCONF} ${AUTOMAKE} ${BISON} ${CAIRO} ${COREUTILS} ${CVS} \
 	${EXPAT} ${FINDUTILS} ${FLEX} ${FONTCONFIG} ${FREETYPE} ${GAWK} \
-	${GD} ${GETTEXT} ${GHOSTSCRIPT} ${GLIB} ${GREP} ${GTK} ${GTS} \
-	${GZIP} ${LIBICONV} ${LIBPNG} ${LIBRSVG} ${LIBTOOL} ${LIBXML2} \
+	${GD} ${GDKPIXBUF} ${GETTEXT} ${GHOSTSCRIPT} ${GLIB} ${GREP} ${GTK} \
+	${GTS} ${GZIP} ${LIBICONV} ${LIBPNG} ${LIBRSVG} ${LIBTOOL} ${LIBXML2} \
 	${LIBXSLT} ${M4} ${MAKE} ${PANGO} ${PIXMAN} ${PKGCONFIG} ${SED} \
 	${SWIG} ${TAR} ${TCL} ${TK} ${WGET} ${ZLIB} 
 
+${ATK}: 
+	@wget@ http://ftp.acc.umu.se/pub/GNOME/sources/atk/1.24/${ATK}
 ${AUTOCONF}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/autoconf/${AUTOCONF}
 ${AUTOMAKE}:
@@ -76,6 +80,8 @@ ${GAWK}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/gawk/${GAWK}
 ${GD}:
 	@wget@ http://www.libgd.org/releases/${GD}
+${GDKPIXBUF}:
+	@wget@ http://ftp.gnome.org/pub/GNOME/sources/gdk-pixbuf/0.22/${GDKPIXBUF}
 ${GETTEXT}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/gettext/${GETTEXT}
 ${GHOSTSCRIPT}:
@@ -137,10 +143,15 @@ BASETOOLS = @prefix@ make bison flex pkg-config sed tar tcl wget
 
 allbasetools: ${BASETOOLS}
 
-CVSTOOLS = ${BASETOOLS} cvs autoconf automake libtoolize swig
+CVSTOOLS = ${BASETOOLS} cvs autoconf automake libtool swig
 
 allcvstools: ${CVSTOOLS}
 
+atk: ${ATK} ${BASETOOLS} glib
+	@gzcat@ ${ATK} | tar xf -
+	(cd `echo ${ATK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
+	touch atk;
+automake: ${AUTOMAKE} ${BASETOOLS}
 autoconf: ${AUTOCONF} ${BASETOOLS}
 	@gzcat@ ${AUTOCONF} | tar xf -
 	(cd `echo ${AUTOCONF} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
@@ -148,6 +159,7 @@ autoconf: ${AUTOCONF} ${BASETOOLS}
 automake: ${AUTOMAKE} ${BASETOOLS}
 	@gzcat@ ${AUTOMAKE} | tar xf -
 	(cd `echo ${AUTOMAKE} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
+	touch automake
 bison: ${BISON} make
 	@gzcat@ ${BISON} | tar xf -
 	(cd `echo ${BISON} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
@@ -192,6 +204,10 @@ gd: ${GD} ${BASETOOLS}
 	@gzcat@ ${GD} | tar xf -
 	(cd `echo ${GD} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
 	touch gd
+gdk-pixbuf: ${GDKPIXBUF} ${BASETOOLS} glib gtk
+	@gzcat@ ${GDKPIXBUF} | tar xf -
+	(cd `echo ${GDKPIXBUF} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
+	touch gdk-pixbuf
 gettext: ${GETTEXT} make
 	@gzcat@ ${GETTEXT} | tar xf -
 	(cd `echo ${GETTEXT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-java; make LIBS="-lsec"; make install; make clean)
@@ -208,9 +224,10 @@ grep: ${GREP} make gettext
 	@gzcat@ ${GREP} | tar xf -
 	(cd `echo ${GREP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch grep
-gtk: ${GTK} ${BASETOOLS}
+gtk: ${GTK} ${BASETOOLS} glib atk
 	@gzcat@ ${GTK} | tar xf -
-	(cd `echo ${GTK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
+	(cd `echo ${GTK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --without-libjasper; make install)
+	touch gtk
 gts: ${GTS} ${BASETOOLS}
 	@gzcat@ ${GTS} | tar xf -
 	(cd `echo ${GTS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
@@ -226,7 +243,7 @@ libpng: ${LIBPNG} ${BASETOOLS}
 	@gzcat@ ${LIBPNG} | tar xf -
 	(cd `echo ${LIBPNG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch libpng
-rsvg: ${LIBRSVG} ${BASETOOLS}
+rsvg: ${LIBRSVG} ${BASETOOLS} gdk-pixbuf
 	@gzcat@ ${LIBRSVG} | tar xf -
 	(cd `echo ${LIBRSVG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch rsvg
@@ -270,7 +287,7 @@ sed: ${SED} make
 	touch sed
 swig: ${SWIG} ${BASETOOLS}
 	@gzcat@ ${SWIG} | tar xf -
-	(cd `echo ${SWIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
+	(cd `echo ${SWIG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make; make install)
 	touch swig
 tar: ${TAR} make
 	@gzcat@ ${TAR} | tar xf -
