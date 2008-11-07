@@ -1,0 +1,12 @@
+--- sed-4.1.5/lib/mkstemp.c.orig	Fri Nov  7 18:44:58 2008
++++ sed-4.1.5/lib/mkstemp.c	Fri Nov  7 18:45:30 2008
+@@ -16,6 +16,9 @@
+ # include <sys/file.h>
+ #endif /* HAVE_SYS_FILE_H */
+ 
++#include <sys/types.h>
++#include <sys/stat.h>
++
+ #ifdef HAVE_IO_H
+ # include <io.h>
+ #endif /* HAVE_IO_H */

@@ -226,7 +226,7 @@ grep: ${GREP} make gettext
 	touch grep
 gtk: ${GTK} ${BASETOOLS} glib atk
 	@gzcat@ ${GTK} | tar xf -
-	(cd `echo ${GTK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --without-libjasper; make install)
+	(cd `echo ${GTK} | sed s/.tar.gz//`; LDFLAGS="-L/usr/openwin/sfw/lib" ./configure --prefix=@prefix@ --without-libjasper; make install)
 	touch gtk
 gts: ${GTS} ${BASETOOLS}
 	@gzcat@ ${GTS} | tar xf -
@@ -283,6 +283,7 @@ sed: ${SED} make
 	@gzcat@ ${SED} | tar xf -
 	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
 	patch -p0 <sed-4.1.5_lib_regexec.c.patch
+	patch -p0 <sed-4.1.5_lib_mkstemp.c.patch
 	(cd `echo ${SED} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch sed
 swig: ${SWIG} ${BASETOOLS}
