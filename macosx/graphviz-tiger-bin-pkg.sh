@@ -19,7 +19,7 @@ work=$HOME/tmp/gviz
 fix=$HOME/fix
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
-PKGS=$GRAPHVIZ_PUB_PATH/macos
+PKGS=$GRAPHVIZ_PUB_PATH/macos/tiger
 
 # search for last graphviz tarball in the public sources
 source=
