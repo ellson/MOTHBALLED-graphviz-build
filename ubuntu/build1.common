@@ -70,7 +70,9 @@ proc rpmbuildargs {release own_} {
 		set rc [regexp $pat $line . vers]
 		if {$rc} {
 			set os $own_$os
-			set vers [expr ($vers + $offset)]
+			if {$offset} {
+				set vers [expr ($vers + $offset)]
+			}
 			set dist $osprefix$vers
 			break
 		}
