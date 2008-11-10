@@ -50,7 +50,7 @@ set patterns {
 	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
-	"DISTRIB_DESCRIPTION=\"Ubuntu (\[0-9\]+).*\"" ".ub" 0 ubuntu
+	"DISTRIB_DESCRIPTION=\"Ubuntu (\[0-9.\]+)\"" ".ub" 0 ubuntu
 }
 
 # as far as I can tell, rpmbuild --macros doesn't work,
