@@ -68,7 +68,7 @@ close $f
 
 set productfiles [concat [glob -nocomplain *$version*.deb] $BUILDLOG]
 
-set DEBS $path/ubuntu/[string trim $dist .]/$arch
+set DEBS $path/ubuntu/$dist/$arch
 exec ssh $graphviz_host "mkdir -p $DEBS"
 
 foreach fn $productfiles {
