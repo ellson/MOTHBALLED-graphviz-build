@@ -17,6 +17,7 @@ fi
 
 work=$HOME/tmp/gviz
 PREFIX=$HOME/FIX/leopard
+export PREFIX
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
 PKGS=$GRAPHVIZ_PUB_PATH/macos/leopard
@@ -44,7 +45,7 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	make -C $source/macosx/build PREBUILD=$PREFIX >>$LOG 2>&1
+	make -C $source/macosx/build >>$LOG 2>&1
 
 	# put the package
 	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
