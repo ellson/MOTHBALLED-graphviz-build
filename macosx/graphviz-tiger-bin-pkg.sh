@@ -16,7 +16,7 @@ else
 fi
 
 work=$HOME/tmp/gviz
-FIX=$HOME/FIX/tiger
+PREFIX=$HOME/FIX/tiger
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
 PKGS=$GRAPHVIZ_PUB_PATH/macos/tiger
@@ -44,7 +44,7 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	make -C $source/macosx/build PREBUILD=$FIX >>$LOG 2>&1
+	make -C $source/macosx/build PREBUILD=$PREFIX >>$LOG 2>&1
 
 	# put the package
 	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
