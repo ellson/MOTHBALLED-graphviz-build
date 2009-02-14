@@ -63,7 +63,7 @@ puts $f $end_time
 close $f
 
 set productfiles [concat \
-  [glob -nocomplain $rpmbuild/RPMS/$pkgarch/$pkg*$version*.rpm] \
+  [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm] \
   $BUILDLOG]
 
 set RPMS $path/redhat/[string trim $dist .]/$arch
