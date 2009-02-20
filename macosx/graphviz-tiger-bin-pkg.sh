@@ -46,7 +46,7 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	make -C $source/macosx/build >>$LOG 2>&1
+	make -C $source/macosx/build -f Makefile.tiger >>$LOG 2>&1
 
 	# put the package
 	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
