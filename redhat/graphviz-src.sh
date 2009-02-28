@@ -49,6 +49,8 @@ VERSION_DATE=$DATE
 sed "s/VERSION_DATE=.*/VERSION_DATE=$VERSION_DATE/" <configure.ac >t$$
 mv t$$ configure.ac
 
+sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
+
 ./autogen.sh >/dev/null
 make dist >/dev/null
 
