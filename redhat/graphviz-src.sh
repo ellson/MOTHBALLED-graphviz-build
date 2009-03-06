@@ -52,6 +52,10 @@ mv t$$ configure.ac
 sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
 
 ./autogen.sh >/dev/null
+
+# ship a version of config.h thats ready for Visual Studio - they don't do shells or run ./configure, apparently.
+cat config.h.vs_extras >>config.h
+
 make dist >/dev/null
 
 if ! test -f graphviz-$VERSION.tar.gz; then
