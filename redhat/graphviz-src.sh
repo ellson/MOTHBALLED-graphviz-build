@@ -53,8 +53,8 @@ sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
 
 ./autogen.sh >/dev/null
 
-# ship a version of config.h thats ready for Visual Studio - they don't do shells or run ./configure, apparently.
-cat config.h.vs_extras >>config.h
+# ship a version of config.h thats set up for Visual Studio
+patch -p0 <config.h.vs.patch
 
 make dist >/dev/null
 
