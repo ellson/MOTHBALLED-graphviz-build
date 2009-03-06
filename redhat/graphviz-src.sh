@@ -53,8 +53,7 @@ sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
 
 ./autogen.sh >/dev/null
 
-# ship a version of config.h thats set up for Visual Studio
-patch -p0 <config.h.vs.patch
+grep 'PACKAGE\|VERSION' config_version.h
 
 make dist >/dev/null
 
