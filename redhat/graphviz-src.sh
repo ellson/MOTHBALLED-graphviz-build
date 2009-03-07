@@ -53,7 +53,7 @@ sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
 
 ./autogen.sh >/dev/null
 
-grep 'PACKAGE\|VERSION' config.h > config_version.h
+grep 'PACKAGE\|VERSION\|GVPLUGIN' config.h > config_version.h
 
 make dist >/dev/null
 
