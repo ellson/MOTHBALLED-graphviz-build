@@ -210,7 +210,7 @@ ghostscript: ${GHOSTSCRIPT} ${BASETOOLS} fontconfig
 	@gzcat@ ${GHOSTSCRIPT} | tar xf -
 	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-cups --enable-dynamic --with-drivers=CAIRO; make install soinstall; make clean)
 	touch ghostscript
-glib: ${GLIB} ${BASETOOLS} gettext
+glib: ${GLIB} ${BASETOOLS} gettext iconv
 	@gzcat@ ${GLIB} | tar xf -
 	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility --with-libiconv=gnu; make; make install; make clean)
 	touch glib
