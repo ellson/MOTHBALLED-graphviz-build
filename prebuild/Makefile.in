@@ -25,7 +25,7 @@ allcvstools: ${CVSTOOLS}
   GDKPIXBUF = gdk-pixbuf-0.22.0.tar.gz
     GETTEXT = gettext-0.17.tar.gz
 GHOSTSCRIPT = ghostscript-8.63.tar.gz
-       GLIB = glib-2.18.2.tar.gz
+       GLIB = glib-2.18.4.tar.gz
        GREP = grep-2.5.3.tar.gz
         GTK = gtk+-2.14.4.tar.gz
         GTS = gts-0.7.6.tar.gz
@@ -71,11 +71,11 @@ ${COREUTILS}:
 ${CVS}:
 	@wget@ http://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.23/${CVS}
 ${EXPAT}:
-	@wget@ http://prdownloads.sourceforge.net/expat/${EXPAT}?download
+	@wget@ http://downloads.sourceforge.net/expat/${EXPAT}
 ${FINDUTILS}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/findutils/${FINDUTILS}
 ${FLEX}:
-	@wget@ http://prdownloads.sourceforge.net/flex/${FLEX}?download
+	@wget@ http://downloads.sourceforge.net/flex/${FLEX}
 ${FONTCONFIG}:
 	@wget@ http://fontconfig.org/release/${FONTCONFIG}
 ${FREETYPE}:
@@ -97,13 +97,13 @@ ${GREP}:
 ${GTK}:
 	@wget@ http://ftp.gnome.org/pub/gnome/sources/gtk+/2.14/${GTK}
 ${GTS}:
-	@wget@ http://prdownloads.sourceforge.net/gts/${GTS}?download
+	@wget@ http://downloads.sourceforge.net/gts/${GTS}
 ${GZIP}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/gzip/${GZIP}
 ${LIBICONV}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/libiconv/${LIBICONV}
 ${LIBPNG}:
-	@wget@ http://prdownloads.sourceforge.net/libpng/${LIBPNG}?download
+	@wget@ http://downloads.sourceforge.net/libpng/${LIBPNG}
 ${LIBRSVG}:
 	@wget@ http://ftp.gnome.org/pub/GNOME/sources/librsvg/2.22/${LIBRSVG}
 ${LIBTOOL}:
@@ -210,9 +210,9 @@ ghostscript: ${GHOSTSCRIPT} ${BASETOOLS} fontconfig
 	@gzcat@ ${GHOSTSCRIPT} | tar xf -
 	(cd `echo ${GHOSTSCRIPT} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-cups --enable-dynamic --with-drivers=CAIRO; make install soinstall; make clean)
 	touch ghostscript
-glib: ${GLIB} ${BASETOOLS} gettext iconv
+glib: ${GLIB} ${BASETOOLS} gettext libiconv
 	@gzcat@ ${GLIB} | tar xf -
-	(cd `echo ${GLIB} | sed s/.tar.gz//`; ./configure --prefix=@prefix@ --disable-visibility --with-libiconv=gnu; make; make install; make clean)
+	(cd `echo ${GLIB} | sed s/.tar.gz//`; CFLAGS=-I@prefix@/include LDFLAGS=-L@prefix@/lib ./configure --prefix=@prefix@ --disable-visibility --with-libiconv=gnu; make; make install; make clean)
 	touch glib
 grep: ${GREP} make gettext
 	@gzcat@ ${GREP} | tar xf -
@@ -222,17 +222,17 @@ gtk: ${GTK} ${BASETOOLS} glib atk
 	@gzcat@ ${GTK} | tar xf -
 	(cd `echo ${GTK} | sed s/.tar.gz//`; LDFLAGS="-L/usr/openwin/sfw/lib" ./configure --prefix=@prefix@ --without-libjasper; make install)
 	touch gtk
-gts: ${GTS} ${BASETOOLS}
+gts: ${GTS} ${BASETOOLS} glib
 	@gzcat@ ${GTS} | tar xf -
 	(cd `echo ${GTS} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
 	touch gts
 gzip: ${GZIP} make
 	@gzcat@ ${GZIP} | tar xf -
 	(cd `echo ${GZIP} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
-iconv: ${LIBICONV} make
+libiconv: ${LIBICONV} make
 	@gzcat@ ${LIBICONV} | tar xf -
 	(cd `echo ${LIBICONV} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
-	touch iconv
+	touch libiconv
 libpng: ${LIBPNG} ${BASETOOLS}
 	@gzcat@ ${LIBPNG} | tar xf -
 	(cd `echo ${LIBPNG} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install)
