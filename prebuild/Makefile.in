@@ -1,14 +1,18 @@
-     GVDEPS = pango cairo gts rsvg tcl tk libxml2 libxslt gd
-
-# ghostscript
+BASETOOLS = @prefix@ make bison flex pkg-config sed tcl wget 
+CVSTOOLS = ${BASETOOLS} cvs m4 autoconf automake libtool swig
+GVDEPS = ${BASETOOLS} pango cairo gts rsvg tcl tk libxml2 libxslt gd
 
 all: ${GVDEPS}
+
+allbasetools: ${BASETOOLS}
+
+allcvstools: ${CVSTOOLS}
 
         ATK = atk-1.24.0.tar.gz
    AUTOCONF = autoconf-2.63.tar.gz
    AUTOMAKE = automake-1.10.1.tar.gz
       BISON = bison-2.3.tar.gz
-      CAIRO = cairo-1.8.2.tar.gz
+      CAIRO = cairo-1.8.6.tar.gz
   COREUTILS = coreutils-6.12.tar.gz
         CVS = cvs-1.11.23.tar.gz
       EXPAT = expat-2.0.1.tar.gz
@@ -34,12 +38,12 @@ GHOSTSCRIPT = ghostscript-8.63.tar.gz
     LIBXSLT = libxslt-1.1.24.tar.gz
          M4 = m4-1.4.12.tar.gz
        MAKE = make-3.81.tar.gz
-      PANGO = pango-1.22.2.tar.gz
-     PIXMAN = pixman-0.12.0.tar.gz
+      PANGO = pango-1.23.0.tar.gz
+     PIXMAN = pixman-0.14.0.tar.gz
   PKGCONFIG = pkg-config-0.23.tar.gz
         SED = sed-4.1.5.tar.gz
        SWIG = swig-1.3.35.tar.gz
-        TAR = tar-1.20.tar.gz
+        TAR = tar-1.22.tar.gz
         TCL = tcl8.6a3-src.tar.gz
          TK = tk8.6a3-src.tar.gz
        WGET = wget-1.11.4.tar.gz
@@ -113,7 +117,7 @@ ${M4}:
 ${MAKE}:
 	@wget@ --passive-ftp ftp://ftp.gnu.org/pub/gnu/make/${MAKE}
 ${PANGO}:
-	@wget@ http://ftp.gnome.org/pub/GNOME/sources/pango/1.22/${PANGO}
+	@wget@ http://ftp.gnome.org/pub/GNOME/sources/pango/1.23/${PANGO}
 ${PIXMAN}:
 	@wget@ http://www.cairographics.org/releases/${PIXMAN}
 ${PKGCONFIG}:
@@ -137,16 +141,6 @@ ${ZLIB}:
 @prefix@:
 	mkdir -p @prefix@
 	
-BASETOOLS = @prefix@ make bison flex pkg-config sed tar tcl wget 
-
-#gawk gzip grep coreutils findutils
-
-allbasetools: ${BASETOOLS}
-
-CVSTOOLS = ${BASETOOLS} cvs autoconf automake libtool swig
-
-allcvstools: ${CVSTOOLS}
-
 atk: ${ATK} ${BASETOOLS} glib
 	@gzcat@ ${ATK} | tar xf -
 	(cd `echo ${ATK} | sed s/.tar.gz//`; ./configure --prefix=@prefix@; make install; make clean)
