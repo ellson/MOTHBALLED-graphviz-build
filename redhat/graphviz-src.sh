@@ -49,8 +49,6 @@ VERSION_DATE=$DATE
 sed "s/VERSION_DATE=.*/VERSION_DATE=$VERSION_DATE/" <configure.ac >t$$
 mv t$$ configure.ac
 
-sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
-
 ./autogen.sh >/dev/null
 
 grep 'PACKAGE\|VERSION\|GVPLUGIN' config.h > config_version.h
@@ -100,8 +98,6 @@ VERSION=$VERSION_MAJOR.$VERSION_MINOR.$VERSION_MICRO
 
 sed "s/VERSION_DATE=.*/VERSION_DATE=$VERSION_DATE/" <configure.ac >t$$
 mv t$$ configure.ac
-
-sed "s/@VERSION@/$VERSION/" <debian/changelog.in >debian/changelog
 
 # modify debian rules
 sed "s/--without-sfdp/--with-sfdp/" <debian/rules >t$$1
