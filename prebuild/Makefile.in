@@ -138,7 +138,7 @@ gettext: GETTEXT ${BASETOOLS} make
 	#LIBS = -lsec
 	(cd `basename ${GETTEXT} .tar.gz` && ./configure ${BASECONFIG} --disable-java \
 		&& make && make install && make clean) && touch $@
-ghostscript: GHOSTSCRIPT} ${BASETOOLS} fontconfig
+ghostscript: GHOSTSCRIPT ${BASETOOLS} fontconfig
 	@ZCAT@ `basename ${GHOSTSCRIPT}` | @TAR@ xf -
 	(cd `basename ${GHOSTSCRIPT} .tar.gz` && ./configure ${BASECONFIG} --disable-cups --enable-dynamic --with-drivers=CAIRO \
 		&& make && make install soinstall && make clean) && touch $@
