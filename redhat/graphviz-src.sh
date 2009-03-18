@@ -51,7 +51,7 @@ mv t$$ configure.ac
 
 ./autogen.sh >/dev/null
 
-grep 'PACKAGE\|VERSION\|GVPLUGIN' config.h > config_version.h
+grep 'PACKAGE\|VERSION\|GVPLUGIN' config.h > graphviz_version.h
 
 make dist >/dev/null
 
