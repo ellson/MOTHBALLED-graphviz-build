@@ -38,8 +38,7 @@ puts "zcat $sourcefile | tar xf -"
 catch "exec zcat $sourcefile | tar xf -" unpacklog
 cd $pkg-$version
 ### FIXME temporary hack for 2.22.2 only
-catch "exec sed -e 's/2.22.2/2.22.2att/' <debian/changelog >debian/changelog.NEW; mv debian/changelog.NEW debian/changelog"
-catch "exec mv -f debian/changelog.NEW debian/changelog"
+catch "exec sed -e 's/2.22.2/2.22.2att/' <debian/changelog >debian/changelog.NEW&& mv -f debian/changelog.NEW debian/changelog"
 catch "exec fakeroot make -f debian/rules binary" buildlog
 
 #set end_build_time [clock format [clock seconds]]
