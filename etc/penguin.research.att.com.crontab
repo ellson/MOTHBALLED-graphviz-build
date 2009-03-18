@@ -33,6 +33,7 @@ DIR=CURRENT
 # MacOS-X build
 # not vm's, so schedule in parallel
 15 1 * * * ssh stayman      graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR
+45 1 * * * ssh stayman      graphviz-build/macosx/graphviz-leopard-bin-att-pkg.sh $DIR
 20 1 * * * ssh gentoo       graphviz-build/macosx/graphviz-tiger-bin-pkg.sh $DIR
 
 # shadowfax is not a vm, so schedule in parallel
