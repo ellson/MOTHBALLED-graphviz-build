@@ -179,7 +179,7 @@ libtool: LIBTOOL_URL ${BASETOOLS}
 		&& make && make install && make clean) && touch $@
 libxml2: LIBXML2_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBXML2_URL}` | @TAR@ xf -
-	(cd `basename ${LIBXML2_URL} .tar.gz | @SED_URL@ -e 's/-sources//'` && ./configure ${BASECONFIG} \
+	(cd `basename ${LIBXML2_URL} .tar.gz | @SED@ -e 's/-sources//'` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libxslt: LIBXSLT_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBXSLT_URL}` | @TAR@ xf -
