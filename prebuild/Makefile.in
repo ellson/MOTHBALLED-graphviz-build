@@ -20,7 +20,7 @@ GREP_URL	= ftp://ftp.gnu.org/pub/gnu/grep/grep-2.5.3.tar.gz
 GTK_URL		= http://ftp.gnome.org/pub/gnome/sources/gtk+/2.16/gtk+-2.16.1.tar.gz
 GTS_URL		= http://downloads.sourceforge.net/gts/gts-0.7.6.tar.gz
 GZIP_URL	= ftp://ftp.gnu.org/pub/gnu/gzip/gzip-1.3.12.tar.gz
-LIBICONV_URL    = ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.12.tar.gz
+LIBICONV_URL    = ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.tar.gz
 LIBPNG_URL	= http://downloads.sourceforge.net/libpng/libpng-1.2.35.tar.gz
 LIBRSVG_URL	= http://ftp.gnome.org/pub/gnome/sources/librsvg/2.22/librsvg-2.22.3.tar.gz
 LIBTOOL_URL	= ftp://ftp.gnu.org/pub/gnu/libtool/libtool-2.2.6a.tar.gz
@@ -112,7 +112,7 @@ flex: FLEX_URL make
 	@ZCAT@ `basename ${FLEX_URL}` | @TAR@ xf -
 	(cd `basename ${FLEX_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-fontconfig: FONTCONFIG_URL ${BASETOOLS} freetype expat libxml2
+fontconfig: FONTCONFIG_URL ${BASETOOLS} freetype expat libxml2 libiconv
 	@ZCAT@ `basename ${FONTCONFIG_URL}` | @TAR@ xf -
 	(cd `basename ${FONTCONFIG_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-docs \
 		&& make && make install && make clean) && touch $@
