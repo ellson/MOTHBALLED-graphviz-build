@@ -1,4 +1,4 @@
-ATK_URL 	= http://ftp.acc.umu.se/pub/gnome/sources/atk/1.24/atk-1.24.0.tar.gz
+ATK_URL 	= http://ftp.acc.umu.se/pub/gnome/sources/atk/1.26/atk-1.26.0.tar.gz
 AUTOCONF_URL    = ftp://ftp.gnu.org/pub/gnu/autoconf/autoconf-2.63.tar.gz
 AUTOMAKE_URL    = ftp://ftp.gnu.org/pub/gnu/automake/automake-1.10.2.tar.gz
 BISON_URL	= ftp://ftp.gnu.org/pub/gnu/bison/bison-2.3.tar.gz
