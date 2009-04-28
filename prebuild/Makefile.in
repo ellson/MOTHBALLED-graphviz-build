@@ -11,13 +11,17 @@ FLEX_URL	= http://downloads.sourceforge.net/flex/flex-2.5.35.tar.gz
 FONTCONFIG_URL  = http://fontconfig.org/release/fontconfig-2.6.0.tar.gz
 FREETYPE_URL    = http://download.savannah.gnu.org/releases/freetype/freetype-2.3.9.tar.gz
 GAWK_URL	= ftp://ftp.gnu.org/pub/gnu/gawk/gawk-3.1.5.tar.gz
+GIT_URL		= http://kernel.org/pub/software/scm/git/git-1.6.2.4.tar.gz
+GCC_URL		= ftp://ftp.gnu.org/gnu/gcc/gcc-4.4.0/gcc-4.4.0.tar.gz
 GD_URL		= http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz
 GDKPIXBUF_URL   = http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/0.22/gdk-pixbuf-0.22.0.tar.gz
 GETTEXT_URL	= ftp://ftp.gnu.org/pub/gnu/gettext/gettext-0.17.tar.gz
 GHOSTSCRIPT_URL = http://ghostscript.com/releases/ghostscript-8.64.tar.gz
 GLIB_URL	= http://ftp.gnome.org/pub/gnome/sources/glib/2.20/glib-2.20.1.tar.gz
+GMP_URL		= ftp://ftp.gnu.org/gnu/gmp/gmp-4.3.0.tar.gz
 GREP_URL	= ftp://ftp.gnu.org/pub/gnu/grep/grep-2.5.3.tar.gz
 GTK_URL		= http://ftp.gnome.org/pub/gnome/sources/gtk+/2.16/gtk+-2.16.1.tar.gz
+GTK_DOC_URL	= http://ftp.gnome.org/pub/GNOME/sources/gtk-doc/1.11/gtk-doc-1.11.tar.gz
 GTS_URL		= http://downloads.sourceforge.net/gts/gts-0.7.6.tar.gz
 GZIP_URL	= ftp://ftp.gnu.org/pub/gnu/gzip/gzip-1.3.12.tar.gz
 LIBICONV_URL    = ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.tar.gz
@@ -28,10 +32,14 @@ LIBXML2_URL	= ftp://xmlsoft.org/libxml2/libxml2-sources-2.7.3.tar.gz
 LIBXSLT_URL	= ftp://xmlsoft.org/libxml2/libxslt-1.1.24.tar.gz
 M4_URL		= ftp://ftp.gnu.org/pub/gnu/m4/m4-1.4.12.tar.gz
 MAKE_URL	= ftp://ftp.gnu.org/pub/gnu/make/make-3.81.tar.gz
+MPFR_URL	= http://www.mpfr.org/mpfr-current/mpfr-2.4.1.tar.gz
+MPFR_PATCHES_URL = http://www.mpfr.org/mpfr-current/patches
 PANGO_URL	= http://ftp.gnome.org/pub/gnome/sources/pango/1.24/pango-1.24.0.tar.gz
+PATCH_URL	= http://alpha.gnu.org/gnu/patch/patch-2.5.9-81-gaad98f0.tar.gz
 PIXMAN_URL	= http://www.cairographics.org/releases/pixman-0.15.2.tar.gz
 PKGCONFIG_URL   = http://pkg-config.freedesktop.org/releases/pkg-config-0.23.tar.gz
-SED_URL		= ftp://ftp.gnu.org/pub/gnu/sed/sed-4.1.5.tar.gz
+SED_URL		= ftp://ftp.gnu.org/gnu/sed/sed-4.1.4.tar.gz
+#SED_URL	= ftp://ftp.gnu.org/pub/gnu/sed/sed-4.1.5.tar.gz
 SWIG_URL	= http://downloads.sourceforge.net/swig/swig-1.3.39.tar.gz
 TAR_URL		= ftp://ftp.gnu.org/pub/gnu/tar/tar-1.22.tar.gz
 TCL_URL		= http://downloads.sourceforge.net/tcl/tcl8.6b1-src.tar.gz
@@ -40,10 +48,10 @@ WGET_URL	= ftp://ftp.gnu.org/pub/gnu/wget/wget-1.11.4.tar.gz
 ZLIB_URL	= http://www.zlib.net/zlib-1.2.3.tar.gz
 
 ALL = ATK_URL AUTOCONF_URL AUTOMAKE_URL BISON_URL CAIRO_URL COREUTILS_URL CVS_URL \
-	EXPAT_URL FINDUTILS_URL FLEX_URL FONTCONFIG_URL FREETYPE_URL GAWK_URL \
-	GD_URL GDKPIXBUF_URL GETTEXT_URL GHOSTSCRIPT_URL GLIB_URL GREP_URL GTK_URL \
+	EXPAT_URL FINDUTILS_URL FLEX_URL FONTCONFIG_URL FREETYPE_URL GAWK_URL GIT_URL GCC_URL \
+	GD_URL GDKPIXBUF_URL GETTEXT_URL GHOSTSCRIPT_URL GLIB_URL GMP_URL GREP_URL GTK_URL GTK_DOC_URL \
 	GTS_URL GZIP_URL LIBICONV_URL LIBPNG_URL LIBRSVG_URL LIBTOOL_URL LIBXML2_URL \
-	LIBXSLT_URL M4_URL MAKE PANGO_URL PIXMAN_URL PKGCONFIG_URL SED_URL \
+	LIBXSLT_URL M4_URL MAKE_URL MPFR_URL PANGO_URL PATCH_URL PIXMAN_URL PKGCONFIG_URL SED_URL \
 	SWIG_URL TAR_URL TCL_URL TK_URL WGET_URL ZLIB_URL 
 
 BASETOOLS = @prefix@ make bison flex pkg-config sed tcl wget 
@@ -74,7 +82,7 @@ BASECONFIG=--prefix=@prefix@ --disable-dependency-tracking PKG_CONFIG="@prefix@/
 
 atk:	ATK_URL ${BASETOOLS} glib
 	@ZCAT@ `basename ${ATK_URL}` | @TAR@ xf -
-	(cd `basename ${ATK_URL} .tar.gz` && ./configure ${BASECONFIG} \
+	(cd `basename ${ATK_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-gtk-doc \
 		&& make && make install && make clean) && touch $@
 autoconf: AUTOCONF_URL ${BASETOOLS}
 	@ZCAT@ `basename ${AUTOCONF_URL}` | @TAR@ xf -
@@ -124,6 +132,14 @@ gawk: GAWK_URL make
 	@ZCAT@ `basename ${GAWK_URL}` | @TAR@ xf -
 	(cd `basename ${GAWK_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
+git: GIT_URL make 
+	@ZCAT@ `basename ${GIT_URL}` | @TAR@ xf -
+	(cd `basename ${GIT_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gcc: GCC_URL make mpfr gmp
+	@ZCAT@ `basename ${GCC_URL}` | @TAR@ xf -
+	(cd `basename ${GCC_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
 gd: GD_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GD_URL}` | @TAR@ xf -
 	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} \
@@ -136,7 +152,7 @@ gettext: GETTEXT_URL ${BASETOOLS} make
 	@ZCAT@ `basename ${GETTEXT_URL}` | @TAR@ xf -
 	#LIBS = -lsec
 	(cd `basename ${GETTEXT_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-java \
-		&& make && make install && make clean) && touch $@
+		&& make "LDFLAGS=-lsec" && make install && make clean) && touch $@
 ghostscript: GHOSTSCRIPT_URL ${BASETOOLS} fontconfig
 	@ZCAT@ `basename ${GHOSTSCRIPT_URL}` | @TAR@ xf -
 	(cd `basename ${GHOSTSCRIPT_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-cups --enable-dynamic --with-drivers=CAIRO_URL \
@@ -145,6 +161,10 @@ glib: GLIB_URL ${BASETOOLS} gettext libiconv
 	@ZCAT@ `basename ${GLIB_URL}` | @TAR@ xf -
 	(cd `basename ${GLIB_URL} .tar.gz` && CFLAGS=-I@prefix@/include LDFLAGS=-L@prefix@/lib ./configure ${BASECONFIG} --disable-visibility --with-libiconv=gnu \
 		&& make && make install && make clean) && touch $@
+gmp: GMP_URL make
+	@ZCAT@ `basename ${GMP_URL}` | @TAR@ xf -
+	(cd `basename ${GMP_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
 grep: GREP_URL make gettext
 	@ZCAT@ `basename ${GREP_URL}` | @TAR@ xf -
 	(cd `basename ${GREP_URL} .tar.gz` && ./configure ${BASECONFIG} \
@@ -152,6 +172,10 @@ grep: GREP_URL make gettext
 gtk: GTK_URL ${BASETOOLS} glib atk
 	@ZCAT@ `basename ${GTK_URL}` | @TAR@ xf -
 	(cd `basename ${GTK_URL} .tar.gz` && LDFLAGS="-L/usr/openwin/sfw/lib" ./configure ${BASECONFIG} --without-libjasper \
+		&& make && make install && make clean) && touch $@
+gtk-doc: GTK_DOC_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GTK_DOC_URL}` | @TAR@ xf -
+	(cd `basename ${GTK_DOC_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 gts: GTS_URL ${BASETOOLS} glib
 	@ZCAT@ `basename ${GTS_URL}` | @TAR@ xf -
@@ -175,6 +199,7 @@ rsvg: LIBRSVG_URL ${BASETOOLS} gdk-pixbuf
 		&& make && make install && make clean) && touch $@
 libtool: LIBTOOL_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBTOOL_URL}` | @TAR@ xf -
+	ln -s `basename ${LIBTOOL_URL} a.tar.gz` `basename ${LIBTOOL_URL} .tar.gz`
 	(cd `basename ${LIBTOOL_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libxml2: LIBXML2_URL ${BASETOOLS}
@@ -193,9 +218,17 @@ make: MAKE_URL
 	@ZCAT@ `basename ${MAKE_URL}` | @TAR@ xf -
 	(cd `basename ${MAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
+mpfr: MPFR_URL MPFR_PATCHES_URL
+	@ZCAT@ `basename ${MPFR_URL}` | @TAR@ xf -
+	(cd `basename ${MPFR_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
 pango: PANGO_URL ${BASETOOLS} glib fontconfig cairo
 	@ZCAT@ `basename ${PANGO_URL}` | @TAR@ xf -
 	(cd `basename ${PANGO_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+patch: PATCH_URL ${BASETOOLS}
+	@ZCAT@ `basename ${PATCH_URL}` | @TAR@ xf -
+	(cd `basename ${PATCH_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 pixman: PIXMAN_URL ${BASETOOLS}
 	@ZCAT@ `basename ${PIXMAN_URL}` | @TAR@ xf -
@@ -207,9 +240,9 @@ pkg-config: PKGCONFIG_URL make
 		&& make && make install && make clean) && touch $@
 sed: SED_URL make
 	@ZCAT@ `basename ${SED_URL}` | @TAR@ xf -
-	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
-	patch -p0 <sed-4.1.5_lib_regexec.c.patch
-	patch -p0 <sed-4.1.5_lib_mkstemp.c.patch
+#	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
+#	patch -p0 <sed-4.1.5_lib_regexec.c.patch
+#	patch -p0 <sed-4.1.5_lib_mkstemp.c.patch
 	(cd `basename ${SED_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 swig: SWIG_URL ${BASETOOLS}
