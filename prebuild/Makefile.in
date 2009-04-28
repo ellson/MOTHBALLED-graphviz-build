@@ -54,7 +54,8 @@ ALL = ATK_URL AUTOCONF_URL AUTOMAKE_URL BISON_URL CAIRO_URL COREUTILS_URL CVS_UR
 	LIBXSLT_URL M4_URL MAKE_URL MPFR_URL PANGO_URL PATCH_URL PIXMAN_URL PKGCONFIG_URL SED_URL \
 	SWIG_URL TAR_URL TCL_URL TK_URL WGET_URL ZLIB_URL 
 
-BASETOOLS = @prefix@ make bison flex pkg-config sed tcl wget 
+#BASETOOLS = @prefix@ make bison flex pkg-config sed
+BASETOOLS = @prefix@ 
 CVS_URLTOOLS = ${BASETOOLS} cvs m4 autoconf automake libtool swig
 GVDEPS = ${BASETOOLS} pango gts rsvg tk libxml2 libxslt gd
 
@@ -92,7 +93,7 @@ automake: AUTOMAKE_URL ${BASETOOLS}
 	@ZCAT@ `basename ${AUTOMAKE_URL}` | @TAR@ xf -
 	(cd `basename ${AUTOMAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-bison: BISON_URL make
+bison: BISON_URL make m4
 	@ZCAT@ `basename ${BISON_URL}` | @TAR@ xf -
 	(cd `basename ${BISON_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -185,17 +186,13 @@ gzip: GZIP_URL make
 	@ZCAT@ `basename ${GZIP_URL}` | @TAR@ xf -
 	(cd `basename ${GZIP_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-libiconv: LIBICONV_URL make
+libiconv: LIBICONV_URL
 	@ZCAT@ `basename ${LIBICONV_URL}` | @TAR@ xf -
 	(cd `basename ${LIBICONV_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libpng: LIBPNG_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBPNG_URL}` | @TAR@ xf -
 	(cd `basename ${LIBPNG_URL} .tar.gz` && ./configure ${BASECONFIG} \
-		&& make && make install && make clean) && touch $@
-rsvg: LIBRSVG_URL ${BASETOOLS} gdk-pixbuf
-	@ZCAT@ `basename ${LIBRSVG_URL}` | @TAR@ xf -
-	(cd `basename ${LIBRSVG_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libtool: LIBTOOL_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBTOOL_URL}` | @TAR@ xf -
@@ -210,11 +207,11 @@ libxslt: LIBXSLT_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBXSLT_URL}` | @TAR@ xf -
 	(cd `basename ${LIBXSLT_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-m4: M4_URL ${BASETOOLS}
+m4: M4_URL make
 	@ZCAT@ `basename ${M4_URL}` | @TAR@ xf -
 	(cd `basename ${M4_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-make: MAKE_URL
+make: MAKE_URL sed
 	@ZCAT@ `basename ${MAKE_URL}` | @TAR@ xf -
 	(cd `basename ${MAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -238,7 +235,11 @@ pkg-config: PKGCONFIG_URL make
 	@ZCAT@ `basename ${PKGCONFIG_URL}` | @TAR@ xf -
 	(cd `basename ${PKGCONFIG_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-sed: SED_URL make
+rsvg: LIBRSVG_URL ${BASETOOLS} gdk-pixbuf
+	@ZCAT@ `basename ${LIBRSVG_URL}` | @TAR@ xf -
+	(cd `basename ${LIBRSVG_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+sed: SED_URL libiconv
 	@ZCAT@ `basename ${SED_URL}` | @TAR@ xf -
 #	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
 #	patch -p0 <sed-4.1.5_lib_regexec.c.patch
@@ -259,7 +260,7 @@ tcl: TCL_URL make
 		&& make && make install && make clean) && touch $@
 tk: TK_URL tcl
 	@ZCAT@ `basename ${TK_URL}` | @TAR@ xf -
-	patch -p0 <tk8.6a3.patch
+#	patch -p0 <tk8.6a3.patch
 	(cd `basename ${TK_URL} -src.tar.gz`/unix && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 wget: WGET_URL make
