@@ -79,9 +79,9 @@ clean:
 distclean: clean
 	rm -rf *gz ${ALL}
 
-BASECONFIG=--prefix=@prefix@ --disable-dependency-tracking PKG_CONFIG="@prefix@/bin/pkg-config" PKG_CONFIG_PATH="@prefix@/lib/pkgconfig:$(PKG_CONFIG_PATH)"
+BASECONFIG=--prefix=@prefix@ --build=i686-pcu-linux-gnu --host=i686-pcu-linux-gnu --disable-dependency-tracking PKG_CONFIG="@prefix@/bin/pkg-config" PKG_CONFIG_PATH="@prefix@/lib/pkgconfig:$(PKG_CONFIG_PATH)"
 
-atk:	ATK_URL ${BASETOOLS} glib
+atk:	ATK_URL ${BASETOOLS} 
 	@ZCAT@ `basename ${ATK_URL}` | @TAR@ xf -
 	(cd `basename ${ATK_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-gtk-doc \
 		&& make && make install && make clean) && touch $@
@@ -93,7 +93,7 @@ automake: AUTOMAKE_URL ${BASETOOLS}
 	@ZCAT@ `basename ${AUTOMAKE_URL}` | @TAR@ xf -
 	(cd `basename ${AUTOMAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-bison: BISON_URL make m4
+bison: BISON_URL
 	@ZCAT@ `basename ${BISON_URL}` | @TAR@ xf -
 	(cd `basename ${BISON_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -143,9 +143,9 @@ gcc: GCC_URL make mpfr gmp
 		&& make && make install && make clean) && touch $@
 gd: GD_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GD_URL}` | @TAR@ xf -
-	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} \
+	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-rpath \
 		&& make && make install && make clean) && touch $@
-gdk-pixbuf: GDKPIXBUF_URL ${BASETOOLS} glib gtk
+gdk-pixbuf: GDKPIXBUF_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GDKPIXBUF_URL}` | @TAR@ xf -
 	(cd `basename ${GDKPIXBUF_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -158,19 +158,19 @@ ghostscript: GHOSTSCRIPT_URL ${BASETOOLS} fontconfig
 	@ZCAT@ `basename ${GHOSTSCRIPT_URL}` | @TAR@ xf -
 	(cd `basename ${GHOSTSCRIPT_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-cups --enable-dynamic --with-drivers=CAIRO_URL \
 		&& make && make install soinstall && make clean) && touch $@
-glib: GLIB_URL ${BASETOOLS} gettext libiconv
+glib: GLIB_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GLIB_URL}` | @TAR@ xf -
 	(cd `basename ${GLIB_URL} .tar.gz` && CFLAGS=-I@prefix@/include LDFLAGS=-L@prefix@/lib ./configure ${BASECONFIG} --disable-visibility --with-libiconv=gnu \
 		&& make && make install && make clean) && touch $@
-gmp: GMP_URL make
+gmp: GMP_URL 
 	@ZCAT@ `basename ${GMP_URL}` | @TAR@ xf -
 	(cd `basename ${GMP_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-grep: GREP_URL make gettext
+grep: GREP_URL 
 	@ZCAT@ `basename ${GREP_URL}` | @TAR@ xf -
 	(cd `basename ${GREP_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-gtk: GTK_URL ${BASETOOLS} glib atk
+gtk: GTK_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GTK_URL}` | @TAR@ xf -
 	(cd `basename ${GTK_URL} .tar.gz` && LDFLAGS="-L/usr/openwin/sfw/lib" ./configure ${BASECONFIG} --without-libjasper \
 		&& make && make install && make clean) && touch $@
@@ -178,11 +178,11 @@ gtk-doc: GTK_DOC_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GTK_DOC_URL}` | @TAR@ xf -
 	(cd `basename ${GTK_DOC_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-gts: GTS_URL ${BASETOOLS} glib
+gts: GTS_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GTS_URL}` | @TAR@ xf -
 	(cd `basename ${GTS_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-gzip: GZIP_URL make
+gzip: GZIP_URL
 	@ZCAT@ `basename ${GZIP_URL}` | @TAR@ xf -
 	(cd `basename ${GZIP_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -196,7 +196,7 @@ libpng: LIBPNG_URL ${BASETOOLS}
 		&& make && make install && make clean) && touch $@
 libtool: LIBTOOL_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBTOOL_URL}` | @TAR@ xf -
-	ln -s `basename ${LIBTOOL_URL} a.tar.gz` `basename ${LIBTOOL_URL} .tar.gz`
+	ln -sf `basename ${LIBTOOL_URL} a.tar.gz` `basename ${LIBTOOL_URL} .tar.gz`
 	(cd `basename ${LIBTOOL_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libxml2: LIBXML2_URL ${BASETOOLS}
@@ -207,11 +207,11 @@ libxslt: LIBXSLT_URL ${BASETOOLS}
 	@ZCAT@ `basename ${LIBXSLT_URL}` | @TAR@ xf -
 	(cd `basename ${LIBXSLT_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-m4: M4_URL make
+m4: M4_URL
 	@ZCAT@ `basename ${M4_URL}` | @TAR@ xf -
 	(cd `basename ${M4_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-make: MAKE_URL sed
+make: MAKE_URL 
 	@ZCAT@ `basename ${MAKE_URL}` | @TAR@ xf -
 	(cd `basename ${MAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -219,7 +219,7 @@ mpfr: MPFR_URL MPFR_PATCHES_URL
 	@ZCAT@ `basename ${MPFR_URL}` | @TAR@ xf -
 	(cd `basename ${MPFR_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-pango: PANGO_URL ${BASETOOLS} glib fontconfig cairo
+pango: PANGO_URL ${BASETOOLS} 
 	@ZCAT@ `basename ${PANGO_URL}` | @TAR@ xf -
 	(cd `basename ${PANGO_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
@@ -229,17 +229,18 @@ patch: PATCH_URL ${BASETOOLS}
 		&& make && make install && make clean) && touch $@
 pixman: PIXMAN_URL ${BASETOOLS}
 	@ZCAT@ `basename ${PIXMAN_URL}` | @TAR@ xf -
+	(cd `basename ${PIXMAN_URL} .tar.gz`/pixman; ln -sf ../../solaris-hwcap.mapfile .)
 	(cd `basename ${PIXMAN_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-pkg-config: PKGCONFIG_URL make
+pkg-config: PKGCONFIG_URL 
 	@ZCAT@ `basename ${PKGCONFIG_URL}` | @TAR@ xf -
 	(cd `basename ${PKGCONFIG_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-rsvg: LIBRSVG_URL ${BASETOOLS} gdk-pixbuf
+rsvg: LIBRSVG_URL ${BASETOOLS} 
 	@ZCAT@ `basename ${LIBRSVG_URL}` | @TAR@ xf -
 	(cd `basename ${LIBRSVG_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
-sed: SED_URL libiconv
+sed: SED_URL
 	@ZCAT@ `basename ${SED_URL}` | @TAR@ xf -
 #	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
 #	patch -p0 <sed-4.1.5_lib_regexec.c.patch
