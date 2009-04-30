@@ -24,6 +24,7 @@ GTK_URL		= http://ftp.gnome.org/pub/gnome/sources/gtk+/2.16/gtk+-2.16.1.tar.gz
 GTK_DOC_URL	= http://ftp.gnome.org/pub/GNOME/sources/gtk-doc/1.11/gtk-doc-1.11.tar.gz
 GTS_URL		= http://downloads.sourceforge.net/gts/gts-0.7.6.tar.gz
 GZIP_URL	= ftp://ftp.gnu.org/pub/gnu/gzip/gzip-1.3.12.tar.gz
+LASI_URL	= http://sourceforge.net/projects/lasi/libLASi-1.1.0.tar.gz
 LIBICONV_URL    = ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.tar.gz
 LIBPNG_URL	= http://downloads.sourceforge.net/libpng/libpng-1.2.35.tar.gz
 LIBRSVG_URL	= http://ftp.gnome.org/pub/gnome/sources/librsvg/2.22/librsvg-2.22.3.tar.gz
@@ -50,7 +51,7 @@ ZLIB_URL	= http://www.zlib.net/zlib-1.2.3.tar.gz
 ALL = ATK_URL AUTOCONF_URL AUTOMAKE_URL BISON_URL CAIRO_URL COREUTILS_URL CVS_URL \
 	EXPAT_URL FINDUTILS_URL FLEX_URL FONTCONFIG_URL FREETYPE_URL GAWK_URL GIT_URL GCC_URL \
 	GD_URL GDKPIXBUF_URL GETTEXT_URL GHOSTSCRIPT_URL GLIB_URL GMP_URL GREP_URL GTK_URL GTK_DOC_URL \
-	GTS_URL GZIP_URL LIBICONV_URL LIBPNG_URL LIBRSVG_URL LIBTOOL_URL LIBXML2_URL \
+	GTS_URL GZIP_URL LASI_URL LIBICONV_URL LIBPNG_URL LIBRSVG_URL LIBTOOL_URL LIBXML2_URL \
 	LIBXSLT_URL M4_URL MAKE_URL MPFR_URL PANGO_URL PATCH_URL PIXMAN_URL PKGCONFIG_URL SED_URL \
 	SWIG_URL TAR_URL TCL_URL TK_URL WGET_URL ZLIB_URL 
 
@@ -79,7 +80,7 @@ clean:
 distclean: clean
 	rm -rf *gz ${ALL}
 
-BASECONFIG=--prefix=@prefix@ --build=i686-pcu-linux-gnu --host=i686-pcu-linux-gnu --disable-dependency-tracking PKG_CONFIG="@prefix@/bin/pkg-config" PKG_CONFIG_PATH="@prefix@/lib/pkgconfig:$(PKG_CONFIG_PATH)"
+BASECONFIG=--prefix=@prefix@ --disable-dependency-tracking PKG_CONFIG="@prefix@/bin/pkg-config" PKG_CONFIG_PATH="@prefix@/lib/pkgconfig:$(PKG_CONFIG_PATH)" 
 
 atk:	ATK_URL ${BASETOOLS} 
 	@ZCAT@ `basename ${ATK_URL}` | @TAR@ xf -
@@ -143,7 +144,7 @@ gcc: GCC_URL make mpfr gmp
 		&& make && make install && make clean) && touch $@
 gd: GD_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GD_URL}` | @TAR@ xf -
-	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-rpath \
+	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} LDFLAGS='-L/opt/csw/lib -liconv' \
 		&& make && make install && make clean) && touch $@
 gdk-pixbuf: GDKPIXBUF_URL ${BASETOOLS}
 	@ZCAT@ `basename ${GDKPIXBUF_URL}` | @TAR@ xf -
@@ -185,6 +186,10 @@ gts: GTS_URL ${BASETOOLS}
 gzip: GZIP_URL
 	@ZCAT@ `basename ${GZIP_URL}` | @TAR@ xf -
 	(cd `basename ${GZIP_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+lasi: LASI_URL
+	@ZCAT@ `basename ${LASI_URL}` | @TAR@ xf -
+	(cd `basename ${LASI_URL} .tar.gz` && ./configure ${BASECONFIG} \
 		&& make && make install && make clean) && touch $@
 libiconv: LIBICONV_URL
 	@ZCAT@ `basename ${LIBICONV_URL}` | @TAR@ xf -
