@@ -36,4 +36,5 @@ puts "making..."
 # make products
 puts "zcat $sourcefile | tar xf -"
 catch "exec zcat $sourcefile | tar xf -" unpacklog
+cd $oldpwd
 cd $pkg-$version

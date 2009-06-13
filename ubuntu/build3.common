@@ -1,3 +1,6 @@
+cd $work
+cd $pkg-$version
+
 puts "fakeroot make -f debian/rules binary"
 catch "exec fakeroot make -f debian/rules binary" buildlog
 
