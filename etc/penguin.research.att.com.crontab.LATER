@@ -5,7 +5,7 @@
 DIR=CURRENT
 #DIR=ARCHIVE
 
-25 0 * * * (cd graphviz-build; ../bin/anoncvs.tcl -qz3 update -d; crontab etc/penguin.research.att.com.crontab)
+25 0 * * * (cd graphviz-build; bin/anoncvs.tcl -qz3 update -d; crontab etc/penguin.research.att.com.crontab)
 
 #35 0 * * * ssh fc9-64       graphviz-build/redhat/webdot-src.sh $DIR
 
