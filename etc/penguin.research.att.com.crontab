@@ -31,6 +31,8 @@ DIR=CURRENT
 #45 6 * * * ssh fc6-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #15 4 * * * ssh fc7          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #45 4 * * * ssh fc7-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 12 * * * ssh fc7         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#45 12 * * * ssh fc7-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 
 # MacOS-X build
 # not vm's, so schedule in parallel
@@ -97,7 +99,3 @@ DIR=CURRENT
 #fc12 builds are done on John Ellson's home machines.  Can't ssh from here.
 #45 1 * * * ssh fc12        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #45 1 * * * ssh fc12-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-
-# Just too old.
-#15 12 * * * ssh fc7         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-#45 12 * * * ssh fc7-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
