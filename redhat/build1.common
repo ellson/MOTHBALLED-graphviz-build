@@ -42,7 +42,7 @@ proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
 set patterns {
-	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 1 fedora
+	"Fedora release (\[0-9\]+).*(Rawhide)" ".fc" 0 fedora
 	"Fedora release (\[0-9\]+)" ".fc"  0 fedora
 	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
 	"CentOS release (\[0-9\]+)" ".el" 0 rhel
