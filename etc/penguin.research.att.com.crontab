@@ -28,12 +28,12 @@ DIR=CURRENT
 #20 1 * * * ssh gentoo       graphviz-build/macosx/graphviz-tiger-bin-pkg.sh $DIR
 
 # shadowfax is not a vm, so schedule in parallel
-15 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-45 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#15 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#45 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 
-15 1 * * * ssh centos3        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh centos3        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 # Use penguin's PATH because the path under ssh on centos[34]-64 is missing /usr/X11R6/bin
-45 1 * * * ssh centos3-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#45 1 * * * ssh centos3-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 2 * * * ssh centos4      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 2 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 3 * * * ssh centos5      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
