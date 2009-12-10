@@ -49,8 +49,8 @@ DIR=CURRENT
 30 10 * * * ssh fc12-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 # Ubuntu
-25 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
-55 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-att-deb.tcl $DIR
+#25 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
+#55 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-att-deb.tcl $DIR
 25 9 * * * ssh ubuntu9      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
 55 9 * * * ssh ubuntu9      graphviz-build/ubuntu/graphviz-bin-att-deb.tcl $DIR
 25 10 * * * ssh ubuntu9-64   graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
