@@ -15,7 +15,7 @@ set redhat_release /etc/redhat-release
 ################################################build_host
 set start_time [clock format [clock seconds]]
 
-if {[catch {exec hostname -f} build_host]} {
+if {[catch {exec hostname} build_host]} {
 	set build_host [exec uname -n]
 }
 set work $env(HOME)/tmp/gviz/$build_host
