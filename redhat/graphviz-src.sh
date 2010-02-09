@@ -5,7 +5,7 @@
 WWW=www.graphviz.org
 DATE=`date -u +%Y%m%d.%H%M`
 #HOST=`uname -n`
-HOST=`hostname -f`
+HOST=`hostname`
 
 export CVSROOT=:ext:ellson@cvs-graphviz.research.att.com:/home/cvsroot
 export CVS_RSH=ssh
