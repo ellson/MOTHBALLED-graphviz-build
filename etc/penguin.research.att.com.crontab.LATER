@@ -39,14 +39,16 @@ DIR=CURRENT
 30 8 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 9 * * * ssh centos5      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 9 * * * ssh centos5-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-0 11 * * * ssh fc9          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-30 11 * * * ssh fc9-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#0 11 * * * ssh fc9          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#30 11 * * * ssh fc9-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 7 * * * ssh fc10         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 7 * * * ssh fc10-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 8 * * * ssh fc11         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 8 * * * ssh fc11-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 10 * * * ssh fc12          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 10 * * * ssh fc12-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#0 11 * * * ssh fc13          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#30 11 * * * ssh fc13-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 # Ubuntu
 #25 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
@@ -57,8 +59,8 @@ DIR=CURRENT
 55 10 * * * ssh ubuntu9-64   graphviz-build/ubuntu/graphviz-bin-att-deb.tcl $DIR
 
 #fc13 builds are done on John Ellson's home machines.  Can't ssh from here.
-#15 1 * * * ssh fc13        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#15 1 * * * ssh fc13-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh fc14        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh fc14-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 #30 2 * * * ssh bilbo       graphviz-build/redhat/graphviz-rtest.tcl
 
@@ -70,15 +72,17 @@ DIR=CURRENT
 45 10 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 11 * * * ssh centos5     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 45 11 * * * ssh centos5-64  graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-15 13 * * * ssh fc9         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-45 13 * * * ssh fc9-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#15 13 * * * ssh fc9         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#45 13 * * * ssh fc9-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 14 * * * ssh fc10        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 45 14 * * * ssh fc10-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 15 * * * ssh fc11        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 45 15 * * * ssh fc11-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 12 * * * ssh fc12         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 45 12 * * * ssh fc12-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#15 13 * * * ssh fc13         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#45 13 * * * ssh fc13-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 
-#fc13 builds are done on John Ellson's home machines.  Can't ssh from here.
-#45 1 * * * ssh fc13        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-#45 1 * * * ssh fc13-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#fc14 builds are done on John Ellson's home machines.  Can't ssh from here.
+#45 1 * * * ssh fc14        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#45 1 * * * ssh fc14-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
