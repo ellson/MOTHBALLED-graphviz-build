@@ -17,7 +17,7 @@ fi
 
 cd $HOME/tmp/gviz/graphviz2
 
-rm -rf graphviz-static-analysis
+rm -rf graphviz-static-analysis*
 mkdir -p graphviz-static-analysis
 
 scan-build -o ./graphviz-static-analysis/ ./configure --with-smyrna --with-ortho --with-ipsepcola --with-sfdp >graphviz-static-analysis.log 2>&1
