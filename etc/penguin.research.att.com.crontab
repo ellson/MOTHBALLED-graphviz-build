@@ -19,7 +19,7 @@ DIR=CURRENT
 
 # graphviz-static-analysis.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the static-analysis
-45 14 * * * ssh fc13-64      graphviz-build/redhat/graphviz-static-analysys.sh
+45 14 * * * ssh fc13-64      graphviz-build/redhat/graphviz-static-analysis.sh
 
 # MacOS-X build
 # not vm's, so schedule in parallel
