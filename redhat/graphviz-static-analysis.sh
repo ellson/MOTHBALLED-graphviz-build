@@ -21,7 +21,7 @@ rm -rf graphviz-static-analysis*
 mkdir -p graphviz-static-analysis
 
 scan-build -o ./graphviz-static-analysis/ ./configure --with-smyrna --with-ortho --with-ipsepcola --with-sfdp >graphviz-static-analysis.log 2>&1
-scan-build -o ./graphviz-static-analysis/ make >graphviz-static-analysis.log 2>&1
+scan-build -o ./graphviz-static-analysis/ make >>graphviz-static-analysis.log 2>&1
 tar cfz - graphviz-static-analysis >graphviz-static-analysis.tgz
 scp -p graphviz-static-analysis.tgz $WWW:$GRAPHVIZ_PATH
 ssh $WWW "cd $GRAPHVIZ_PATH; tar xfz graphviz-static-analysis.tgz"
