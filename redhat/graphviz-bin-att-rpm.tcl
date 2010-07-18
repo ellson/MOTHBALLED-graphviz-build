@@ -2,7 +2,9 @@
 
 # $Id$ $Revision$
 
-set own att
+#set own att       - no special AT&T support in graphviz.spec.in  anymore
+set own ""
+
 set rtest 0
 
 source [file dirname $argv0]/build1.common
