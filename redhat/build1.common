@@ -49,6 +49,7 @@ set patterns {
 	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel
+	"Red Hat Enterprise Linux Workstation release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
 }
 
