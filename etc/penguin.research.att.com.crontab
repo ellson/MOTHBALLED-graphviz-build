@@ -47,8 +47,8 @@ DIR=CURRENT
 #45 5 * * * ssh fc9-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #15 6 * * * ssh fc10         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #45 6 * * * ssh fc10-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-15 7 * * * ssh fc11         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-45 7 * * * ssh fc11-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 7 * * * ssh fc11         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#45 7 * * * ssh fc11-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 4 * * * ssh fc12         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 4 * * * ssh fc12-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 5 * * * ssh fc13          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
@@ -82,8 +82,8 @@ DIR=CURRENT
 #45 13 * * * ssh fc9-64      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #15 14 * * * ssh fc10        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #45 14 * * * ssh fc10-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-15 15 * * * ssh fc11        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-45 15 * * * ssh fc11-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#15 15 * * * ssh fc11        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
+#45 15 * * * ssh fc11-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 12 * * * ssh fc12        graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 45 12 * * * ssh fc12-64     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 15 13 * * * ssh fc13         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
