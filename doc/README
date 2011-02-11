@@ -1,0 +1,25 @@
+Graphviz build notes 11 February 2011
+
+The build process is stored in the graphviz-build  CVS repository (here).
+
+The starting point for all builds is really the crontab on gviz@penguin
+which is mastered at graphviz-build/etc/penguin.research.att.com.crontab
+
+Leopard builds are done on gviz@snares
+Snowleopard builds are done on gviz@stayman
+
+The mac builds don't depend on MacPorts, so periodically the dependencies
+have to be manually prebuilt using
+macos/prebuild/Makefile.leopard
+macos/prebuild/Makefile.snowleopard
+in the main tree. 
+
+The configure options are stored in these files. See
+/Users/gviz/FIX/Darwin.i386/build/graphviz2/macosx/prebuild/some-package
+
+The prebuilt dependencies are saved in /Users/gviz/FIX/Darwin.i386/
+
+The mac builds are mult-arch binaries: i686, x86_64, ppc
+
+
+
