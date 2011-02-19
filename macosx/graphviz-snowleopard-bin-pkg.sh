@@ -45,7 +45,8 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	(cd $source/macosx/build; sed -e 's/configure --/configure --with-sfdp --/' <Makefile.snowleopard >Makefile)
+#	(cd $source/macosx/build; sed -e 's/configure --/configure --with-sfdp --/' <Makefile.snowleopard >Makefile)
+	(cd $source/macosx/build; cp Makefile.snowleopard Makefile)
 	make -C $source/macosx/build >>$LOG 2>&1
 
 	# put the package
