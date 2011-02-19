@@ -16,7 +16,7 @@ else
 fi
 
 work=$HOME/tmp/gviz
-PREFIX=$HOME/FIX/leopard
+PREFIX=$HOME/FIX/Darwin.i386
 export PREFIX
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
