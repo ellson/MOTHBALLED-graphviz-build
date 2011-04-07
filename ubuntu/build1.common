@@ -36,7 +36,6 @@ if {[string equal $source_dir CURRENT]} {
 set arch $tcl_platform(machine)
 #for i686 use canonical i386
 if {[string equal $arch i686]} {set arch i386}
-
 proc getfile {host path fn} { exec scp $host:/$path/$fn . }
 proc putfile {host path fn} { exec scp $fn $host:/$path/ }
 proc getindex {host path} { exec ssh $host ls $path }

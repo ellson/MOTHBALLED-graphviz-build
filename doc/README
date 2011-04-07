@@ -4,6 +4,9 @@ The build process is stored in the graphviz-build  CVS repository (here).
 
 The starting point for all builds is really the crontab on gviz@penguin
 which is mastered at graphviz-build/etc/penguin.research.att.com.crontab
+DIR is unset for nightly snapshots (or set to "CURRENT"), and set to
+"ARCHIVE" when building the stable release.  It's set in the contab in
+gviz@penguin so as to get the same kind of build from all build hosts.
 
 Leopard builds are done on gviz@snares
 Snowleopard builds are done on gviz@stayman
