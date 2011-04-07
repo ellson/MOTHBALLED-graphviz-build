@@ -19,18 +19,21 @@ work=$HOME/tmp/gviz
 #PREFIX=$HOME/FIX/Darwin.i386
 PREFIX=/opt/local
 export PREFIX
+PATH=$PREFIX/bin:$PATH
+export PATH
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
 PKGS=$GRAPHVIZ_PUB_PATH/macos/snowleopard
 
 # search for last graphviz tarball in the public sources
 source=
-for file in `ssh gviz@www.graphviz.org ls -t $SOURCES`; do
+for file in `ssh www.graphviz.org ls -t $SOURCES`; do
         source=`expr $file : '\(graphviz-[0-9.]*\).tar.gz$'`
         if test -n "$source"; then
                 break
         fi
 done
+echo "got $source"
 
 if test -n "$source"
 then
@@ -42,7 +45,7 @@ then
 	cd $work
 
 	# get the sources
-	scp gviz@$graphviz_host:$SOURCES/$source.tar.gz . 2>$LOG
+	scp $graphviz_host:$SOURCES/$source.tar.gz . 2>$LOG
 	
 	# build the package
 	tar xzf $source.tar.gz
@@ -51,6 +54,6 @@ then
 	make -C $source/macosx/build >>$LOG 2>&1
 
 	# put the package
-	scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
-	scp $LOG gviz@$graphviz_host:$PKGS/$LOG
+	# scp $source/macosx/build/graphviz.pkg gviz@$graphviz_host:$PKGS/$source.pkg 2>>$LOG
+	# scp $LOG gviz@$graphviz_host:$PKGS/$LOG
 fi
