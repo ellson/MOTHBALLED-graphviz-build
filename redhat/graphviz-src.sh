@@ -52,8 +52,6 @@ mv t$$ configure.ac
 
 ./autogen.sh >/dev/null
 
-grep 'PACKAGE\|VERSION\|GVPLUGIN' config.h > graphviz_version.h
-
 make dist >/dev/null
 
 if ! test -f graphviz-$VERSION.tar.gz; then
