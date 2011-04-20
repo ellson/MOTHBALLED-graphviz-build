@@ -16,8 +16,7 @@ else
 fi
 
 work=$HOME/tmp/gviz
-#PREFIX=$HOME/FIX/Darwin.i386
-PREFIX=/opt/local
+PREFIX=$HOME/FIX/Darwin.i386
 export PREFIX
 PATH=$PREFIX/bin:$PATH
 export PATH
