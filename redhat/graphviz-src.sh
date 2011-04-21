@@ -38,7 +38,7 @@ if test .$SRCDIR = .CURRENT; then
     ./set_dev_version.sh
 fi
 
-VERSION=`grep '^PACKAGE_VERSION' config.log | sed 's/^.*=.\([.0-9]*\)./\1/'`
+VERSION="`grep '^PACKAGE_VERSION' config.log | sed 's/^.*=.\([.0-9]*\)./\1/'`"
 
 ./autogen.sh >/dev/null
 
