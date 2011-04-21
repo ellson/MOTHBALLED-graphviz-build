@@ -35,7 +35,7 @@ $HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
 cd graphviz2
 
 if test .$SRCDIR = .CURRENT; then
-    ./set_dev_vesion.sh
+    ./set_dev_version.sh
 fi
 
 ./autogen.sh >/dev/null
