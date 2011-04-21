@@ -38,12 +38,15 @@ if test .$SRCDIR = .CURRENT; then
     ./set_dev_version.sh
 fi
 
+VERSION=`grep '^PACKAGE_VERSION' config.log | sed 's/^.*=.\([.0-9]*\)./\1/'`
+
 ./autogen.sh >/dev/null
 
 make dist >/dev/null
 
 if ! test -f graphviz-$VERSION.tar.gz; then
-    exit -1
+    echo "Error: no graphviz-$VERSION.tar.gz was created"
+    exit 1
 fi
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
