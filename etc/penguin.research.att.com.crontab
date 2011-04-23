@@ -24,7 +24,8 @@ DIR=CURRENT
 # MacOS-X build
 # not vm's, so schedule in parallel
 #    - on Stephen's desktop
-15 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
+15 1 * * * ssh pome      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
+#15 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
 #45 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-att-pkg.sh $DIR
 #    - on Emden's desktop
 15 1 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR
