@@ -1,4 +1,4 @@
-#!/usr/bin/expect --
+#!/bin/env expect
   
 if {$argc == 0} {
         send_user "Usage: $argv0 checkout <module>\n"
