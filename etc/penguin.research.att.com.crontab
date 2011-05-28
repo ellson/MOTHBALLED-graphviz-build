@@ -5,6 +5,8 @@
 DIR=CURRENT
 #DIR=ARCHIVE
 
+PATH=$HOME/bin:/home/ellson/FIX/Linux.x86_64/bin:$PATH
+
 25 0 * * * (cd graphviz-build; bin/anoncvs.tcl -qz3 update -d; crontab etc/penguin.research.att.com.crontab)
 
 35 0 * * * ssh fc14       graphviz-build/redhat/webdot-src.sh $DIR
