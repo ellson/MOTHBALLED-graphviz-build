@@ -6,6 +6,6 @@ base=$1
 SERVER="hg.research.att.com"
 USR="gviz"
 OUT="outfile_$base"
-ssh $USR@$SERVER "(bin/hg_get_repo ${base})" > $OUT 2>&1
+ssh $USR@$SERVER "(bin/hg_update_repo ${base})" > $OUT 2>&1
 scp -r $USR@$SERVER:${base}.tgz . >> $OUT 2>&1
 
