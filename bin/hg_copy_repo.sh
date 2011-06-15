@@ -8,6 +8,6 @@ USR="gviz"
 OUT="outfile_$base"
 ssh $USR@$SERVER "(bin/hg_get_repo ${base})" > $OUT 2>&1
 scp -r $USR@$SERVER:${base}.tgz . >> $OUT 2>&1
-tar xzf ${base}.tgz
+tar xzf ${base}.tgz 2>> $OUT
 rm ${base}.tgz >> $OUT 2>&1
 
