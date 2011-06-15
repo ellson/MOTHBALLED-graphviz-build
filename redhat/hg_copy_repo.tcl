@@ -7,7 +7,7 @@ if {$argc == 0} {
 set timeout 300 
 foreach {a1} $argv {break}
  
-spawn ~/graphviz-build/bin/hg_copy_repo $a1
+spawn ~/graphviz-build/bin/hg_copy_repo.sh $a1
 while {1} {
         expect timeout {
                 send_user "Failed to checkout $a1 from mercurial server (timeout)\n"
