@@ -6,7 +6,7 @@ base=$1
 SERVER="hg.research.att.com"
 USR="gviz"
 OUT="output_$base"
-ssh $USR@$SERVER "(bin/hg_get_repo_tgz ${base})" > $OUT 2>&1
+ssh $USR@$SERVER "(bin/hg_get_repo_tgz.sh ${base})" > $OUT 2>&1
 scp -r $USR@$SERVER:${base}.tgz . >> $OUT 2>&1
 tar xzf ${base}.tgz 2>> $OUT
 chmod 775 ${base} >> $OUT 2>&1
