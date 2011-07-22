@@ -28,8 +28,9 @@ cd $HOME/tmp/gviz
 # cleanup previous build
 rm -rf graphviz2
 
-# obtain latest from cvs
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co graphviz2
+# obtain latest from mercurial
+$HOME/graphviz-build/redhat/hg_copy_repo.sh graphviz
+mv graphviz graphviz2
 #cvs -Qz3 co graphviz2
 
 cd graphviz2

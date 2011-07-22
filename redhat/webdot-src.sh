@@ -30,7 +30,8 @@ cd $HOME/tmp/gviz
 rm -rf webdot
 
 # obtain latest from cvs
-$HOME/graphviz-build/redhat/anoncvs.tcl -Qz3 co webdot
+# obtain latest from mercurial
+$HOME/graphviz-build/redhat/hg_copy_repo.sh webdot
 #cvs -Qz3 co webdot
 
 cd webdot
