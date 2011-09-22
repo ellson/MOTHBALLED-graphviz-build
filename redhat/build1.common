@@ -46,6 +46,7 @@ set patterns {
 	"Fedora release (\[0-9\]+)" ".fc"  0 fedora
 	"Fedora Core release (\[0-9\]+)" ".fc" 0 fedora
 	"CentOS release (\[0-9\]+)" ".el" 0 rhel
+	"CentOS Linux release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux Server release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux ES release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux AS release (\[0-9\]+)" ".el" 0 rhel

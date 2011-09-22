@@ -5,7 +5,7 @@
 DIR=CURRENT
 #DIR=ARCHIVE
 
-25 0 * * * (cd graphviz-build; bin/anoncvs.tcl -qz3 update -d; crontab etc/penguin.research.att.com.crontab)
+25 0 * * * (graphviz-build/bin/hg_copy_repo.sh graphviz-build; cd graphviz-build; crontab etc/penguin.research.att.com.crontab)
 
 #35 0 * * * ssh fc14-64       graphviz-build/redhat/webdot-src.sh $DIR
 
@@ -45,10 +45,14 @@ DIR=CURRENT
 30 8 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 9 * * * ssh centos5      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 9 * * * ssh centos5-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+0 7 * * * ssh centos6      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+30 7 * * * ssh centos6-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 11 * * * ssh fc13          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 11 * * * ssh fc13-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 10 * * * ssh fc14          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 10 * * * ssh fc14-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+0 12 * * * ssh fc15          graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+30 12 * * * ssh fc15-64       graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 # Ubuntu
 #25 8 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
@@ -60,9 +64,11 @@ DIR=CURRENT
 55 9 * * * ssh ubuntu10      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
 55 10 * * * ssh ubuntu10-64   graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
 
-#fc15 builds are done on John Ellson's home machines.  Can't ssh from here.
-#15 1 * * * ssh fc15        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#15 1 * * * ssh fc15-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#fc16, fc17 builds are done on John Ellson's home machines.  Can't ssh from here.
+#15 1 * * * ssh fc16        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh fc16-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh fc17        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#15 1 * * * ssh fc17-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 #30 2 * * * ssh bilbo       graphviz-build/redhat/graphviz-rtest.tcl
 

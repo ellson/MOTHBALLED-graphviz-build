@@ -7,8 +7,6 @@ DATE=`date -u +%Y%m%d.%H%M`
 #HOST=`uname -n`
 HOST=`hostname`
 
-export CVSROOT=:ext:ellson@cvs-graphviz.research.att.com:/home/cvsroot
-export CVS_RSH=ssh
 
 SRCDIR=CURRENT
 if test .$1 != . ;then
@@ -29,10 +27,8 @@ cd $HOME/tmp/gviz
 # cleanup previous
 rm -rf webdot
 
-# obtain latest from cvs
 # obtain latest from mercurial
 $HOME/graphviz-build/redhat/hg_copy_repo.sh webdot
-#cvs -Qz3 co webdot
 
 cd webdot
 
