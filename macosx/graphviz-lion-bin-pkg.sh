@@ -47,7 +47,6 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	(cd $source; ./configure --enable-swig=no --disable-dependency-tracking --with-ipsepcola --with-quartz --with-smyrna=no --disable-perl --with-extra-includedir="/Users/gviz/FIX/Lion.x86_64/include" --with-extra-libdir="/Users/gviz/FIX/Lion.x86_64/lib" CFLAGS="-O2 " CXXFLAGS="-O2 " OBJCFLAGS="-O2 " LDFLAGS=" -Wl,-dead_strip" GDLIB_CONFIG="/Users/gviz/FIX/Lion.x86_64/bin/gdlib-config" PKG_CONFIG="/Users/gviz/FIX/Lion.x86_64/bin/pkg-config" PKG_CONFIG_PATH="/Users/gviz/FIX/Lion.x86_64/lib/pkgconfig:/usr/X11/lib/pkgconfig" LIBS="-framework CoreFoundation -framework CoreServices -framework ApplicationServices -fexceptions" >>$LOG 2>&1)
 	(cd $source/macosx/graphviz.xcodeproj; cp lion.project.pbxproj project.pbxproj)
 	(cd $source/macosx/build; cp Makefile.lion Makefile)
 	make -C $source/macosx/build >>$LOG 2>&1
