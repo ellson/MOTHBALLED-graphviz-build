@@ -47,9 +47,9 @@ then
 	
 	# build the package
 	tar xzf $source.tar.gz
-	(cd $source/macosx/graphviz.xcodeproj; cp $source/macosx/prebuild/project.pbxproj.lion project.pbxproj)
-	(cd $source/macosx/build; cp $source/macosx/prebuild/Makefile.lion Makefile)
-	(cd $source/macosx/graphviz.hlp; cp $source/macosx/prebuild/graphviz.hlp.helpindex.lion graphviz.hlp.helpindex)
+	(cd $source/macosx/graphviz.xcodeproj; cp lion.project.pbxproj project.pbxproj)
+	(cd $source/macosx/build; cp Makefile.lion Makefile)
+	(cd $source/macosx/graphviz.hlp; cp $source/macosx/build/graphviz.hlp.helpindex.lion graphviz.hlp.helpindex)
 	make -C $source/macosx/build >>$LOG 2>&1
 
 	# put the package
