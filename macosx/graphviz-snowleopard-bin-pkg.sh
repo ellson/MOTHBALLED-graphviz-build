@@ -49,7 +49,9 @@ then
 	# build the package
 	tar xzf $source.tar.gz
 #	(cd $source/macosx/build; sed -e 's/configure --/configure --with-sfdp --/' <Makefile.snowleopard >Makefile)
+	(cd $source/macosx/graphviz.xcodeproj; cp snowleopard.project.pbxproj project.pbxproj)
 	(cd $source/macosx/build; cp Makefile.snowleopard Makefile)
+	(cd $source/macosx/graphviz.help; cp ../build/graphviz.help.helpindex.snowleopard graphviz.help.helpindex)
 	make -C $source/macosx/build >>$LOG 2>&1
 
 	# put the package
