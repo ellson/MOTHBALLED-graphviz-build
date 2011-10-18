@@ -25,11 +25,11 @@ switch $distroversion {
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
 	}
 	"ubuntu11" - "ubuntu11-64" { 
-		exec sed -e "s/--disable-python26/--enable-python26/" <debian/rules  >debian/rules.NEW
+		exec sed -e "s/--disable-python27/--enable-python27/" <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
-		exec sed -e "s,\#usr/lib/graphviz/python26,usr/lib/graphviz/python26," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
 	}
 	default { }
