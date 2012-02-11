@@ -41,8 +41,8 @@ DIR=CURRENT
 #0 7 * * * ssh centos3        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 # Use penguin's PATH because the path under ssh on centos[34]-64 is missing /usr/X11R6/bin
 #30 7 * * * ssh centos3-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-0 8 * * * ssh centos4      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-30 8 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#0 8 * * * ssh centos4      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#30 8 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 9 * * * ssh centos5      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 9 * * * ssh centos5-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 7 * * * ssh centos6      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
