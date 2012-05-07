@@ -7,15 +7,15 @@ DIR=CURRENT
 
 25 0 * * * (graphviz-build/bin/hg_copy_repo.sh graphviz-build; cd graphviz-build; crontab etc/penguin.research.att.com.crontab)
 
-#35 0 * * * ssh fc15-64       graphviz-build/redhat/webdot-src.sh $DIR
+#35 0 * * * ssh fc16-64       graphviz-build/redhat/webdot-src.sh $DIR
 
 # the source distribution is built on a machine with doxygen, graphviz,
 #    and a recent swig installed
-#45 0 * * * ssh fc15-64       graphviz-build/redhat/graphviz-src.sh $DIR
+#45 0 * * * ssh fc16-64       graphviz-build/redhat/graphviz-src.sh $DIR
 
 # graphviz-doxygen.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the doxygen documents
-#15 14 * * * ssh fc14-64      graphviz-build/redhat/graphviz-doxygen.sh
+#15 14 * * * ssh fc16-64      graphviz-build/redhat/graphviz-doxygen.sh
 
 # graphviz-static-analysis.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the static-analysis
