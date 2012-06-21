@@ -19,7 +19,7 @@ DIR=CURRENT
 
 # graphviz-static-analysis.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the static-analysis
-#55 14 * * * ssh fc14-64      graphviz-build/redhat/graphviz-static-analysis.sh
+#55 14 * * * ssh fc16-64      graphviz-build/redhat/graphviz-static-analysis.sh
 
 # MacOS-X build
 # not vm's, so schedule in parallel
@@ -47,8 +47,8 @@ DIR=CURRENT
 30 9 * * * ssh centos5-64  graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 7 * * * ssh centos6      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 7 * * * ssh centos6-64  graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#0 10 * * * ssh fc14        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#30 10 * * * ssh fc14-64    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+0 10 * * * ssh fc17        PATH=/usr/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+30 10 * * * ssh fc17-64    PATH=/usr/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 12 * * * ssh fc15        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 30 12 * * * ssh fc15-64    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 0 11 * * * ssh fc16        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
@@ -68,9 +68,7 @@ DIR=CURRENT
 25 9 * * * ssh ubuntu12      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
 25 10 * * * ssh ubuntu12-64   graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
 
-#fc17, fc18 builds are done on John Ellson's home machines. Can't ssh from here.
-#15 1 * * * ssh fc17        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#15 1 * * * ssh fc17-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+#fc18 builds are done on John Ellson's home machines. Can't ssh from here.
 #15 1 * * * ssh fc18        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 #15 1 * * * ssh fc18-64     graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
