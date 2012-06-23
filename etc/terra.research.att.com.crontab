@@ -35,25 +35,16 @@ DIR=CURRENT
 #    - on Emden's desktop
 #20 1 * * * ssh gentoo       graphviz-build/macosx/graphviz-tiger-bin-pkg.sh $DIR
 
-# shadowfax is not a vm, so schedule in parallel
-#15 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#45 1 * * * ssh shadowfax    graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-
-#15 1 * * * ssh centos3        graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-# Use terra's PATH because the path under ssh on centos[34]-64 is missing /usr/X11R6/bin
-#45 1 * * * ssh centos3-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#15 2 * * * ssh centos4      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-#45 2 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 3 * * * ssh centos5      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 3 * * * ssh centos5-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 1 * * * ssh centos6      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 1 * * * ssh centos6-64   graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-15 4 * * * ssh fc17         PATH=/usr/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-45 4 * * * ssh fc17-64      PATH=/usr/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-15 6 * * * ssh fc15         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
-45 6 * * * ssh fc15-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+15 4 * * * ssh fc17         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+45 4 * * * ssh fc17-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 15 5 * * * ssh fc16         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 45 5 * * * ssh fc16-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+15 6 * * * ssh fc15         graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+45 6 * * * ssh fc15-64      graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 # Ubuntu
 #25 7 * * * ssh ubuntu8      graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR
@@ -76,11 +67,6 @@ DIR=CURRENT
 #30 2 * * * ssh bilbo       graphviz-build/redhat/graphviz-rtest.tcl
 
 # AT&T fc* custom distro for internal use
-#15 9 * * * ssh centos3      graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-# Use terra's PATH because the path under ssh on centos[34]-64 is missing /usr/X11R6/bin
-#45 9 * * * ssh centos3-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-#15 10 * * * ssh centos4     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
-#45 10 * * * ssh centos4-64 PATH=$PATH graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #15 11 * * * ssh centos5     graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #45 11 * * * ssh centos5-64  graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
 #15 13 * * * ssh fc13         graphviz-build/redhat/graphviz-bin-att-rpm.tcl $DIR
