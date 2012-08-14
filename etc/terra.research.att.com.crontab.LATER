@@ -28,7 +28,7 @@ DIR=CURRENT
 #15 7 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
 #45 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-att-pkg.sh $DIR
 #    - on Emden's desktop
-15 7 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR
+#15 7 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR
 #45 7 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-att-pkg.sh $DIR
 #    - on Emden's desktop
 # #20 1 * * * ssh gentoo       graphviz-build/macosx/graphviz-tiger-bin-pkg.sh $DIR
