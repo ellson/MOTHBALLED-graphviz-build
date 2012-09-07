@@ -26,10 +26,11 @@ DIR=CURRENT
 #    - at rear of lab
 15 1 * * * ssh empire      graphviz-build/macosx/graphviz-lion-bin-pkg.sh $DIR
 #    - on Stephen's desktop
-15 1 * * * ssh pome.client.research.att.com      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
+#15 1 * * * ssh pome.client.research.att.com      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
 #15 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
 #45 1 * * * ssh stayman      graphviz-build/macosx/graphviz-snowleopard-bin-att-pkg.sh $DIR
 #    - on Emden's desktop
+15 1 * * * ssh snares      graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR
 #15 1 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR
 #45 1 * * * ssh snares      graphviz-build/macosx/graphviz-leopard-bin-att-pkg.sh $DIR
 #    - on Emden's desktop
