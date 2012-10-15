@@ -23,6 +23,15 @@ switch $distroversion {
 #		exec mv debian/rules.NEW  debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python26,usr/lib/graphviz/python26," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+  		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~maverick)\ maverick\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~maverick)\ maverick\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec sed -e "s/5/8/" < debian/compat > debian/compat.NEW
+		exec mv  debian/compat.NEW debian/compat
+		exec sed -e "s/debhelper\ (>= 5)/debhelper\ (>= 8)/" -e "s/libgdk-pixbuf-dev,\ //" < debian/control > debian/control.NEW
+		exec mv  debian/control.NEW debian/control
+		exec echo "-1~maverick_source.changes" > debian/series
 	}
 	"ubuntu11" - "ubuntu11-64" { 
 		exec sed -e "s/--disable-python27/--enable-python27/" <debian/rules  >debian/rules.NEW
@@ -31,14 +40,33 @@ switch $distroversion {
 #		exec mv debian/rules.NEW  debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~natty)\ natty\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~natty)\ natty\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec sed -e "s/5/8/" < debian/compat > debian/compat.NEW
+		exec mv  debian/compat.NEW debian/compat
+		exec sed -e "s/debhelper\ (>= 5)/debhelper\ (>= 8)/" -e "s/libgdk-pixbuf-dev,\ //" < debian/control > debian/control.NEW
+		exec mv  debian/control.NEW debian/control
+		exec echo "-1~natty_source.changes" > debian/series
 	}
 	"ubuntu12" - "ubuntu12-64" { 
-		exec sed -e "s/--disable-python27/--enable-python27/" <debian/rules  >debian/rules.NEW
+		exec sed -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/" <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~precise)\ precise\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~precise)\ precise\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec sed -e "s/5/8/" < debian/compat > debian/compat.NEW
+		exec mv  debian/compat.NEW debian/compat
+		exec sed -e "s/debhelper\ (>= 5)/debhelper\ (>= 8)/" -e "s/libgdk-pixbuf-dev,\ //" -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.1/" < debian/control > debian/control.NEW
+		exec mv  debian/control.NEW debian/control
+		exec echo "-1~precise_source.changes" > debian/series
+
 	}
 	default { }
 }

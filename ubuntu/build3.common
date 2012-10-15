@@ -1,8 +1,12 @@
 cd $work
 cd $pkg-$version
 
-puts "fakeroot make -f debian/rules binary"
-catch "exec fakeroot make -f debian/rules binary" buildlog
+puts "exec dpkg-buildpackage -S -rfakeroot -kC67831CC "
+catch "exec cat debian/series" series
+catch "exec dpkg-buildpackage -S -rfakeroot -kC67831CC -nc " debuildlog
+
+puts "dpkg-buildpackage -B -kC67831CC -nc"
+catch "exec dpkg-buildpackage -B -kC67831CC -nc" buildlog
 
 #set end_build_time [clock format [clock seconds]]
 
@@ -10,6 +14,9 @@ catch "exec fakeroot make -f debian/rules binary" buildlog
 #catch "exec ./rtest.sh" rtestlog
 
 cd $work
+
+#puts "dput ppa:dperry/ppa-graphviz-test ${pkg}_$version$series"
+#catch "exec dput ppa:dperry/ppa-graphviz-test ${pkg}_$version$series" debuildlog
 
 set end_time [clock format [clock seconds]]
 
@@ -22,6 +29,8 @@ puts $f ""
 puts $f $unpacklog
 puts $f ""
 puts $f $buildlog
+puts $f ""
+puts $f $debuildlog
 puts $f ""
 #puts $f $end_build_time
 #puts $f ""
