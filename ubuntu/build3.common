@@ -1,9 +1,11 @@
 cd $work
 cd $pkg-$version
 
+if {[string equal $arch i386]} {
 puts "exec dpkg-buildpackage -S -rfakeroot -k34D3E345"
 catch "exec cat debian/series" series
 catch "exec dpkg-buildpackage -S -rfakeroot -k34D3E345 -nc " debuildlog
+}
 
 puts "dpkg-buildpackage -b -k34D3E345 -nc"
 catch "exec dpkg-buildpackage -b -k34D3E345 -nc" buildlog
@@ -31,8 +33,10 @@ puts $f ""
 puts $f $unpacklog
 puts $f ""
 puts $f $buildlog
+if {[string equal $arch i386]} {
 puts $f ""
 puts $f $debuildlog
+}
 puts $f ""
 #puts $f $end_build_time
 #puts $f ""
