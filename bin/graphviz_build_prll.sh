@@ -8,7 +8,7 @@ BUILD_HOSTS="fc18-64 fc18 fc17-64 fc17 fc16-64 fc16 centos6-64 centos6 centos5-6
 parallel -j 2 --arg-sep ::: ssh -x {} PATH=/usr/bin:/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR ::: $BUILD_HOSTS
 
 BUILD_HOSTS="ubuntu10 ubuntu10-64 ubuntu11 ubuntu11-64 ubuntu12 ubuntu12-64"
-parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/redhat/graphviz-bin-deb.tcl $DIR ::: $BUILD_HOSTS
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR ::: $BUILD_HOSTS
 
 BUILD_HOSTS="pome.client.research.att.com"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR ::: $BUILD_HOSTS
