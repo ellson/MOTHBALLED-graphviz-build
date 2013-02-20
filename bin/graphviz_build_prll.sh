@@ -1,31 +1,20 @@
 #!/bin/bash
 
-date
+# set DIR=ARCHIVE to build stable release
+#     DIR=CURRENT (or empty) to build the current snapshot
+DIR=$1
 
-#prll.sh should already be in user's shell
-#source bin/prll.sh
+BUILD_HOSTS="fc18-64 fc18 fc17-64 fc17 fc16-64 fc16 centos6-64 centos6 centos5-64 centos5"
+parallel -j 2 --arg-sep ::: ssh -x {} PATH=/usr/bin:/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR ::: $BUILD_HOSTS
 
-VHOSTS="fc10 fc10-64 \
-	fc11 fc11-64 \
-	fc12 fc12-64 \
-	fc13 fc13-64 \
-	centos4 centos4-64 \
-	centos5 centos5-64"
+BUILD_HOSTS="ubuntu10 ubuntu10-64 ubuntu11 ubuntu11-64 ubuntu12 ubuntu12-64"
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/redhat/graphviz-bin-deb.tcl $DIR ::: $BUILD_HOSTS
 
-#for i in $VHOSTS; do echo $i;done
+BUILD_HOSTS="pome.client.research.att.com"
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR ::: $BUILD
 
-function vtest() {
-	exec ssh $1 graphviz-build/redhat/graphviz-bin-rpm.tcl ;
-}
+BUILD_HOSTS="snares"
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR ::: $BUILD
 
-PRLL_NR_CPUS=2 prll vtest $VHOSTS
-
-date
-
-function vtest_att() {
-	exec ssh $1 graphviz-build/redhat/graphviz-bin-att-rpm.tcl ;
-}
-
-PRLL_NR_CPUS=2 prll vtest_att $VHOSTS
-
-date
+BUILD_HOSTS="empire"
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-lion-bin-pkg.sh $DIR ::: $BUILD
