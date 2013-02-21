@@ -10,11 +10,11 @@ parallel -j 2 --arg-sep ::: ssh -x {} PATH=/usr/bin:/bin:$PATH graphviz-build/re
 BUILD_HOSTS="ubuntu10 ubuntu10-64 ubuntu11 ubuntu11-64 ubuntu12 ubuntu12-64"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/ubuntu/graphviz-bin-deb.tcl $DIR ::: $BUILD_HOSTS
 
-BUILD_HOSTS="pome.client.research.att.com"
+BUILD_HOSTS="snares"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR ::: $BUILD_HOSTS
 
-BUILD_HOSTS="snares"
-parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-leopard-bin-pkg.sh $DIR ::: $BUILD_HOSTS
+BUILD_HOSTS="pome.client.research.att.com"
+parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-mountainlion-bin-pkg.sh $DIR ::: $BUILD_HOSTS
 
 BUILD_HOSTS="empire"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-lion-bin-pkg.sh $DIR ::: $BUILD_HOSTS
