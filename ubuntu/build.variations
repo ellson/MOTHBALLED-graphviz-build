@@ -58,7 +58,7 @@ switch $distroversion {
 		exec echo "-1~precise_source.changes" > debian/series
 	}
 	"ubuntu13" - "ubuntu13-64" { 
-		exec sed -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/" -e "s/--with-smyrna/--without-smyrna/"  -e "s/--enable-lua/--disable-lua/" <debian/rules  >debian/rules.NEW
+		exec sed -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/" -e "s/--enable-lua/--disable-lua/" <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
