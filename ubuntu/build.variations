@@ -61,9 +61,8 @@ switch $distroversion {
 
 
 #Temporary workaround for lua build failure on launchpad
-exec sed -e "s/mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so/#mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so/" -e "s/\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/#\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/" -e "s/install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)/#install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)/" -e "s/ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/#ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/" -e "s/\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so/#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so/" -e "s/--enable-lua/--disable-lua/" < rules
+exec sed -e "s/mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so/#mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so/" -e "s/\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/#\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/" -e "s/install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)/#install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)/" -e "s/ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/#ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so/" -e "s/\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so/#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so/" -e "s/--enable-lua/--disable-lua/" -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/"" < debian/rules  >debian/rules.NEW
 
-		exec sed -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/"" <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
