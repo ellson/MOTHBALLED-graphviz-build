@@ -58,12 +58,38 @@ switch $distroversion {
 		exec echo "-1~precise_source.changes" > debian/series
 	}
 	"ubuntu13" - "ubuntu13-64" { 
-
-
 #Temporary workaround for lua build failure on launchpad
-exec sed -e "s,mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so,#mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so," -e "s,\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," -e "s,install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION),#install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)," -e "s,ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," -e "s,\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so," -e "s/--enable-lua/--disable-lua/" -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/" < debian/rules  >debian/rules.NEW
+		exec sed -e "s,mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so,#mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so," \
+-e "s,\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," \
+-e "s,install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION),#install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)," \
+-e "s,ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," \
+-e "s,\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so," \
+-e "s/--enable-lua/--disable-lua/"  <debian/rules  >debian/rules.lua
+		exec mv debian/rules.lua debian/rules
 
+		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
+		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
+
+#Temporary workaround for ruby build failure on launchpad
+		exec sed -e "s/--enable-ruby/--disable-ruby/" \
+-e "s,install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION),#install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)," \
+-e "s,install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION),#install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)," \
+-e "s,mv\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby\.so,#mv \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby.so," \
+-e "s,\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so,#\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so," \
+-e "s,rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz,#rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz," <debian/rules  >debian/rules.ruby
+		exec mv debian/rules.ruby  debian/rules
+
+		exec sed -e "s,usr\/lib\/graphviz\/ruby\/libgv_ruby\.so,#usr\/lib\/graphviz\/ruby\/libgv_ruby\.so," \
+-e "s,usr/share\/man\/man3\/gv\.3ruby,#usr\/share\/man\/man3\/gv\.3ruby," <debian/libgv-ruby.install >debian/libgv-ruby.install.NEW
+	exec mv debian/libgv-ruby.install.NEW debian/libgv-ruby.install
+
+
+		exec sed -e "s/--disable-python27/--enable-python27/" \
+				-e "s/dh_clean\ -k/dh_prep/" \
+				-e "s/dh_pysupport/dh_python2/"  <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
+
+
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
