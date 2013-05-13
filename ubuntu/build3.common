@@ -17,9 +17,13 @@ catch "exec dpkg-buildpackage -b -k34D3E345 -nc" buildlog
 
 cd $work
 
+#Only need to send binary to launchpad from one hardware platform
+#ubuntu maverick version is no longer supported; do not send to launchpad
 if {[string equal $arch i386]} {
-puts "dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series"
-catch "exec dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series" debuildlog
+	if {![regexp  {.*maverick.*} $series]} {
+		puts "dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series"
+		catch "exec dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series" debuildlog
+	}
 }
 
 set end_time [clock format [clock seconds]]
