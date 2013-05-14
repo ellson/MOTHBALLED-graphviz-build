@@ -76,6 +76,7 @@ switch $distroversion {
 -e "s,install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION),#install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)," \
 -e "s,mv\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby\.so,#mv \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby.so," \
 -e "s,\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so,#\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so," \
+-e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
 -e "s,rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz,#rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz," <debian/rules  >debian/rules.ruby
 		exec mv debian/rules.ruby  debian/rules
 
@@ -100,7 +101,8 @@ switch $distroversion {
 		exec mv  debian/changelog.in.NEW debian/changelog.in
 		exec sed -e "s/-1)\ intrepid\;\ /-1~raring)\ raring\;\ /" <debian/changelog >debian/changelog.NEW
 		exec mv  debian/changelog.NEW debian/changelog
-		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" < debian/control > debian/control.NEW
+		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
+-e "s/ruby1\.8-dev/ruby1\.9\.1-dev/" < debian/control > debian/control.NEW
 		exec mv  debian/control.NEW debian/control
 		exec echo "-1~raring_source.changes" > debian/series
 	}
