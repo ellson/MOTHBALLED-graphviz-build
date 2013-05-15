@@ -70,7 +70,8 @@ switch $distroversion {
 		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
 
-		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/i686-linux," < configure.ac > configure.ac.NEW
+		if {[string equal $arch i386]} {set real_arch i686}
+		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/${real_arch}-linux," < configure.ac > configure.ac.NEW
 		exec mv configure.ac.NEW configure.ac
 
 		exec sed  -e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
