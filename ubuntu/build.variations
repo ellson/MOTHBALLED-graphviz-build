@@ -69,10 +69,18 @@ switch $distroversion {
 
 		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
+#End of lua workaround
 
-		if {[string equal $arch i386]} {set real_arch i686}
+#Workaround for ruby multi-arch include directory placement
+		if {[string equal $arch i386]} {
+			set real_arch i686
+		} else {
+			set real_arch "x86_64"
+		}
+
 		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/${real_arch}-linux," < configure.ac > configure.ac.NEW
 		exec mv configure.ac.NEW configure.ac
+#End of ruby multi-arch workaround
 
 		exec sed  -e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
 				-e "s/--disable-python27/--enable-python27/" \
