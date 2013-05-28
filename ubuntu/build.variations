@@ -71,21 +71,13 @@ switch $distroversion {
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
 #End of lua workaround
 
-#Temporary workaround for ruby build failure on launchpad
-		exec sed -e "s/--enable-ruby/--disable-ruby/" \
--e "s,install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION),#install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)," \
--e "s,install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION),#install\ -d\ \$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)," \
--e "s,mv\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby\.so,#mv \$(RUBY_PACKAGE)\/usr\/lib\/graphviz\/ruby\/libgv_ruby.so," \
--e "s,\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so,#\$(RUBY_PACKAGE)\/usr\/lib\/ruby\/\$(RUBY_VERSION)\/gv\.so," \
--e "s,rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz,#rm\ -rf\ \$(RUBY_PACKAGE)\/usr\/lib\/graphviz," <debian/rules  >debian/rules.ruby
+#Workaround for ruby build failure on launchpad
+		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/x86_64-linux," < configure.ac > configure.ac.NEW
+		exec mv configure.ac.NEW configure.ac
 
-		exec mv debian/rules.ruby  debian/rules
   
-		exec sed -e "s,usr\/lib\/graphviz\/ruby\/libgv_ruby\.so,#usr\/lib\/graphviz\/ruby\/libgv_ruby\.so," \
--e "s,usr/share\/man\/man3\/gv\.3ruby,#usr\/share\/man\/man3\/gv\.3ruby," <debian/libgv-ruby.install >debian/libgv-ruby.install.NEW
-		exec mv debian/libgv-ruby.install.NEW debian/libgv-ruby.install
-
-		exec sed -e "s/--disable-python27/--enable-python27/" \
+		exec sed -e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
+				-e "s/--disable-python27/--enable-python27/" \
 				-e "s/dh_clean\ -k/dh_prep/" \
 				-e "s/dh_pysupport/dh_python2/"  <debian/rules  >debian/rules.NEW
 		exec mv debian/rules.NEW  debian/rules
