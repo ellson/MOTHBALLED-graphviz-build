@@ -74,8 +74,6 @@ switch $distroversion {
 #Workaround for ruby build failure on launchpad
 		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/x86_64-linux," < configure.ac > configure.ac.NEW
 		exec mv configure.ac.NEW configure.ac
-
-  
 		exec sed -e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
 				-e "s/--disable-python27/--enable-python27/" \
 				-e "s/dh_clean\ -k/dh_prep/" \
@@ -87,13 +85,15 @@ switch $distroversion {
 #		exec mv debian/rules.NEW  debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
-		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
+		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install >debian/libgv-lua.install.NEW
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
 		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~raring)\ raring\;\ /" <debian/changelog.in >debian/changelog.in.NEW
 		exec mv  debian/changelog.in.NEW debian/changelog.in
 		exec sed -e "s/-1)\ intrepid\;\ /-1~raring)\ raring\;\ /" <debian/changelog >debian/changelog.NEW
 		exec mv  debian/changelog.NEW debian/changelog
-		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//"  < debian/control > debian/control.NEW
+		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
+				-e "s/ruby1\.8/ruby1\.9\.1/" \
+				-e "s/Ruby (1.8)/Ruby (1.9.1)/" < debian/control > debian/control.NEW
 		exec mv  debian/control.NEW debian/control
 		exec echo "-1~raring_source.changes" > debian/series
 	}
