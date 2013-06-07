@@ -30,9 +30,9 @@ rm -rf graphviz2
 
 
 # obtain latest from git
-$HOME/graphviz-build/redhat/git_copy_repo.sh graphviz
+$HOME/graphviz-build/bin/git_copy_repo.sh graphviz
 
-mv graphviz_git graphviz2
+mv graphviz graphviz2
 
 
 cd graphviz2

@@ -31,9 +31,7 @@ rm -rf webdot
 
 
 # obtain latest from mercurial
-$HOME/graphviz-build/redhat/git_copy_repo.sh webdot
-
-mv webdot_git webdot
+$HOME/graphviz-build/bin/git_copy_repo.sh webdot
 
 cd webdot
 

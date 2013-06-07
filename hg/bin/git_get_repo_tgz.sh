@@ -4,11 +4,11 @@
 cd /home/gviz
 
 base=$1
-OUT="output_${base}_git"
+OUT="output_${base}"
 > $OUT
 #Remove the compressed file to force git to update its repo and reset timestamps
 
-rm ${base}_git.tgz >> $OUT 2>&1
+rm ${base}.tgz >> $OUT 2>&1
 #Set timestamps, create compressed file
 bin/git_archive.sh ${base} >> $OUT 2>&1
 if [ ! -s $OUT ]

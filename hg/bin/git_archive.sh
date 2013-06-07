@@ -5,7 +5,7 @@ base=$1
 
 cd /home/gitroot/${base}.git
 
-git archive --format=tar --prefix="${base}_git/" HEAD | gzip > ~/${base}_git.tgz
+git archive --format=tar --prefix="${base}/" HEAD | gzip > ~/${base}.tgz
 
 
 
