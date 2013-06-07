@@ -8,10 +8,6 @@ OUT="output_${base}_git"
 > $OUT
 #Remove the compressed file to force git to update its repo and reset timestamps
 
-#*******************************************************************************
-#Remove _git after testing is completed
-#*******************************************************************************
-
 rm ${base}_git.tgz >> $OUT 2>&1
 #Set timestamps, create compressed file
 bin/git_archive.sh ${base} >> $OUT 2>&1
