@@ -4,7 +4,7 @@
 #     DIR=CURRENT (or empty) to build the current snapshot
 DIR=$1
 
-BUILD_HOSTS="fc18-64 fc18 fc17-64 fc17 centos6-64 centos6 centos5-64 centos5"
+BUILD_HOSTS="fc19-64 fc19 fc18-64 fc18 fc17-64 fc17 centos6-64 centos6 centos5-64 centos5"
 parallel -j 2 --arg-sep ::: ssh -x {} PATH=/usr/bin:/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR ::: $BUILD_HOSTS
 
 BUILD_HOSTS="ubuntu10 ubuntu10-64 ubuntu11 ubuntu11-64 ubuntu12 ubuntu12-64 ubuntu13 ubuntu13-64"
