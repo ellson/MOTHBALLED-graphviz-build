@@ -4,10 +4,11 @@
 base=$1
 
 
-cd /home/gitroot/graphviz.git
+cd ~/graphviz
+git pull
 git archive --format=tar HEAD doc/* | gzip > ~/doc.tgz
 
-cd /home/gitroot/${base}.git
+cd ~/${base}
 git archive --format=tar HEAD | gzip > ~/html.tgz
 
 

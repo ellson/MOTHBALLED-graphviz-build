@@ -2,7 +2,7 @@
 
 base="graphviz-web"
 #remove _git after testing is done
-git_repo=${base}-dynamic_git
+git_repo=${base}-dynamic
 OUT=output_$git_repo
 cd /home/gviz
 rm ${git_repo}.tgz >> $OUT 2>&1
