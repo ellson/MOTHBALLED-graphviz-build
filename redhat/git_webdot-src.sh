@@ -27,16 +27,14 @@ RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
 
 # cleanup previous build
-rm -rf webdot webdot-master
-
+rm -rf webdot webdot-master master.zip*
 
 # # obtain latest from mercurial
 # $HOME/graphviz-build/bin/git_copy_repo.sh webdot
 
 wget https://github.com/ellson/webdot/archive/master.zip
 unzip -q master.zip
-
-
+rm -rf master.zip*
 
 #cd webdot
 cd webdot-master
