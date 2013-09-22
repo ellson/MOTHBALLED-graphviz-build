@@ -34,7 +34,7 @@ rm -rf webdot webdot-master
 # $HOME/graphviz-build/bin/git_copy_repo.sh webdot
 
 wget https://github.com/ellson/webdot/archive/master.zip
-unzip master.zip
+unzip -q master.zip
 
 
 
