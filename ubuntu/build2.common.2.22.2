@@ -1,0 +1,80 @@
+# $Id$ $Revision$
+
+if {$isnoarch} {set pkgarch noarch} {set pkgarch $arch}
+
+#clean up any previous build
+foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-*] {file delete -force $f}
+foreach f [glob -nocomplain $rpmbuild/*/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/*deb] {file delete -force $f}
+
+set oldpwd [pwd]
+cd $work
+
+set SOURCES $path/SOURCES
+
+catch {unset versions}
+set index [getindex $graphviz_host $SOURCES]
+set pat "$pkg-(\[0-9.\]*?$own).tar.gz"
+foreach {. v} [regexp -all -inline -- $pat $index] {
+  lappend versions $v
+}
+if {! [info exists versions]} {
+    puts stderr "no $pkg snapshots found"
+    exit
+}
+set version [lindex [lsort -decreasing -dictionary $versions] 0]
+
+set sourcefile $pkg-$version.tar.gz
+
+puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
+
+# get sourcefile into local temporary directory
+getfile $graphviz_host $SOURCES $sourcefile
+
+puts "making..."
+# make products
+puts "zcat $sourcefile | tar xf -"
+catch "exec zcat $sourcefile | tar xf -" unpacklog
+cd $pkg-$version
+### FIXME temporary hack for 2.22.2 only
+catch {exec sed -e "s/2.22.2/2.22.2.att/" <debian/changelog  >debian/changelog.NEW}
+catch {exec mv debian/changelog.NEW debian/changelog}
+catch "exec fakeroot make -f debian/rules binary" buildlog
+
+#set end_build_time [clock format [clock seconds]]
+
+#cd $rpmbuild/BUILD/$pkg-$version/rtest
+#catch "exec ./rtest.sh" rtestlog
+
+cd $work
+
+set end_time [clock format [clock seconds]]
+
+puts  "...done making."
+
+set BUILDLOG $pkg-linux-buildlog-$version$dist.$pkgarch.txt
+set f [open $BUILDLOG w]
+puts $f $start_time
+puts $f ""
+puts $f $unpacklog
+puts $f ""
+puts $f $buildlog
+puts $f ""
+#puts $f $end_build_time
+#puts $f ""
+#puts $f $rtestlog
+#puts $f ""
+puts $f $end_time
+close $f
+
+set productfiles [concat [glob -nocomplain *$version*.deb] $BUILDLOG]
+
+set DEBS $path/ubuntu/[string trim $dist .]/$arch
+exec ssh $graphviz_host "mkdir -p $DEBS"
+
+foreach fn $productfiles {
+  putfile $graphviz_host $DEBS $fn
+}
+
+cd $oldpwd

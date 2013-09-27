@@ -1,0 +1,279 @@
+ATK_URL 	= http://ftp.acc.umu.se/pub/gnome/sources/atk/1.26/atk-1.26.0.tar.gz
+AUTOCONF_URL    = ftp://ftp.gnu.org/pub/gnu/autoconf/autoconf-2.63.tar.gz
+AUTOMAKE_URL    = ftp://ftp.gnu.org/pub/gnu/automake/automake-1.10.2.tar.gz
+BISON_URL	= ftp://ftp.gnu.org/pub/gnu/bison/bison-2.3.tar.gz
+CAIRO_URL	= http://www.cairographics.org/releases/cairo-1.8.6.tar.gz
+COREUTILS_URL   = ftp://ftp.gnu.org/pub/gnu/coreutils/coreutils-6.12.tar.gz
+CVS_URL		= http://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.23/cvs-1.11.23.tar.gz
+EXPAT_URL	= http://downloads.sourceforge.net/expat/expat-2.0.1.tar.gz
+FINDUTILS_URL   = ftp://ftp.gnu.org/pub/gnu/findutils/findutils-4.4.0.tar.gz
+FLEX_URL	= http://downloads.sourceforge.net/flex/flex-2.5.35.tar.gz
+FONTCONFIG_URL  = http://fontconfig.org/release/fontconfig-2.6.0.tar.gz
+FREETYPE_URL    = http://download.savannah.gnu.org/releases/freetype/freetype-2.3.9.tar.gz
+GAWK_URL	= ftp://ftp.gnu.org/pub/gnu/gawk/gawk-3.1.5.tar.gz
+GIT_URL		= http://kernel.org/pub/software/scm/git/git-1.6.2.4.tar.gz
+GCC_URL		= ftp://ftp.gnu.org/gnu/gcc/gcc-4.4.0/gcc-4.4.0.tar.gz
+GD_URL		= http://www.libgd.org/releases/gd-2.0.36RC1.tar.gz
+GDKPIXBUF_URL   = http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/0.22/gdk-pixbuf-0.22.0.tar.gz
+GETTEXT_URL	= ftp://ftp.gnu.org/pub/gnu/gettext/gettext-0.17.tar.gz
+GHOSTSCRIPT_URL = http://ghostscript.com/releases/ghostscript-8.64.tar.gz
+GLIB_URL	= http://ftp.gnome.org/pub/gnome/sources/glib/2.20/glib-2.20.1.tar.gz
+GMP_URL		= ftp://ftp.gnu.org/gnu/gmp/gmp-4.3.0.tar.gz
+GREP_URL	= ftp://ftp.gnu.org/pub/gnu/grep/grep-2.5.3.tar.gz
+GTK_URL		= http://ftp.gnome.org/pub/gnome/sources/gtk+/2.16/gtk+-2.16.1.tar.gz
+GTK_DOC_URL	= http://ftp.gnome.org/pub/GNOME/sources/gtk-doc/1.11/gtk-doc-1.11.tar.gz
+GTS_URL		= http://downloads.sourceforge.net/gts/gts-0.7.6.tar.gz
+GZIP_URL	= ftp://ftp.gnu.org/pub/gnu/gzip/gzip-1.3.12.tar.gz
+LASI_URL	= http://sourceforge.net/projects/lasi/libLASi-1.1.0.tar.gz
+LIBICONV_URL    = ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.tar.gz
+LIBPNG_URL	= http://downloads.sourceforge.net/libpng/libpng-1.2.35.tar.gz
+LIBRSVG_URL	= http://ftp.gnome.org/pub/gnome/sources/librsvg/2.22/librsvg-2.22.3.tar.gz
+LIBTOOL_URL	= ftp://ftp.gnu.org/pub/gnu/libtool/libtool-2.2.6a.tar.gz
+LIBXML2_URL	= ftp://xmlsoft.org/libxml2/libxml2-sources-2.7.3.tar.gz
+LIBXSLT_URL	= ftp://xmlsoft.org/libxml2/libxslt-1.1.24.tar.gz
+M4_URL		= ftp://ftp.gnu.org/pub/gnu/m4/m4-1.4.12.tar.gz
+MAKE_URL	= ftp://ftp.gnu.org/pub/gnu/make/make-3.81.tar.gz
+MPFR_URL	= http://www.mpfr.org/mpfr-current/mpfr-2.4.1.tar.gz
+MPFR_PATCHES_URL = http://www.mpfr.org/mpfr-current/patches
+PANGO_URL	= http://ftp.gnome.org/pub/gnome/sources/pango/1.24/pango-1.24.0.tar.gz
+PATCH_URL	= http://alpha.gnu.org/gnu/patch/patch-2.5.9-81-gaad98f0.tar.gz
+PIXMAN_URL	= http://www.cairographics.org/releases/pixman-0.15.2.tar.gz
+PKGCONFIG_URL   = http://pkg-config.freedesktop.org/releases/pkg-config-0.23.tar.gz
+SED_URL		= ftp://ftp.gnu.org/gnu/sed/sed-4.1.4.tar.gz
+#SED_URL	= ftp://ftp.gnu.org/pub/gnu/sed/sed-4.1.5.tar.gz
+SWIG_URL	= http://downloads.sourceforge.net/swig/swig-1.3.39.tar.gz
+TAR_URL		= ftp://ftp.gnu.org/pub/gnu/tar/tar-1.22.tar.gz
+TCL_URL		= http://downloads.sourceforge.net/tcl/tcl8.6b1-src.tar.gz
+TK_URL		= http://downloads.sourceforge.net/tcl/tk8.6b1-src.tar.gz
+WGET_URL	= ftp://ftp.gnu.org/pub/gnu/wget/wget-1.11.4.tar.gz
+ZLIB_URL	= http://www.zlib.net/zlib-1.2.3.tar.gz
+
+ALL = ATK_URL AUTOCONF_URL AUTOMAKE_URL BISON_URL CAIRO_URL COREUTILS_URL CVS_URL \
+	EXPAT_URL FINDUTILS_URL FLEX_URL FONTCONFIG_URL FREETYPE_URL GAWK_URL GIT_URL GCC_URL \
+	GD_URL GDKPIXBUF_URL GETTEXT_URL GHOSTSCRIPT_URL GLIB_URL GMP_URL GREP_URL GTK_URL GTK_DOC_URL \
+	GTS_URL GZIP_URL LASI_URL LIBICONV_URL LIBPNG_URL LIBRSVG_URL LIBTOOL_URL LIBXML2_URL \
+	LIBXSLT_URL M4_URL MAKE_URL MPFR_URL PANGO_URL PATCH_URL PIXMAN_URL PKGCONFIG_URL SED_URL \
+	SWIG_URL TAR_URL TCL_URL TK_URL WGET_URL ZLIB_URL 
+
+#BASETOOLS = @prefix@ make bison flex pkg-config sed
+BASETOOLS = @prefix@ 
+CVS_URLTOOLS = ${BASETOOLS} cvs m4 autoconf automake libtool swig
+GVDEPS = ${BASETOOLS} pango gts rsvg tk libxml2 libxslt gd
+
+all: ${GVDEPS}
+
+allbasetools: ${BASETOOLS}
+
+allcvstools: ${CVS_URLTOOLS}
+
+allsrc:	${ALL}
+
+${ALL}:
+	if @WGET@ --passive-ftp ${$@};then touch $@;fi
+
+@prefix@:
+	mkdir -p @prefix@
+
+clean:
+	rm -rf `echo ${ALL} | tr [:upper:] [:lower:]`
+        
+distclean: clean
+	rm -rf *gz ${ALL}
+
+BASECONFIG=--prefix=@prefix@ --disable-dependency-tracking PKG_CONFIG="@prefix@/bin/pkg-config" PKG_CONFIG_PATH="@prefix@/lib/pkgconfig:$(PKG_CONFIG_PATH)" 
+
+atk:	ATK_URL ${BASETOOLS} 
+	@ZCAT@ `basename ${ATK_URL}` | @TAR@ xf -
+	(cd `basename ${ATK_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-gtk-doc \
+		&& make && make install && make clean) && touch $@
+autoconf: AUTOCONF_URL ${BASETOOLS}
+	@ZCAT@ `basename ${AUTOCONF_URL}` | @TAR@ xf -
+	(cd `basename ${AUTOCONF_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+automake: AUTOMAKE_URL ${BASETOOLS}
+	@ZCAT@ `basename ${AUTOMAKE_URL}` | @TAR@ xf -
+	(cd `basename ${AUTOMAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+bison: BISON_URL
+	@ZCAT@ `basename ${BISON_URL}` | @TAR@ xf -
+	(cd `basename ${BISON_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+cairo: CAIRO_URL ${BASETOOLS} pixman freetype libpng
+	@ZCAT@ `basename ${CAIRO_URL}` | @TAR@ xf -
+	(cd `basename ${CAIRO_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-xlib-xrender \
+		&& make && make install && make clean) && touch $@
+coreutils: COREUTILS_URL
+	@ZCAT@ `basename ${COREUTILS_URL}` | @TAR@ xf -
+	(cd `basename ${COREUTILS_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+cvs: CVS_URL ${BASETOOLS}
+	@ZCAT@ `basename ${CVS_URL}` | @TAR@ xf -
+	(cd `basename ${CVS_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+expat: EXPAT_URL ${BASETOOLS}
+	@ZCAT@ `basename ${EXPAT_URL}` | @TAR@ xf -
+	(cd `basename ${EXPAT_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+findutils: FINDUTILS_URL ${BASETOOLS}
+	@ZCAT@ `basename ${FINDUTILS_URL}` | @TAR@ xf -
+	(cd `basename ${FINDUTILS_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+flex: FLEX_URL make
+	@ZCAT@ `basename ${FLEX_URL}` | @TAR@ xf -
+	(cd `basename ${FLEX_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+fontconfig: FONTCONFIG_URL ${BASETOOLS} freetype expat libxml2 libiconv
+	@ZCAT@ `basename ${FONTCONFIG_URL}` | @TAR@ xf -
+	(cd `basename ${FONTCONFIG_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-docs \
+		&& make && make install && make clean) && touch $@
+freetype: FREETYPE_URL ${BASETOOLS}
+	@ZCAT@ `basename ${FREETYPE_URL}` | @TAR@ xf -
+	(cd `basename ${FREETYPE_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gawk: GAWK_URL make 
+	@ZCAT@ `basename ${GAWK_URL}` | @TAR@ xf -
+	(cd `basename ${GAWK_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+git: GIT_URL make 
+	@ZCAT@ `basename ${GIT_URL}` | @TAR@ xf -
+	(cd `basename ${GIT_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gcc: GCC_URL make mpfr gmp
+	@ZCAT@ `basename ${GCC_URL}` | @TAR@ xf -
+	(cd `basename ${GCC_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gd: GD_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GD_URL}` | @TAR@ xf -
+	(cd `basename ${GD_URL} .tar.gz` && ./configure ${BASECONFIG} LDFLAGS='-L/opt/csw/lib -liconv' \
+		&& make && make install && make clean) && touch $@
+gdk-pixbuf: GDKPIXBUF_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GDKPIXBUF_URL}` | @TAR@ xf -
+	(cd `basename ${GDKPIXBUF_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gettext: GETTEXT_URL ${BASETOOLS} make
+	@ZCAT@ `basename ${GETTEXT_URL}` | @TAR@ xf -
+	#LIBS = -lsec
+	(cd `basename ${GETTEXT_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-java \
+		&& make "LDFLAGS=-lsec" && make install && make clean) && touch $@
+ghostscript: GHOSTSCRIPT_URL ${BASETOOLS} fontconfig
+	@ZCAT@ `basename ${GHOSTSCRIPT_URL}` | @TAR@ xf -
+	(cd `basename ${GHOSTSCRIPT_URL} .tar.gz` && ./configure ${BASECONFIG} --disable-cups --enable-dynamic --with-drivers=CAIRO_URL \
+		&& make && make install soinstall && make clean) && touch $@
+glib: GLIB_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GLIB_URL}` | @TAR@ xf -
+	(cd `basename ${GLIB_URL} .tar.gz` && CFLAGS=-I@prefix@/include LDFLAGS=-L@prefix@/lib ./configure ${BASECONFIG} --disable-visibility --with-libiconv=gnu \
+		&& make && make install && make clean) && touch $@
+gmp: GMP_URL 
+	@ZCAT@ `basename ${GMP_URL}` | @TAR@ xf -
+	(cd `basename ${GMP_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+grep: GREP_URL 
+	@ZCAT@ `basename ${GREP_URL}` | @TAR@ xf -
+	(cd `basename ${GREP_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gtk: GTK_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GTK_URL}` | @TAR@ xf -
+	(cd `basename ${GTK_URL} .tar.gz` && LDFLAGS="-L/usr/openwin/sfw/lib" ./configure ${BASECONFIG} --without-libjasper \
+		&& make && make install && make clean) && touch $@
+gtk-doc: GTK_DOC_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GTK_DOC_URL}` | @TAR@ xf -
+	(cd `basename ${GTK_DOC_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gts: GTS_URL ${BASETOOLS}
+	@ZCAT@ `basename ${GTS_URL}` | @TAR@ xf -
+	(cd `basename ${GTS_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+gzip: GZIP_URL
+	@ZCAT@ `basename ${GZIP_URL}` | @TAR@ xf -
+	(cd `basename ${GZIP_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+lasi: LASI_URL
+	@ZCAT@ `basename ${LASI_URL}` | @TAR@ xf -
+	(cd `basename ${LASI_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+libiconv: LIBICONV_URL
+	@ZCAT@ `basename ${LIBICONV_URL}` | @TAR@ xf -
+	(cd `basename ${LIBICONV_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+libpng: LIBPNG_URL ${BASETOOLS}
+	@ZCAT@ `basename ${LIBPNG_URL}` | @TAR@ xf -
+	(cd `basename ${LIBPNG_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+libtool: LIBTOOL_URL ${BASETOOLS}
+	@ZCAT@ `basename ${LIBTOOL_URL}` | @TAR@ xf -
+	ln -sf `basename ${LIBTOOL_URL} a.tar.gz` `basename ${LIBTOOL_URL} .tar.gz`
+	(cd `basename ${LIBTOOL_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+libxml2: LIBXML2_URL ${BASETOOLS}
+	@ZCAT@ `basename ${LIBXML2_URL}` | @TAR@ xf -
+	(cd `basename ${LIBXML2_URL} .tar.gz | @SED@ -e 's/-sources//'` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+libxslt: LIBXSLT_URL ${BASETOOLS}
+	@ZCAT@ `basename ${LIBXSLT_URL}` | @TAR@ xf -
+	(cd `basename ${LIBXSLT_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+m4: M4_URL
+	@ZCAT@ `basename ${M4_URL}` | @TAR@ xf -
+	(cd `basename ${M4_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+make: MAKE_URL 
+	@ZCAT@ `basename ${MAKE_URL}` | @TAR@ xf -
+	(cd `basename ${MAKE_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+mpfr: MPFR_URL MPFR_PATCHES_URL
+	@ZCAT@ `basename ${MPFR_URL}` | @TAR@ xf -
+	(cd `basename ${MPFR_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+pango: PANGO_URL ${BASETOOLS} 
+	@ZCAT@ `basename ${PANGO_URL}` | @TAR@ xf -
+	(cd `basename ${PANGO_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+patch: PATCH_URL ${BASETOOLS}
+	@ZCAT@ `basename ${PATCH_URL}` | @TAR@ xf -
+	(cd `basename ${PATCH_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+pixman: PIXMAN_URL ${BASETOOLS}
+	@ZCAT@ `basename ${PIXMAN_URL}` | @TAR@ xf -
+	(cd `basename ${PIXMAN_URL} .tar.gz`/pixman; ln -sf ../../solaris-hwcap.mapfile .)
+	(cd `basename ${PIXMAN_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+pkg-config: PKGCONFIG_URL 
+	@ZCAT@ `basename ${PKGCONFIG_URL}` | @TAR@ xf -
+	(cd `basename ${PKGCONFIG_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+rsvg: LIBRSVG_URL ${BASETOOLS} 
+	@ZCAT@ `basename ${LIBRSVG_URL}` | @TAR@ xf -
+	(cd `basename ${LIBRSVG_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+sed: SED_URL
+	@ZCAT@ `basename ${SED_URL}` | @TAR@ xf -
+#	patch -p0 <sed-4.1.5_lib_regcomp.c.patch
+#	patch -p0 <sed-4.1.5_lib_regexec.c.patch
+#	patch -p0 <sed-4.1.5_lib_mkstemp.c.patch
+	(cd `basename ${SED_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+swig: SWIG_URL ${BASETOOLS}
+	@ZCAT@ `basename ${SWIG_URL}` | @TAR@ xf -
+	(cd `basename ${SWIG_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+tar: TAR_URL make
+	@ZCAT@ `basename ${TAR_URL}` | @TAR@ xf -
+	(cd `basename ${TAR_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+tcl: TCL_URL make
+	@ZCAT@ `basename ${TCL_URL}` | @TAR@ xf -
+	(cd `basename ${TCL_URL} -src.tar.gz`/unix && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+tk: TK_URL tcl
+	@ZCAT@ `basename ${TK_URL}` | @TAR@ xf -
+#	patch -p0 <tk8.6a3.patch
+	(cd `basename ${TK_URL} -src.tar.gz`/unix && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+wget: WGET_URL make
+	@ZCAT@ `basename ${WGET_URL}` | @TAR@ xf -
+	(cd `basename ${WGET_URL} .tar.gz` && ./configure ${BASECONFIG} \
+		&& make && make install && make clean) && touch $@
+zlib: ZLIB_URL make
+	@ZCAT@ `basename ${ZLIB_URL}` | @TAR@ xf -
+	(cd `basename ${ZLIB_URL} .tar.gz` && ./configure ${BASECONFIG} --shared \
+		&& make && make install && make clean) && touch $@

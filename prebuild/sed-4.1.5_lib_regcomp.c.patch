@@ -1,0 +1,15 @@
+--- sed-4.1.5/lib/regcomp.c.orig	Sat Oct 18 12:53:23 2008
++++ sed-4.1.5/lib/regcomp.c	Sat Oct 18 12:56:09 2008
+@@ -558,7 +558,11 @@
+ static const bitset_t utf8_sb_map =
+ {
+   /* Set the first 128 bits.  */
+-  [0 ... 0x80 / BITSET_WORD_BITS - 1] = BITSET_WORD_MAX
++//  [0 ... 0x80 / BITSET_WORD_BITS - 1] = BITSET_WORD_MAX
++//
++// Sun's cc can't handle this syntax.
++// assume 32 bit words
++  0xffff, 0xffff, 0xffff, 0xffff,
+ };
+ #endif
+ 

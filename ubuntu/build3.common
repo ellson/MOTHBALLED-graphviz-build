@@ -1,0 +1,61 @@
+cd $work
+cd $pkg-$version
+
+if {[string equal $arch i386]} {
+puts "exec dpkg-buildpackage -S -rfakeroot -k34D3E345"
+catch "exec cat debian/series" series
+catch "exec dpkg-buildpackage -S -rfakeroot -k34D3E345 -nc " debuildlog
+}
+
+puts "dpkg-buildpackage -b -k34D3E345 -nc"
+catch "exec dpkg-buildpackage -b -k34D3E345 -nc" buildlog
+
+#set end_build_time [clock format [clock seconds]]
+
+#cd $rpmbuild/BUILD/$pkg-$version/rtest
+#catch "exec ./rtest.sh" rtestlog
+
+cd $work
+
+#Only need to send binary to launchpad from one hardware platform
+#ubuntu maverick version is no longer supported; do not send to launchpad
+if {[string equal $arch i386]} {
+	if {![regexp  {.*maverick.*} $series] && ![regexp  {.*natty.*} $series]} {
+		puts "dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series"
+		catch "exec dput ppa:gviz-adm/graphviz-dev ${pkg}_$version$series" debuildlog
+	}
+}
+
+set end_time [clock format [clock seconds]]
+
+puts  "...done making."
+
+set BUILDLOG $pkg-linux-buildlog-$version$dist.$pkgarch.txt
+set f [open $BUILDLOG w]
+puts $f $start_time
+puts $f ""
+puts $f $unpacklog
+puts $f ""
+puts $f $buildlog
+if {[string equal $arch i386]} {
+puts $f ""
+puts $f $debuildlog
+}
+puts $f ""
+#puts $f $end_build_time
+#puts $f ""
+#puts $f $rtestlog
+#puts $f ""
+puts $f $end_time
+close $f
+
+set productfiles [concat [glob -nocomplain *$version*.deb] $BUILDLOG]
+
+set DEBS $path/ubuntu/[string trim $dist .]/$arch
+exec ssh $graphviz_host "mkdir -p $DEBS"
+
+foreach fn $productfiles {
+  putfile $graphviz_host $DEBS $fn
+}
+
+cd $oldpwd

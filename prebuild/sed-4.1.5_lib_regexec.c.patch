@@ -1,0 +1,54 @@
+--- sed-4.1.5/lib/regexec.c.orig	Sun Oct 19 01:00:29 2008
++++ sed-4.1.5/lib/regexec.c	Sun Oct 19 01:01:30 2008
+@@ -2894,7 +2894,7 @@
+ 	      sizeof (re_dfastate_t *) * (path->alloc - old_alloc));
+     }
+ 
+-  str_idx = path->next_idx ?: top_str;
++  str_idx = path->next_idx ? path->next_idx : top_str;
+ 
+   /* Temporary modify MCTX.  */
+   backup_state_log = mctx->state_log;
+@@ -3296,8 +3296,10 @@
+   reg_errcode_t err;
+   int i, j, ch, need_word_trtable = 0;
+   bitset_word_t elem, mask;
+-  bool dests_node_malloced = false;
+-  bool dest_states_malloced = false;
++//  bool dests_node_malloced = false;
++//  bool dest_states_malloced = false;
++  int dests_node_malloced = 0;
++  int dest_states_malloced = 0;
+   int ndests; /* Number of the destination states from `state'.  */
+   re_dfastate_t **trtable;
+   re_dfastate_t **dest_states = NULL, **dest_states_word, **dest_states_nl;
+@@ -3322,7 +3324,8 @@
+       dests_alloc = re_malloc (struct dests_alloc, 1);
+       if (BE (dests_alloc == NULL, 0))
+ 	return 0;
+-      dests_node_malloced = true;
++//      dests_node_malloced = true;
++      dests_node_malloced = 1;
+     }
+   dests_node = dests_alloc->dests_node;
+   dests_ch = dests_alloc->dests_ch;
+@@ -3371,7 +3374,8 @@
+ 	    free (dests_alloc);
+ 	  return 0;
+ 	}
+-      dest_states_malloced = true;
++//      dest_states_malloced = true;
++      dest_states_malloced = 1;
+     }
+   dest_states_word = dest_states + ndests;
+   dest_states_nl = dest_states_word + ndests;
+@@ -3576,7 +3580,8 @@
+ 	{
+ 	  if (constraint & NEXT_NEWLINE_CONSTRAINT)
+ 	    {
+-	      bool accepts_newline = bitset_contain (accepts, NEWLINE_CHAR);
++//	      bool accepts_newline = bitset_contain (accepts, NEWLINE_CHAR);
++	      int accepts_newline = bitset_contain (accepts, NEWLINE_CHAR);
+ 	      bitset_empty (accepts);
+ 	      if (accepts_newline)
+ 		bitset_set (accepts, NEWLINE_CHAR);

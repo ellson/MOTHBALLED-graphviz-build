@@ -1,0 +1,39 @@
+# $Id$ $Revision$
+
+if {$isnoarch} {set pkgarch noarch} {set pkgarch $arch}
+
+#clean up any previous build
+foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-*] {file delete -force $f}
+foreach f [glob -nocomplain $rpmbuild/*/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/$pkg*] {file delete -force $f}
+foreach f [glob -nocomplain $work/*deb] {file delete -force $f}
+
+set oldpwd [pwd]
+cd $work
+
+set SOURCES $path/SOURCES
+
+catch {unset versions}
+set index [getindex $graphviz_host $SOURCES]
+set pat "$pkg-(\[0-9.\]*?$own).tar.gz"
+foreach {. v} [regexp -all -inline -- $pat $index] {
+  lappend versions $v
+}
+if {! [info exists versions]} {
+    puts stderr "no $pkg snapshots found"
+    exit
+}
+set version [lindex [lsort -decreasing -dictionary $versions] 0]
+
+set sourcefile $pkg-$version.tar.gz
+
+puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
+
+# get sourcefile into local temporary directory
+getfile $graphviz_host $SOURCES $sourcefile
+
+puts "making..."
+# make products
+puts "zcat $sourcefile | tar xf -"
+catch "exec zcat $sourcefile | tar xf -" unpacklog
+cd $oldpwd

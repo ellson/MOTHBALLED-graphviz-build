@@ -1,0 +1,103 @@
+cd $work
+cd $pkg-$version
+
+set distroversion [exec uname -n]
+
+switch $distroversion {
+	"ubuntu8" { 
+		exec sed -e "s/--disable-python24/--enable-python24/" <debian/rules  >debian/rules.NEW
+		exec sed -e "s/--disable-python25/--enable-python25/" <debian/rules.NEW  >debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python24,usr/lib/graphviz/python24," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec sed -e "s,\#usr/lib/graphviz/python25,usr/lib/graphviz/python25," <debian/libgv-python.install.NEW  >debian/libgv-python.install
+	}
+	"ubuntu9" - "ubuntu9-64" { 
+		exec sed -e "s/--disable-python26/--enable-python26/" <debian/rules  >debian/rules.NEW
+		exec mv debian/rules.NEW  debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python26,usr/lib/graphviz/python26," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+	}
+	"ubuntu10" - "ubuntu10-64" { 
+		exec sed -e "s/--disable-python26/--enable-python26/" <debian/rules  >debian/rules.NEW
+		exec mv debian/rules.NEW  debian/rules
+#		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
+#		exec mv debian/rules.NEW  debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python26,usr/lib/graphviz/python26," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+  		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~maverick)\ maverick\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~maverick)\ maverick\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec echo "-1~maverick_source.changes" > debian/series
+	}
+	"ubuntu11" - "ubuntu11-64" { 
+		exec sed -e "s/--disable-python27/--enable-python27/" <debian/rules  >debian/rules.NEW
+		exec mv debian/rules.NEW  debian/rules
+#		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
+#		exec mv debian/rules.NEW  debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~natty)\ natty\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~natty)\ natty\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec echo "-1~natty_source.changes" > debian/series
+	}
+	"ubuntu12" - "ubuntu12-64" { 
+		exec sed -e "s/--disable-python27/--enable-python27/" -e "s/dh_clean\ -k/dh_prep/" -e "s/dh_pysupport/dh_python2/" <debian/rules  >debian/rules.NEW
+		exec mv debian/rules.NEW  debian/rules
+#		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
+#		exec mv debian/rules.NEW  debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~precise)\ precise\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~precise)\ precise\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.1/" < debian/control > debian/control.NEW
+		exec mv  debian/control.NEW debian/control
+		exec echo "-1~precise_source.changes" > debian/series
+	}
+	"ubuntu13" - "ubuntu13-64" { 
+#Temporary workaround for lua build failure on launchpad
+		exec sed -e "s,mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so,#mv\ \$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/libgv_lua\.so," \
+-e "s,\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," \
+-e "s,install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION),#install\ \-d\ \$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)," \
+-e "s,ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so,#ln\ \-s\ \/usr\/lib\/graphviz\/lua\/liblua\$(LUA_VERSION)\-libgv\.so," \
+-e "s,\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so," \
+-e "s/--enable-lua/--disable-lua/"  <debian/rules  >debian/rules.lua
+		exec mv debian/rules.lua debian/rules
+
+		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
+		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
+#End of lua workaround
+
+#Workaround for ruby build failure on launchpad
+		exec sed -e "/RUBY_CFLAGS=\"-I/s,r\`,r\` -I/usr/include/ruby-1.9.1 -I/usr/include/ruby-1.9.1/i686-linux -I/usr/include/ruby-1.9.1/x86_64-linux," < configure.ac > configure.ac.NEW
+		exec mv configure.ac.NEW configure.ac
+		exec sed -e "s/RUBY_VERSION      = 1.8/RUBY_VERSION      = 1.9.1/" \
+				-e "s/--disable-python27/--enable-python27/" \
+				-e "s/dh_clean\ -k/dh_prep/" \
+				-e "s/dh_pysupport/dh_python2/"  <debian/rules  >debian/rules.NEW
+		exec mv debian/rules.NEW  debian/rules
+#End of temporary workaround for ruby build failure on launchpad
+
+#		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
+#		exec mv debian/rules.NEW  debian/rules
+		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
+		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
+		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install >debian/libgv-lua.install.NEW
+		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~raring)\ raring\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec mv  debian/changelog.in.NEW debian/changelog.in
+		exec sed -e "s/-1)\ intrepid\;\ /-1~raring)\ raring\;\ /" <debian/changelog >debian/changelog.NEW
+		exec mv  debian/changelog.NEW debian/changelog
+		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
+				-e "s/ruby1\.8/ruby1\.9\.1/" \
+				-e "s/Ruby (1.8)/Ruby (1.9.1)/" < debian/control > debian/control.NEW
+		exec mv  debian/control.NEW debian/control
+		exec echo "-1~raring_source.changes" > debian/series
+	}
+	default { }
+}
+
+cd $oldpwd
