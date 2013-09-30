@@ -1,21 +1,8 @@
 #!/bin/bash
-[ $# -eq 0 ] && { echo "Usage $0 git_copy_repo repo_name"; exit 999; }
+[ $# -eq 0 ] && { echo "Usage $0 repo_name"; exit 1; }
 
-base=$1
-
-SERVER="hg.research.att.com"
-USR="gviz"
-
-OUT="git_output_$base"
-> $OUT
-ssh $USR@$SERVER "(bin/git_get_repo_tgz.sh ${base})" > $OUT 2>&1
-scp -r $USR@$SERVER:${base}.tgz . >> $OUT 2>&1
-tar xzf ${base}.tgz 2>> $OUT
-chmod 775 ${base} >> $OUT 2>&1
-touch ${base}
-rm ${base}.tgz >> $OUT 2>&1
-if [ ! -s $OUT ]
-then
-	rm $OUT
-fi
+rm -f master.zip*
+wget https://github.com/ellson/$1/archive/master.zip
+unzip master.zip
+(rm -rf $1 master.zip;mv ${1}-master $1)
 
