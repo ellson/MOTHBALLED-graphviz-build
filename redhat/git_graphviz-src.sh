@@ -26,14 +26,14 @@ RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
 
 # cleanup previous build
-rm -rf graphviz
+rm -rf graphviz-master
 
 # obtain latest from git
 wget https://github.com/ellson/graphviz/archive/master.zip
 unzip -q master.zip
 rm -rf master.zip*
 
-cd graphviz
+cd graphviz-master
 
 if test .$SRCDIR = .CURRENT; then
     ./set_dev_version.sh
