@@ -1,7 +1,7 @@
 #!/bin/bash
 [ $# -eq 0 ] && { echo "Usage $0 repo_name"; exit 1; }
 
-rm -f master.zip*
+rm -f master master.* 
 wget https://github.com/ellson/$1/archive/master.zip
 if test -f master.zip; then
 	unzip -q master.zip
