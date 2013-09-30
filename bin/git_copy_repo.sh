@@ -4,11 +4,11 @@
 rm -f master.zip*
 wget https://github.com/ellson/$1/archive/master.zip
 if test -f master.zip; then
-	unzip master.zip
+	unzip -q master.zip
 	rm master.zip
 else
 	if test -f master; then
-		unzip master
+		unzip -q master
 		rm master
 	else
 		echo "Failed to transfer master.zip"; exit 1
