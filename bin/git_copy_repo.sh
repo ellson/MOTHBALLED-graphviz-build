@@ -14,4 +14,4 @@ else
 		echo "Failed to transfer master.zip"; exit 1
 	fi
 fi
-(cp -rf ${1}-master $1; rm -rf ${1}-master)
+(if test -d $1; then rm -rf $1; fi; mv ${1}-master $1; exit)

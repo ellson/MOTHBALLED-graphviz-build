@@ -19,5 +19,5 @@ DIR=CURRENT
 
 # graphviz-doxygen.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the doxygen documents
-15 14 * * * ssh fc18-64      graphviz-build/redhat/graphviz-doxygen.sh
+15 14 * * * ssh fc19-64      graphviz-build/redhat/graphviz-doxygen.sh
 
