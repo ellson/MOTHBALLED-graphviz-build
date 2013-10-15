@@ -32,7 +32,7 @@ rm -rf webdot-master master.zip*
 # # obtain latest from mercurial
 # $HOME/graphviz-build/bin/git_copy_repo.sh webdot
 
-wget https://github.com/ellson/webdot/archive/master.zip
+wget -q https://github.com/ellson/webdot/archive/master.zip
 unzip -q master.zip
 rm -rf master.zip*
 

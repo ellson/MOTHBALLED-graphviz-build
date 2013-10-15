@@ -29,7 +29,7 @@ cd $HOME/tmp/gviz
 rm -rf graphviz-master master.zip*
 
 # obtain latest from git
-wget https://github.com/ellson/graphviz/archive/master.zip
+wget -q https://github.com/ellson/graphviz/archive/master.zip
 unzip -q master.zip
 rm -rf master.zip*
 
