@@ -53,6 +53,7 @@ set patterns {
 	"Red Hat Enterprise Linux Workstation release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Enterprise Linux release (\[0-9\]+)" ".el" 0 rhel
 	"Red Hat Linux release (\[0-9\]+)" ".rhl" 0 rhl
+	"Red Hat Enterprise Linux Everything release (\[0-9\]+)" ".el" 0 rhel
 }
 
 # as far as I can tell, rpmbuild --macros doesn't work,
