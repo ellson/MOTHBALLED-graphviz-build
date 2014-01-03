@@ -26,10 +26,10 @@ RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
 
 # cleanup previous build
-rm -rf graphviz-master
+rm -rf graphviz-master master.zip*
 
 # obtain latest from git
-wget https://github.com/ellson/graphviz/archive/master.zip
+wget -q https://github.com/ellson/graphviz/archive/master.zip
 unzip -q master.zip
 rm -rf master.zip*
 
