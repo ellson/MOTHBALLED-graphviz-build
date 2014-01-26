@@ -87,15 +87,15 @@ switch $distroversion {
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
 		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install >debian/libgv-lua.install.NEW
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
-		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~raring)\ raring\;\ /" <debian/changelog.in >debian/changelog.in.NEW
+		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~saucy)\ saucy\;\ /" <debian/changelog.in >debian/changelog.in.NEW
 		exec mv  debian/changelog.in.NEW debian/changelog.in
-		exec sed -e "s/-1)\ intrepid\;\ /-1~raring)\ raring\;\ /" <debian/changelog >debian/changelog.NEW
+		exec sed -e "s/-1)\ intrepid\;\ /-1~saucy)\ saucy\;\ /" <debian/changelog >debian/changelog.NEW
 		exec mv  debian/changelog.NEW debian/changelog
 		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
 				-e "s/ruby1\.8/ruby1\.9\.1/" \
 				-e "s/Ruby (1.8)/Ruby (1.9.1)/" < debian/control > debian/control.NEW
 		exec mv  debian/control.NEW debian/control
-		exec echo "-1~raring_source.changes" > debian/series
+		exec echo "-1~saucy_source.changes" > debian/series
 	}
 	default { }
 }
