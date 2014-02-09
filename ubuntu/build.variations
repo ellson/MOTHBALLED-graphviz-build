@@ -94,7 +94,7 @@ switch $distroversion {
 		exec mv  debian/changelog.NEW debian/changelog
 		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
 				-e "s/ruby1\.8/ruby1\.9\.1/" \
-				-e "s/, libgd2-noxpm-dev/, libgd-dev, libtiff5-dev, libvpx-dev, libgd2-noxpm-dev/" \
+				-e "s/, libgd2-noxpm-dev/, libgd-dev, libtiff4-dev, libvpx-dev, libgd2-noxpm-dev/" \
 				-e "s/Ruby (1.8)/Ruby (1.9.1)/" < debian/control > debian/control.NEW
 		exec mv  debian/control.NEW debian/control
 		exec echo "-1~saucy_source.changes" > debian/series
