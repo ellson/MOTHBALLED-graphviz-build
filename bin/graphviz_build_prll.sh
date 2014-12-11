@@ -13,7 +13,7 @@ parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/ubuntu/graphviz-bin-deb.tcl
 BUILD_HOSTS="snares"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-snowleopard-bin-pkg.sh $DIR ::: $BUILD_HOSTS
 
-BUILD_HOSTS="pome.client.research.att.com"
+BUILD_HOSTS="pome"
 parallel -j 2 --arg-sep ::: ssh -x {} graphviz-build/macosx/graphviz-mountainlion-bin-pkg.sh $DIR ::: $BUILD_HOSTS
 
 BUILD_HOSTS="empire"
