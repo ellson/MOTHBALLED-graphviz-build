@@ -15,7 +15,7 @@ else
    GRAPHVIZ_PATH=/data/pub/graphviz/stable/
 fi
 
-cd $HOME/tmp/gviz/graphviz2
+cd $HOME/tmp/gviz/graphviz-master
 
 doxygen >/dev/null
 tar cfz - doxygen >doxygen.tgz
