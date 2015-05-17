@@ -47,6 +47,7 @@ switch $distroversion {
 		exec mv debian/rules.NEW  debian/rules
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
+		exec chmod +x debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
 		exec sed -e "s/@VERSION@-1)\ intrepid\;\ /@VERSION@-1~precise)\ precise\;\ /" <debian/changelog.in >debian/changelog.in.NEW
@@ -66,7 +67,6 @@ switch $distroversion {
 -e "s,\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so,#\$(LUA_PACKAGE)\/usr\/lib\/lua\/\$(LUA_VERSION)\/gv\.so," \
 -e "s/--enable-lua/--disable-lua/"  <debian/rules  >debian/rules.lua
 		exec mv debian/rules.lua debian/rules
-
 		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install <debian/libgv-lua.install >debian/libgv-lua.install.NEW
 		exec mv  debian/libgv-lua.install.NEW debian/libgv-lua.install
 #End of lua workaround
@@ -83,6 +83,7 @@ switch $distroversion {
 
 #		exec sed -e "s/--with-devil/--without-devil/" <debian/rules  >debian/rules.NEW
 #		exec mv debian/rules.NEW  debian/rules
+		exec chmod +x debian/rules
 		exec sed -e "s,\#usr/lib/graphviz/python27,usr/lib/graphviz/python27," <debian/libgv-python.install  >debian/libgv-python.install.NEW
 		exec mv  debian/libgv-python.install.NEW debian/libgv-python.install
 		exec sed -e "s,usr,\#usr," <debian/libgv-lua.install >debian/libgv-lua.install.NEW
@@ -93,6 +94,8 @@ switch $distroversion {
 		exec mv  debian/changelog.NEW debian/changelog
 		exec sed -e "s/Standards-Version:\ 3.7.3/Standards-Version:\ 3.9.4/" -e "s/\,\ liblualib50-dev//" \
 				-e "s/ruby1\.8/ruby1\.9\.1/" \
+				-e "s/libgd2-noxpm-dev (>= 2\.0\.35)/libgd2-noxpm-dev, libgd-dev, libtiff5-dev, libvpx-dev/" \
+				-e "s/libtiff4-dev, //" \
 				-e "s/Ruby (1.8)/Ruby (1.9.1)/" < debian/control > debian/control.NEW
 		exec mv  debian/control.NEW debian/control
 		exec echo "-1~saucy_source.changes" > debian/series

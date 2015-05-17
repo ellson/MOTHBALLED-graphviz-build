@@ -7,11 +7,11 @@ DIR=CURRENT
 
 25 0 * * * (graphviz-build/bin/git_copy_repo.sh graphviz-build; cd graphviz-build; crontab etc/terra.research.att.com.crontab)
 
-35 0 * * * ssh fc18-64       graphviz-build/redhat/git_webdot-src.sh $DIR
+35 0 * * * ssh fc20-64       graphviz-build/redhat/git_webdot-src.sh $DIR
 
 # the source distribution is built on a machine with doxygen, graphviz,
 #    and a recent swig installed
-45 0 * * * ssh fc18-64       graphviz-build/redhat/git_graphviz-src.sh $DIR
+45 0 * * * ssh fc20-64       graphviz-build/redhat/git_graphviz-src.sh $DIR
 
 
 # script uses GNU parallel to run all the builds in optimal time
@@ -19,5 +19,5 @@ DIR=CURRENT
 
 # graphviz-doxygen.sh does support a $DIR arg,
 #    but we don't bother generating a separate version of the doxygen documents
-15 14 * * * ssh fc18-64      graphviz-build/redhat/graphviz-doxygen.sh
+15 14 * * * ssh fc20-64      graphviz-build/redhat/graphviz-doxygen.sh
 
