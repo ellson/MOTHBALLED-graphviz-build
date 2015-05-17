@@ -52,14 +52,18 @@ SRPMS=$GRAPHVIZ_PUB_PATH/SRPMS
 
 md5sum graphviz-$VERSION.tar.gz >graphviz-$VERSION.tar.gz.md5
 ssh $WWW "mkdir -p $SOURCES $SRPMS"
-scp -p graphviz-$VERSION.tar.gz graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
+rsync -e ssh -p --ignore-existing graphviz-$VERSION.tar.gz $WWW:$SOURCES/
+rsync -e ssh -p --ignore-existing graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
+#scp -p graphviz-$VERSION.tar.gz graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
 ssh $WWW "cd $SOURCES; ln -sf graphviz-$VERSION.tar.gz graphviz-working.tar.gz"
 
 # build a "distroagnostic" src.rpm.
 rpmbuild -ts -D "distroagnostic 1" graphviz-$VERSION.tar.gz >/dev/null
-scp -p $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
+rsync -e ssh -p --ignore-existing $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
+# scp -p $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
 ssh $WWW "cd $SRPMS; createrepo ."
 
 tar cf - rtest | gzip >rtest.tgz
-scp -p rtest.tgz $WWW:$SOURCES/
+rsync -e ssh -p rtest.tgz $WWW:$SOURCES/
+# scp -p rtest.tgz $WWW:$SOURCES/
 
