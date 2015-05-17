@@ -62,15 +62,16 @@ puts $f ""
 puts $f $end_time
 close $f
 
-set productfiles [concat \
-  [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm] \
-  $BUILDLOG]
+set productfiles [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm]
 
 set RPMS $path/redhat/[string trim $dist .]/$arch
 exec ssh $graphviz_host "mkdir -p $RPMS/os $RPMS/debug"
 
 foreach fn $productfiles {
-  putfile $graphviz_host $RPMS/os $fn
+  # rpms timestamp is that of first build on that git commit
+  putfile_noclobber $graphviz_host $RPMS/os $fn
 }
+# $BUILDLOG timestamp is that of latest build
+putfile $graphviz_host $RPMS/os $BUILDLOG
 
 cd $oldpwd

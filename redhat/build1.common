@@ -38,7 +38,8 @@ set arch $tcl_platform(machine)
 if {[string equal $arch i686]} {set arch i386}
 
 proc getfile {host path fn} { exec scp $host:/$path/$fn . }
-proc putfile {host path fn} { exec rsync -e ssh --ignore-existing $fn $host:$path/ }
+proc putfile_noclobber {host path fn} { exec rsync -e ssh --ignore-existing $fn $host:$path/ }
+proc putfile {host path fn} { exec rsync -e ssh $fn $host:$path/ }
 proc getindex {host path} { exec ssh $host ls $path }
 
 set patterns {

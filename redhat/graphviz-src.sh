@@ -52,8 +52,10 @@ SRPMS=$GRAPHVIZ_PUB_PATH/SRPMS
 
 md5sum graphviz-$VERSION.tar.gz >graphviz-$VERSION.tar.gz.md5
 ssh $WWW "mkdir -p $SOURCES $SRPMS"
+# don't update tar file if no change
 rsync -e ssh -p --ignore-existing graphviz-$VERSION.tar.gz $WWW:$SOURCES/
-rsync -e ssh -p --ignore-existing graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
+# but do update md5 so we can tell when sources last checked
+rsync -e ssh -p graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
 #scp -p graphviz-$VERSION.tar.gz graphviz-$VERSION.tar.gz.md5 $WWW:$SOURCES/
 ssh $WWW "cd $SOURCES; ln -sf graphviz-$VERSION.tar.gz graphviz-working.tar.gz"
 
