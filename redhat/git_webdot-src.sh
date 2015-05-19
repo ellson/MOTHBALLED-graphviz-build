@@ -26,18 +26,22 @@ RPMBUILD=$HOME/rpmbuild/$HOST
 
 cd $HOME/tmp/gviz
 
-# cleanup previous build
-rm -rf webdot-master master.zip*
+# # cleanup previous build
+# rm -rf webdot-master master.zip*
+# 
+# wget -q https://github.com/ellson/webdot/archive/master.zip
+# unzip -q master.zip
+# rm -rf master.zip*
+# cd webdot-master
 
-# # obtain latest from mercurial
-# $HOME/graphviz-build/bin/git_copy_repo.sh webdot
-
-wget -q https://github.com/ellson/webdot/archive/master.zip
-unzip -q master.zip
-rm -rf master.zip*
-
-#cd webdot
-cd webdot-master
+# obtain latest from git
+if test -d webdot-master; then
+    cd webdot-master
+    git pull
+else
+    git clone https://github.com/ellson/webdot.git webdot-master
+    cd webdot-master
+fi
 
 if test $SRCDIR = CURRENT; then
     BASEVERSION=`grep 'AC_INIT(webdot' configure.ac | sed 's/AC_INIT(webdot, \([0-9.]*\))/\1/'`

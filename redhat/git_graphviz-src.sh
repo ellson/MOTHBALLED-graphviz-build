@@ -25,18 +25,27 @@ GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/$COLLECTION/
 RPMBUILD=$HOME/rpmbuild/$HOST
 cd $HOME/tmp/gviz
 
-# cleanup previous build
-rm -rf graphviz-master master.zip*
+# # cleanup previous build
+# rm -rf graphviz-master master.zip*
+# 
+# # obtain latest from git
+# wget -q https://github.com/ellson/graphviz/archive/master.zip
+# unzip -q master.zip
+# rm -rf master.zip*
+# 
+# cd graphviz-master
+# 
+# if test .$SRCDIR = .CURRENT; then
+#     ./set_dev_version.sh
+# fi
 
 # obtain latest from git
-wget -q https://github.com/ellson/graphviz/archive/master.zip
-unzip -q master.zip
-rm -rf master.zip*
-
-cd graphviz-master
-
-if test .$SRCDIR = .CURRENT; then
-    ./set_dev_version.sh
+if test -d graphviz-master; then
+    cd graphviz-master
+    git pull
+else
+    git clone https://github.com/ellson/graphviz.git graphviz-master
+    cd graphviz-master
 fi
 
 ./autogen.sh >/dev/null
