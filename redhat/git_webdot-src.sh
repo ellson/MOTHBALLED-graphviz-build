@@ -9,13 +9,13 @@ HOST=`hostname`
 
 
 SRCDIR=CURRENT
-if test .$1 != . ;then
+if test .$1 != . ;then 
     SRCDIR=$1
 fi
 if test .$SRCDIR = .CURRENT ; then
-    COLLECTION=development
+   COLLECTION=development
 else
-    COLLECTION=stable
+   COLLECTION=stable
 fi
 
 
@@ -23,16 +23,21 @@ GRAPHVIZ_PUB_PATH=/data/pub/graphviz/$COLLECTION/
 GRAPHVIZ_ATT_PATH=/data/att_pub/graphviz/$COLLECTION/
 
 RPMBUILD=$HOME/rpmbuild/$HOST
-
 cd $HOME/tmp/gviz
 
 # # cleanup previous build
-# rm -rf webdot-master master.zip*
+# rm -rf graphviz-master master.zip*
 # 
-# wget -q https://github.com/ellson/webdot/archive/master.zip
+# # obtain latest from git
+# wget -q https://github.com/ellson/graphviz/archive/master.zip
 # unzip -q master.zip
 # rm -rf master.zip*
-# cd webdot-master
+# 
+# cd graphviz-master
+# 
+# if test .$SRCDIR = .CURRENT; then
+#     ./set_dev_version.sh
+# fi
 
 # obtain latest from git
 if test -d webdot-master; then
@@ -43,25 +48,17 @@ else
     cd webdot-master
 fi
 
-if test $SRCDIR = CURRENT; then
-    BASEVERSION=`grep 'AC_INIT(webdot' configure.ac | sed 's/AC_INIT(webdot, \([0-9.]*\))/\1/'`
-    VERSION=$BASEVERSION.$DATE
-
-    sed "s/\(AC_INIT(webdot, [0-9.]*\))/\1.$DATE)/" <configure.ac >t$$
-    mv t$$ configure.ac
-    sed "s/\(GRAPHVIZ_COLLECTION\)=.*/\1=$COLLECTION/" <configure.ac >t$$
-    mv t$$ configure.ac
-else
-    VERSION=`grep 'AC_INIT(webdot' configure.ac | sed 's/AC_INIT(webdot, \([0-9.]*\))/\1/'`
-fi
-
 ./autogen.sh >/dev/null
-./configure >/dev/null
+
+VERSION=`grep '^PACKAGE_VERSION' config.log | sed 's/^.*=.\([.0-9]*\)./\1/'`
+
 make dist >/dev/null
 
 if ! test -f webdot-$VERSION.tar.gz; then
-    exit -1
+    echo "Error: no webdot-$VERSION.tar.gz was created"
+    exit 1
 fi
+
 
 SOURCES=$GRAPHVIZ_PUB_PATH/SOURCES
 SRPMS=$GRAPHVIZ_PUB_PATH/SRPMS
@@ -69,19 +66,20 @@ md5sum webdot-$VERSION.tar.gz >webdot-$VERSION.tar.gz.md5
 
 ssh $WWW "mkdir -p $SOURCES $SRPMS"
 scp -p webdot-$VERSION.tar.gz webdot-$VERSION.tar.gz.md5 $WWW:$SOURCES/
-rpmbuild -ts -D "distroagnostic 1" webdot-$VERSION.tar.gz
-scp -p $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
 
+ssh $WWW "cd $SOURCES; ln -sf webdot-$VERSION.tar.gz webdot-working.tar.gz"
+
+
+# build a "distroagnostic" src.rpm.
 #*******************************************************************************
+rpmbuild -ts -D "distroagnostic 1" webdot-$VERSION.tar.gz >/dev/null
+scp -p $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
+#*******************************************************************************
+
 ssh $WWW "cd $SRPMS; createrepo ."
 
-# copy for internal use
-#
-#SOURCES=$GRAPHVIZ_ATT_PATH/SOURCES
-#SRPMS=$GRAPHVIZ_ATT_PATH/SRPMS
-#
-#ssh $WWW "mkdir -p $SOURCES $SRPMS"
-#scp -p webdot-$VERSION.tar.gz webdot-$VERSION.tar.gz.md5 $WWW:$SOURCES/
-#scp -p $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
-#ssh $WWW "cd $SRPMS; createrepo ."
+#*******************************************************************************
+tar cf - rtest | gzip >rtest.tgz
+scp -p rtest.tgz $WWW:$SOURCES/
+#*******************************************************************************
 
