@@ -1,4 +1,4 @@
 graphviz-build
 ==============
 
-build scripts for graphviz packages
+Build scripts for graphviz packages.
