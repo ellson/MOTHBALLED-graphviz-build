@@ -59,7 +59,7 @@ ssh $WWW "cd $SOURCES; ln -sf webdot-$VERSION.tar.gz webdot-working.tar.gz"
 rpmbuild -ts -D "distroagnostic 1" webdot-$VERSION.tar.gz >/dev/null
 
 # don't clobber existing version, if already present
-rsync -e ssh --ignore-existing sRPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
+rsync -e ssh --ignore-existing $RPMBUILD/SRPMS/webdot-$VERSION-1.src.rpm $WWW:$SRPMS/
 #**************************************************************************
 
 ssh $WWW "cd $SRPMS; createrepo ."
