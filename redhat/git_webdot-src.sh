@@ -26,7 +26,7 @@ if test -d webdot-master; then
 else
     git clone https://github.com/ellson/webdot.git webdot-master
     cd webdot-master
-    m -f webdot-*.tar.gz
+    rm -f webdot-*.tar.gz
 fi
 
 ./autogen.sh >webdot-srclog-$VERSION.txt
