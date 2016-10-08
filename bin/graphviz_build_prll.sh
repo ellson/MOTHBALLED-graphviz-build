@@ -27,7 +27,7 @@ BUILD_HOSTS="
         bld-fedora26
         bld-fedora26-32
 "
-pssh -H "$BUILD_HOSTS" -l gviz -o $OUT -e $ERR -t 12000 -p 4 PATH=/usr/bin:/bin:$PATH graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
+pssh -H "$BUILD_HOSTS" -l gviz -o $OUT -e $ERR -t 12000 -p 4 graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
 BUILD_HOSTS="
 	pome
