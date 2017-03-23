@@ -8,16 +8,10 @@ OUT=graphviz_build_out
 rm -rf $ERR $OUT
 
 BUILD_HOSTS="
-	bld-centos5
-        bld-centos5-32
         bld-centos6
         bld-centos6-32
         bld-centos7
         bld-centos7-32
-        bld-fedora21
-        bld-fedora21-32
-        bld-fedora22
-        bld-fedora22-32
         bld-fedora23
         bld-fedora23-32
         bld-fedora24
@@ -26,6 +20,8 @@ BUILD_HOSTS="
         bld-fedora25-32
         bld-fedora26
         bld-fedora26-32
+        bld-fedora27
+        bld-fedora27-32
 "
 pssh -H "$BUILD_HOSTS" -l gviz -o $OUT -e $ERR -t 12000 -p 4 graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
 
