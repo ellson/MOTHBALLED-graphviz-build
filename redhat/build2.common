@@ -34,17 +34,24 @@ puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
 
 # get sourcefile into local temporary directory
 getfile $graphviz_host $SOURCES $sourcefile
-cp $sourcefile $rpmbuild/SOURCES
+exec cp $sourcefile $rpmbuild/SOURCES
 
 # extract appropriate specfile
-case $( cut -d' ' -f1 /etc/system-release ) in
-Fedora)
-    tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.fedora >$rpmbuild/SPECS/graphviz.spec
-    ;;
-CentOS|Red)
-    tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.rhel >$rpmbuild/SPECS/graphviz.spec
-    ;;
-esac
+set f [open /etc/system-release r]
+set content [read $f]
+close $f
+set records [split $content "\n"]
+foreach rec $records {
+    set fields [split $rec " "]
+    set release [lindex $fields 0]
+    break
+}
+
+switch "$release" {
+"Fedora" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.fedora >$rpmbuild/SPECS/graphviz.spec }
+"CentOS" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.rhel >$rpmbuild/SPECS/graphviz.spec }
+"Red" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.rhel >$rpmbuild/SPECS/graphviz.spec }
+}
 
 puts "making..."
 # make products
