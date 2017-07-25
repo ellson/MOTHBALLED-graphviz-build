@@ -57,8 +57,8 @@ puts "making..."
 # make products
 #puts "rpmbuild $rpmopt -tb $sourcefile"
 #catch "exec rpmbuild $rpmopt -tb $sourcefile" buildlog
-puts "rpmbuild $rpmopt -ba $rpmbuild/SPECS/graphviz.spec"
-catch "exec rpmbuild $rpmopt -ba $rpmbuild/SPECS/graphviz.spec" buildlog
+puts "rpmbuild $rpmopt -ba $rpmbuild/SPECS/$pkg.spec"
+catch "exec rpmbuild $rpmopt -ba $rpmbuild/SPECS/$pkg.spec" buildlog
 
 #set end_build_time [clock format [clock seconds]]
 
