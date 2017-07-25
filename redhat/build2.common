@@ -48,9 +48,9 @@ foreach rec $records {
 }
 
 switch "$release" {
-"Fedora" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.fedora >$rpmbuild/SPECS/graphviz.spec }
-"CentOS" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.rhel >$rpmbuild/SPECS/graphviz.spec }
-"Red" { exec tar zxOf $sourcefile $pkg-$version/redhat/graphviz.spec.rhel >$rpmbuild/SPECS/graphviz.spec }
+"Fedora" { exec tar zxOf $sourcefile $pkg-$version/redhat/$pkg.spec.fedora >$rpmbuild/SPECS/$pkg.spec }
+"CentOS" { exec tar zxOf $sourcefile $pkg-$version/redhat/$pkg.spec.rhel >$rpmbuild/SPECS/$pkg.spec }
+"Red" { exec tar zxOf $sourcefile $pkg-$version/redhat/$pkg.spec.rhel >$rpmbuild/SPECS/$pkg.spec }
 }
 
 puts "making..."
