@@ -18,4 +18,4 @@ set isnoarch 0
 
 source [file dirname $argv0]/build2.common
 
-puts "done"
+source [file dirname $argv0]/build3.common
