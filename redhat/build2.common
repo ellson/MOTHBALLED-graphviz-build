@@ -32,7 +32,7 @@ set version [lindex [lsort -decreasing -dictionary $versions] 0]
 
 set sourcefile $pkg-$version.tar.gz
 
-puts "getting http://$graphviz_host/$SOURCES/$sourcefile"
+puts "getting http://$graphviz_host$SOURCES/$sourcefile"
 
 # get sourcefile into local temporary directory
 getfile $graphviz_host $SOURCES $sourcefile
@@ -88,26 +88,26 @@ close $f
 set target $path/redhat/[string trim $dist .]
 exec ssh $graphviz_host "mkdir -p $target/$arch/os $target/$arch/debug $target/src"
 
-set srcprods [glob -nocomplain $rpmbuild/SRPMS/pkg*$version*.rpm]
+set srcprods [glob $rpmbuild/SRPMS/$pkg*$version*.rpm]
 foreach fn $srcprods {
   # rpms timestamp is that of first build on that git commit
-  puts "pushing $target/src/[file tail $fn]"
+  puts "pushing http://$graphviz_host$target/src/[file tail $fn]"
   putfile_noclobber $graphviz_host $target/src $fn
 }
 
-set archprods [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm]
+set archprods [glob $rpmbuild/RPMS/*/$pkg*$version*.rpm]
 foreach fn $archprods {
   # rpms timestamp is that of first build on that git commit
   if {[string first debuginfo $fn] >= 0} {
-    puts "pushing $target/$arch/debug/[file tail $fn]"
+    puts "pushing http://$graphviz_host$target/$arch/debug/[file tail $fn]"
     putfile_noclobber $graphviz_host $target/$arch/debug $fn
   } {
-    puts "pushing $target/$arch/os/[file tail $fn]"
+    puts "pushing http://$graphviz_host$target/$arch/os/[file tail $fn]"
     putfile_noclobber $graphviz_host $target/$arch/os $fn
   }
 }
 # $BUILDLOG timestamp is that of latest build
-puts "pushing $target/$arch/os/[file tail $BUILDLOG]"
+puts "pushing http://$graphviz_host$target/$arch/os/[file tail $BUILDLOG]"
 putfile $graphviz_host $target/$arch/os $BUILDLOG
 
 cd $oldpwd
