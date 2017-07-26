@@ -58,13 +58,13 @@ ssh $WWW "cd $SOURCES; ln -sf graphviz-$VERSION.tar.gz graphviz-working.tar.gz"
 
 # build a "distroagnostic" src.rpm.
 #**************************************************************************
-rpmbuild -ts -D "distroagnostic 1" graphviz-$VERSION.tar.gz >/dev/null
+###rpmbuild -ts -D "distroagnostic 1" graphviz-$VERSION.tar.gz >/dev/null
 
 # don't clobber existing version, if already present
-rsync -e ssh --ignore-existing $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
+###rsync -e ssh --ignore-existing $RPMBUILD/SRPMS/graphviz-$VERSION-1.src.rpm $WWW:$SRPMS/
 #**************************************************************************
 
-ssh $WWW "cd $SRPMS; createrepo ."
+###ssh $WWW "cd $SRPMS; createrepo ."
 
 #**************************************************************************
 tar cf - rtest | gzip >rtest.tgz
