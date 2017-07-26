@@ -91,6 +91,7 @@ exec ssh $graphviz_host "mkdir -p $target/$arch/os $target/$arch/debug $target/s
 set srcprods [glob -nocomplain $rpmbuild/SRPMS/pkg*$version*.rpm]
 foreach fn $srcprods {
   # rpms timestamp is that of first build on that git commit
+  puts "pushing $target/src/[file tail $fn]"
   putfile_noclobber $graphviz_host $target/src $fn
 }
 
@@ -98,12 +99,15 @@ set archprods [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm]
 foreach fn $archprods {
   # rpms timestamp is that of first build on that git commit
   if {[string first debuginfo $fn] >= 0} {
+    puts "pushing $target/$arch/debug/[file tail $fn]"
     putfile_noclobber $graphviz_host $target/$arch/debug $fn
   } {
+    puts "pushing $target/$arch/os/[file tail $fn]"
     putfile_noclobber $graphviz_host $target/$arch/os $fn
   }
 }
 # $BUILDLOG timestamp is that of latest build
+puts "pushing $target/$arch/os/[file tail $BUILDLOG]"
 putfile $graphviz_host $target/$arch/os $BUILDLOG
 
 cd $oldpwd
