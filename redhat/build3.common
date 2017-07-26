@@ -1,5 +1,3 @@
 # $Id$ $Revision$
 
-exec ssh $graphviz_host "cd $RPMS; (cd os; touch debug; mv *debug* ../debug/; createrepo .); (cd debug; rm -f debug; createrepo .)"
-
 puts "done"

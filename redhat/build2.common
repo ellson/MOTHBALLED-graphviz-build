@@ -97,7 +97,11 @@ foreach fn $srcprods {
 set archprods [glob -nocomplain $rpmbuild/RPMS/*/$pkg*$version*.rpm]
 foreach fn $archprods {
   # rpms timestamp is that of first build on that git commit
-  putfile_noclobber $graphviz_host $target/$arch/os $fn
+  if {[string first debuginfo $fn] >= 0} {
+    putfile_noclobber $graphviz_host $target/$arch/debug $fn
+  } {
+    putfile_noclobber $graphviz_host $target/$arch/os $fn
+  }
 }
 # $BUILDLOG timestamp is that of latest build
 putfile $graphviz_host $target/$arch/os $BUILDLOG
