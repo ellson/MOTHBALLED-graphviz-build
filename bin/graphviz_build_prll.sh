@@ -24,7 +24,7 @@ BUILD_HOSTS="
         bld-fedora27-32
 "
 
-for h in $BUILD_HOSTS; do
+for h in "$BUILD_HOSTS"; do
 	rsync -av --exclude 'graphviz-build/.git' graphviz-build gviz@bld-centos7:
 done
 
