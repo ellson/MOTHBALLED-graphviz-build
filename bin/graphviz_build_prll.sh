@@ -25,7 +25,7 @@ BUILD_HOSTS="
 "
 
 for h in $BUILD_HOSTS; do
-	rsync -av --exclude 'graphviz-build/.git/*' graphviz-build gviz@bld-centos7:
+	rsync -av --exclude 'graphviz-build/.git' graphviz-build gviz@bld-centos7:
 done
 
 pssh -H "$BUILD_HOSTS" -l gviz -o $OUT -e $ERR -t 12000 -p 4 graphviz-build/redhat/graphviz-bin-rpm.tcl $DIR
