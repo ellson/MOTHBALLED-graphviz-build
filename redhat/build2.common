@@ -6,7 +6,7 @@ if {$isnoarch} {set pkgarch noarch} {set pkgarch $arch}
 set rpmopt [rpmbuildargs $redhat_release $own_]
 
 #clean up any previous build
-foreach f [glob $rpmbuild/RPMS/*/$pkg-* $rpmbuild/SRPMS/$pkg-* $rpmbuild/SOURCES/$pkg-* $rpmbuild/SPECS/$pkg* $rpmbuild/BUILD*/$pkg-* $work/$pkg*] {
+foreach f [glob -nocomplain $rpmbuild/RPMS/*/$pkg-* $rpmbuild/SRPMS/$pkg-* $rpmbuild/SOURCES/$pkg-* $rpmbuild/SPECS/$pkg* $rpmbuild/BUILD*/$pkg-* $work/$pkg*] {
     file delete -force $f
 }
 
