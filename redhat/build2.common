@@ -110,6 +110,6 @@ foreach fn $archprods {
 puts "pushing $graphviz_host:$target/$arch/os/[file tail $BUILDLOG]"
 putfile $graphviz_host $target/$arch/os $BUILDLOG
 
-exec ssh $graphviz_host "cd $target; (cd $arch/os; createrepo .); (cd $arch/debug; createrepo .); (cd src; createrepo .)"
+#exec ssh $graphviz_host "cd $target; (cd $arch/os; createrepo .); (cd $arch/debug; createrepo .); (cd src; createrepo .)"
 
 cd $oldpwd
