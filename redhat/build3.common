@@ -1,3 +1,2 @@
-exec ssh $graphviz_host "cd $target; (cd os; createrepo .); (cd debug; createrepo .); (cd ../src; createrepo .)"
 
 puts "done"
