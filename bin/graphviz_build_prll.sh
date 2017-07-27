@@ -9,18 +9,18 @@ rm -rf $ERR $OUT
 
 BUILD_HOSTS="
 	bld-centos6
-	bld-centos6-32
 	bld-centos7
-	bld-centos7-32
 	bld-fedora23
-	bld-fedora23-32
 	bld-fedora24
-	bld-fedora24-32
 	bld-fedora25
-	bld-fedora25-32
 	bld-fedora26
-	bld-fedora26-32
 	bld-fedora27
+	bld-centos6-32
+	bld-centos7-32
+	bld-fedora23-32
+	bld-fedora24-32
+	bld-fedora25-32
+	bld-fedora26-32
 	bld-fedora27-32
 "
 
