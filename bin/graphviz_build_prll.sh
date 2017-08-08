@@ -12,8 +12,6 @@ BUILD_HOSTS="
 	bld-centos6-32
 	bld-centos7
 	bld-centos7-32
-	bld-fedora23
-	bld-fedora23-32
 	bld-fedora24
 	bld-fedora24-32
 	bld-fedora25
